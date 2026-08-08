@@ -1,18 +1,18 @@
-// Copyright 2017 The go-ethereum Authors
-// This file is part of the go-ethereum library.
+// Copyright 2017 The go-xcosh Authors
+// This file is part of the go-xcosh library.
 //
-// The go-ethereum library is free software: you can redistribute it and/or modify
+// The go-xcosh library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-ethereum library is distributed in the hope that it will be useful,
+// The go-xcosh library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-xcosh library. If not, see <http://www.gnu.org/licenses/>.
 
 package tracers
 
@@ -21,12 +21,12 @@ import (
 	"encoding/json"
 	"errors"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/internal/ethapi"
-	"github.com/ethereum/go-ethereum/params/mutations"
-	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/common/hexutil"
+	"github.com/xcosh/go-xcosh/core/types"
+	"github.com/xcosh/go-xcosh/internal/ethapi"
+	"github.com/xcosh/go-xcosh/params/mutations"
+	"github.com/xcosh/go-xcosh/rpc"
 )
 
 // TraceFilterArgs represents the arguments for a call.
@@ -88,14 +88,14 @@ func setTraceCallConfigDefaultTracer(config *TraceCallConfig) *TraceCallConfig {
 	return config
 }
 
-// TraceAPI is the collection of Ethereum full node APIs exposed over
+// TraceAPI is the collection of Xcosh full node APIs exposed over
 // the private debugging endpoint.
 type TraceAPI struct {
 	debugAPI *API
 }
 
 // NewTraceAPI creates a new API definition for the full node-related
-// private debug methods of the Ethereum service.
+// private debug methods of the Xcosh service.
 func NewTraceAPI(debugAPI *API) *TraceAPI {
 	return &TraceAPI{debugAPI: debugAPI}
 }
@@ -109,7 +109,7 @@ func decorateResponse(res interface{}, config *TraceConfig) (interface{}, error)
 }
 
 // decorateNestedTraceResponse formats trace results the way Parity does.
-// Docs: https://openethereum.github.io/JSONRPC-trace-module
+// Docs: https://openxcosh.github.io/JSONRPC-trace-module
 // Example:
 /*
 {

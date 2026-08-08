@@ -25,11 +25,11 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/ethereum/go-ethereum/common/math"
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
-	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/common/hexutil"
+	"github.com/xcosh/go-xcosh/common/math"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/rlp"
 )
 
 //go:generate go run github.com/fjl/gencodec -type Genesis -field-override genesisSpecMarshaling -out gen_genesis.go
@@ -420,30 +420,30 @@ func DecodePreAlloc(data string) GenesisAlloc {
 // Following methods implement the ctypes.GenesisBlocker interface.
 
 func (g *Genesis) GetSealingType() ctypes.BlockSealingT {
-	return ctypes.BlockSealing_Ethereum
+	return ctypes.BlockSealing_Xcosh
 }
 
 func (g *Genesis) SetSealingType(t ctypes.BlockSealingT) error {
-	if t != ctypes.BlockSealing_Ethereum {
+	if t != ctypes.BlockSealing_Xcosh {
 		return ctypes.ErrUnsupportedConfigFatal
 	}
 	return nil
 }
 
-func (g *Genesis) GetGenesisSealerEthereumNonce() uint64 {
+func (g *Genesis) GetGenesisSealerXcoshNonce() uint64 {
 	return g.Nonce
 }
 
-func (g *Genesis) SetGenesisSealerEthereumNonce(n uint64) error {
+func (g *Genesis) SetGenesisSealerXcoshNonce(n uint64) error {
 	g.Nonce = n
 	return nil
 }
 
-func (g *Genesis) GetGenesisSealerEthereumMixHash() common.Hash {
+func (g *Genesis) GetGenesisSealerXcoshMixHash() common.Hash {
 	return g.Mixhash
 }
 
-func (g *Genesis) SetGenesisSealerEthereumMixHash(h common.Hash) error {
+func (g *Genesis) SetGenesisSealerXcoshMixHash(h common.Hash) error {
 	g.Mixhash = h
 	return nil
 }

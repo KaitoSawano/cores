@@ -19,16 +19,16 @@ package params
 import (
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/ethereum/go-ethereum/params/types/coregeth"
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
-	"github.com/ethereum/go-ethereum/params/types/genesisT"
-	"github.com/ethereum/go-ethereum/params/types/goethereum"
-	"github.com/ethereum/go-ethereum/params/vars"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/common/hexutil"
+	"github.com/xcosh/go-xcosh/params/types/coregeth"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/params/types/genesisT"
+	"github.com/xcosh/go-xcosh/params/types/goxcosh"
+	"github.com/xcosh/go-xcosh/params/vars"
 )
 
-// DefaultGenesisBlock returns the Ethereum main net genesis block.
+// DefaultGenesisBlock returns the Xcosh main net genesis block.
 func DefaultGenesisBlock() *genesisT.Genesis {
 	return &genesisT.Genesis{
 		Config:     MainnetChainConfig,
@@ -70,7 +70,7 @@ func DefaultHoleskyGenesisBlock() *genesisT.Genesis {
 func DeveloperGenesisBlock(gasLimit uint64, faucet *common.Address, useEthash bool) *genesisT.Genesis {
 	if !useEthash {
 		// Make a copy to avoid unpredicted contamination.
-		config := &goethereum.ChainConfig{}
+		config := &goxcosh.ChainConfig{}
 		*config = *AllDevChainProtocolChanges
 
 		// Assemble and return the genesis with the precompiles and faucet pre-funded

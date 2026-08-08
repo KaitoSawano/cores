@@ -1,18 +1,18 @@
-// Copyright 2019 The go-ethereum Authors
-// This file is part of the go-ethereum library.
+// Copyright 2019 The go-xcosh Authors
+// This file is part of the go-xcosh library.
 //
-// The go-ethereum library is free software: you can redistribute it and/or modify
+// The go-xcosh library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-ethereum library is distributed in the hope that it will be useful,
+// The go-xcosh library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-xcosh library. If not, see <http://www.gnu.org/licenses/>.
 
 // Package snapshot implements a journalled, dynamic state dump.
 package snapshot
@@ -23,14 +23,14 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/metrics"
-	"github.com/ethereum/go-ethereum/rlp"
-	"github.com/ethereum/go-ethereum/triedb"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/core/rawdb"
+	"github.com/xcosh/go-xcosh/core/types"
+	"github.com/xcosh/go-xcosh/ethdb"
+	"github.com/xcosh/go-xcosh/log"
+	"github.com/xcosh/go-xcosh/metrics"
+	"github.com/xcosh/go-xcosh/rlp"
+	"github.com/xcosh/go-xcosh/triedb"
 )
 
 var (
@@ -156,7 +156,7 @@ type Config struct {
 	AsyncBuild bool // The snapshot generation is allowed to be constructed asynchronously
 }
 
-// Tree is an Ethereum state snapshot tree. It consists of one persistent base
+// Tree is an Xcosh state snapshot tree. It consists of one persistent base
 // layer backed by a key-value store, on top of which arbitrarily many in-memory
 // diff layers are topped. The memory diffs can form a tree with branching, but
 // the disk layer is singleton and common to all. If a reorg goes deeper than the

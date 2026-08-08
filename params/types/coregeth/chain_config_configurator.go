@@ -32,11 +32,11 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/math"
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
-	"github.com/ethereum/go-ethereum/params/types/internal"
-	"github.com/ethereum/go-ethereum/params/vars"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/common/math"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/params/types/internal"
+	"github.com/xcosh/go-xcosh/params/vars"
 )
 
 func newU64(u uint64) *uint64 {

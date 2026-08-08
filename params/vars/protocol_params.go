@@ -1,25 +1,25 @@
-// Copyright 2015 The go-ethereum Authors
-// This file is part of the go-ethereum library.
+// Copyright 2015 The go-xcosh Authors
+// This file is part of the go-xcosh library.
 //
-// The go-ethereum library is free software: you can redistribute it and/or modify
+// The go-xcosh library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-ethereum library is distributed in the hope that it will be useful,
+// The go-xcosh library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-xcosh library. If not, see <http://www.gnu.org/licenses/>.
 
 package vars
 
 import (
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/common"
+	"github.com/xcosh/go-xcosh/common"
 	"github.com/holiman/uint256"
 )
 
@@ -29,17 +29,17 @@ var (
 	EIP1234FBlockReward = uint256.NewInt(2e+18) // Block reward in wei for successfully mining a block upward from Constantinople
 
 	// Values represent TOTAL delays, per specs
-	// https://github.com/ethereum/EIPs/blob/master/EIPS/eip-649.md
+	// https://github.com/xcosh/EIPs/blob/master/EIPS/eip-649.md
 	EIP649DifficultyBombDelay = uint256.NewInt(3000000)
-	// https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1234.md
+	// https://github.com/xcosh/EIPs/blob/master/EIPS/eip-1234.md
 	EIP1234DifficultyBombDelay = uint256.NewInt(5000000)
 
 	EIP2384DifficultyBombDelay = uint256.NewInt(9000000)
-	// https://github.com/ethereum/EIPs/blob/master/EIPS/eip-3554.md
+	// https://github.com/xcosh/EIPs/blob/master/EIPS/eip-3554.md
 	EIP3554DifficultyBombDelay = uint256.NewInt(9700000)
-	// https://github.com/ethereum/EIPs/blob/master/EIPS/eip-4345.md
+	// https://github.com/xcosh/EIPs/blob/master/EIPS/eip-4345.md
 	EIP4345DifficultyBombDelay = uint256.NewInt(10700000)
-	// https://github.com/ethereum/EIPs/blob/master/EIPS/eip-5133.md
+	// https://github.com/xcosh/EIPs/blob/master/EIPS/eip-5133.md
 	EIP5133DifficultyBombDelay = uint256.NewInt(11_400_000)
 )
 

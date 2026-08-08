@@ -1,18 +1,18 @@
-// Copyright 2014 The go-ethereum Authors
-// This file is part of the go-ethereum library.
+// Copyright 2014 The go-xcosh Authors
+// This file is part of the go-xcosh library.
 //
-// The go-ethereum library is free software: you can redistribute it and/or modify
+// The go-xcosh library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-ethereum library is distributed in the hope that it will be useful,
+// The go-xcosh library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-xcosh library. If not, see <http://www.gnu.org/licenses/>.
 
 package core
 
@@ -23,20 +23,20 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/params/confp"
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
-	"github.com/ethereum/go-ethereum/params/types/genesisT"
-	"github.com/ethereum/go-ethereum/params/vars"
-	"github.com/ethereum/go-ethereum/trie"
-	"github.com/ethereum/go-ethereum/triedb"
-	"github.com/ethereum/go-ethereum/triedb/pathdb"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/core/rawdb"
+	"github.com/xcosh/go-xcosh/core/state"
+	"github.com/xcosh/go-xcosh/core/types"
+	"github.com/xcosh/go-xcosh/ethdb"
+	"github.com/xcosh/go-xcosh/log"
+	"github.com/xcosh/go-xcosh/params"
+	"github.com/xcosh/go-xcosh/params/confp"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/params/types/genesisT"
+	"github.com/xcosh/go-xcosh/params/vars"
+	"github.com/xcosh/go-xcosh/trie"
+	"github.com/xcosh/go-xcosh/triedb"
+	"github.com/xcosh/go-xcosh/triedb/pathdb"
 	"github.com/holiman/uint256"
 )
 
@@ -119,7 +119,7 @@ func SetupGenesisBlockWithOverride(db ethdb.Database, triedb *triedb.Database, g
 	if (stored == common.Hash{}) {
 		if genesis == nil {
 			log.Info("Writing default main-net genesis block")
-			log.Warn("Not specifying a chain flag is deprecated and will be removed in the future, please use --mainnet for Ethereum mainnet")
+			log.Warn("Not specifying a chain flag is deprecated and will be removed in the future, please use --mainnet for Xcosh mainnet")
 			genesis = params.DefaultGenesisBlock()
 		} else {
 			log.Info("Writing custom genesis block")
@@ -183,7 +183,7 @@ func SetupGenesisBlockWithOverride(db ethdb.Database, triedb *triedb.Database, g
 	// New logic (below) checks _inequality_ between a defaulty config and a stored config. If different,
 	// the stored config is used. This breaks auto-upgrade magic for defaulty chains.
 	if genesis == nil && !confp.Identical(storedcfg, newcfg, []string{"NetworkID", "ChainID"}) {
-		// TODO/meowsbits/20220405: ethereum code for this scope follows:
+		// TODO/meowsbits/20220405: xcosh code for this scope follows:
 		/*
 				// Special case: if a private network is being used (no genesis and also no
 				// mainnet hash in the database), we must not apply the `configOrDefault`
@@ -475,7 +475,7 @@ func GenesisToBlock(g *genesisT.Genesis, db ethdb.Database) *types.Block {
 	if g.GasLimit == 0 {
 		head.GasLimit = vars.GenesisGasLimit
 	}
-	// -- meowsbits/202203 go-ethereum has: if g.Difficulty == nil && g.Mixhash == (common.Hash{}) {
+	// -- meowsbits/202203 go-xcosh has: if g.Difficulty == nil && g.Mixhash == (common.Hash{}) {
 	// They also assign the Difficulty field directly.
 	if g.Difficulty == nil {
 		head.Difficulty = new(big.Int)
@@ -533,7 +533,7 @@ func CommitGenesis(g *genesisT.Genesis, db ethdb.Database, triedb *triedb.Databa
 	}
 
 	// Upstream omission:
-	// ethereum/go-ethereum does: config.CheckConfigForkOrder()
+	// xcosh/go-xcosh does: config.CheckConfigForkOrder()
 	// core-geth does not.
 
 	if config.GetConsensusEngineType().IsClique() && len(block.Extra()) == 0 {

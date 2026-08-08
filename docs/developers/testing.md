@@ -13,16 +13,16 @@ The `Makefile` at the root of the project includes many commands that can be use
     You can also use plain old `go test` (and `go build`) as you would in any Go project.
 
 
-- `make test` runs all package tests which are, for the most part, _shared with go-ethereum_.
+- `make test` runs all package tests which are, for the most part, _shared with go-xcosh_.
 - `make test-coregeth` runs a suite of tests that are specific to CoreGeth.
 
 
 ## Test generation
 
 CoreGeth is capable of generating some sets of tests used in the `tests` package, which are originally (and still largely)
-driven by the [ethereum/tests](https://github.com/ethereum/tests) suite.
+driven by the [xcosh/tests](https://github.com/xcosh/tests) suite.
 
-- `make tests-generate` runs test(s) generation for the `state` and `difficulty` subsections of this suite, extending the ethereum/tests version
+- `make tests-generate` runs test(s) generation for the `state` and `difficulty` subsections of this suite, extending the xcosh/tests version
   of the controls to include configurations for Xcosh chain configurations at various points in Xcosh hardfork history.
 
 ## Flaky (spuriously erroring) tests

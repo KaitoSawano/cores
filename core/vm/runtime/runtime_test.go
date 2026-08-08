@@ -1,18 +1,18 @@
-// Copyright 2015 The go-ethereum Authors
-// This file is part of the go-ethereum library.
+// Copyright 2015 The go-xcosh Authors
+// This file is part of the go-xcosh library.
 //
-// The go-ethereum library is free software: you can redistribute it and/or modify
+// The go-xcosh library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-ethereum library is distributed in the hope that it will be useful,
+// The go-xcosh library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-xcosh library. If not, see <http://www.gnu.org/licenses/>.
 
 package runtime
 
@@ -23,22 +23,22 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/accounts/abi"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/consensus"
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/core/asm"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/eth/tracers"
-	"github.com/ethereum/go-ethereum/eth/tracers/logger"
+	"github.com/xcosh/go-xcosh/accounts/abi"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/consensus"
+	"github.com/xcosh/go-xcosh/core"
+	"github.com/xcosh/go-xcosh/core/asm"
+	"github.com/xcosh/go-xcosh/core/rawdb"
+	"github.com/xcosh/go-xcosh/core/state"
+	"github.com/xcosh/go-xcosh/core/types"
+	"github.com/xcosh/go-xcosh/core/vm"
+	"github.com/xcosh/go-xcosh/eth/tracers"
+	"github.com/xcosh/go-xcosh/eth/tracers/logger"
 
-	"github.com/ethereum/go-ethereum/params/types/goethereum"
+	"github.com/xcosh/go-xcosh/params/types/goxcosh"
 
 	// force-load js tracers to trigger registration
-	_ "github.com/ethereum/go-ethereum/eth/tracers/js"
+	_ "github.com/xcosh/go-xcosh/eth/tracers/js"
 	"github.com/holiman/uint256"
 )
 
@@ -176,7 +176,7 @@ func benchmarkEVM_Create(bench *testing.B, code string) {
 		Time:        0,
 		Coinbase:    common.Address{},
 		BlockNumber: new(big.Int).SetUint64(1),
-		ChainConfig: &goethereum.ChainConfig{ChainID: big.NewInt(1),
+		ChainConfig: &goxcosh.ChainConfig{ChainID: big.NewInt(1),
 			HomesteadBlock:      new(big.Int),
 			ByzantiumBlock:      new(big.Int),
 			ConstantinopleBlock: new(big.Int),
@@ -600,7 +600,7 @@ func TestEip2929Cases(t *testing.T) {
 
 // TestColdAccountAccessCost test that the cold account access cost is reported
 // correctly
-// see: https://github.com/ethereum/go-ethereum/issues/22649
+// see: https://github.com/xcosh/go-xcosh/issues/22649
 func TestColdAccountAccessCost(t *testing.T) {
 	for i, tc := range []struct {
 		code []byte

@@ -4,10 +4,10 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/ethereum/go-ethereum/params/types/genesisT"
-	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/common/hexutil"
+	"github.com/xcosh/go-xcosh/params/types/genesisT"
+	"github.com/xcosh/go-xcosh/rlp"
 )
 
 var MintMeGenesisHash = common.HexToHash("0x13d1952f29df2a702b3beae629e5b8297c56e401c4c1094bccb3e5febae099c3")

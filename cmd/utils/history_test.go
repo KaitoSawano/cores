@@ -1,18 +1,18 @@
-// Copyright 2023 The go-ethereum Authors
-// This file is part of go-ethereum.
+// Copyright 2023 The go-xcosh Authors
+// This file is part of go-xcosh.
 //
-// go-ethereum is free software: you can redistribute it and/or modify
+// go-xcosh is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// go-ethereum is distributed in the hope that it will be useful,
+// go-xcosh is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with go-ethereum. If not, see <http://www.gnu.org/licenses/>.
+// along with go-xcosh. If not, see <http://www.gnu.org/licenses/>.
 
 package utils
 
@@ -26,18 +26,18 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/consensus/ethash"
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/internal/era"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/params/types/genesisT"
-	"github.com/ethereum/go-ethereum/trie"
-	"github.com/ethereum/go-ethereum/triedb"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/consensus/ethash"
+	"github.com/xcosh/go-xcosh/core"
+	"github.com/xcosh/go-xcosh/core/rawdb"
+	"github.com/xcosh/go-xcosh/core/types"
+	"github.com/xcosh/go-xcosh/core/vm"
+	"github.com/xcosh/go-xcosh/crypto"
+	"github.com/xcosh/go-xcosh/internal/era"
+	"github.com/xcosh/go-xcosh/params"
+	"github.com/xcosh/go-xcosh/params/types/genesisT"
+	"github.com/xcosh/go-xcosh/trie"
+	"github.com/xcosh/go-xcosh/triedb"
 )
 
 var (

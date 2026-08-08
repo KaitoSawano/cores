@@ -1,20 +1,20 @@
-// Copyright 2019 The go-ethereum Authors
-// This file is part of the go-ethereum library.
+// Copyright 2019 The go-xcosh Authors
+// This file is part of the go-xcosh library.
 //
-// The go-ethereum library is free software: you can redistribute it and/or modify
+// The go-xcosh library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-ethereum library is distributed in the hope that it will be useful,
+// The go-xcosh library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-xcosh library. If not, see <http://www.gnu.org/licenses/>.
 
-// Package forkid implements EIP-2124 (https://eips.ethereum.org/EIPS/eip-2124).
+// Package forkid implements EIP-2124 (https://eips.xcosh.org/EIPS/eip-2124).
 package forkid
 
 import (
@@ -23,10 +23,10 @@ import (
 	"hash/crc32"
 	"math"
 
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/params/confp"
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/core/types"
+	"github.com/xcosh/go-xcosh/log"
+	"github.com/xcosh/go-xcosh/params/confp"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
 )
 
 var (
@@ -41,7 +41,7 @@ var (
 	ErrLocalIncompatibleOrStale = errors.New("local incompatible or needs update")
 )
 
-// timestampThreshold is the Ethereum mainnet genesis timestamp. It is used to
+// timestampThreshold is the Xcosh mainnet genesis timestamp. It is used to
 // differentiate if a forkid.next field is a block number or a timestamp. Whilst
 // very hacky, something's needed to split the validation during the transition
 // period (block forks -> time forks).
@@ -68,7 +68,7 @@ type ID struct {
 // Filter is a fork id filter to validate a remotely advertised ID.
 type Filter func(id ID) error
 
-// NewID calculates the Ethereum fork ID from the chain config, genesis hash, head and time.
+// NewID calculates the Xcosh fork ID from the chain config, genesis hash, head and time.
 func NewID(config ctypes.ChainConfigurator, genesis *types.Block, head, time uint64) ID {
 	// Calculate the starting checksum from the genesis hash
 	hash := crc32.ChecksumIEEE(genesis.Hash().Bytes())
@@ -94,7 +94,7 @@ func NewID(config ctypes.ChainConfigurator, genesis *types.Block, head, time uin
 	return ID{Hash: checksumToBytes(hash), Next: 0}
 }
 
-// NewIDWithChain calculates the Ethereum fork ID from an existing chain instance.
+// NewIDWithChain calculates the Xcosh fork ID from an existing chain instance.
 func NewIDWithChain(chain Blockchain) ID {
 	head := chain.CurrentHeader()
 

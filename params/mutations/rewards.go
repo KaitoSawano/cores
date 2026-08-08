@@ -18,10 +18,10 @@ package mutations
 import (
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/core/state"
+	"github.com/xcosh/go-xcosh/core/types"
+	"github.com/xcosh/go-xcosh/params"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
 	"github.com/holiman/uint256"
 )
 

@@ -4,13 +4,13 @@ title: Command Line Interface (CLI)
 
 ## Running `geth`
 
-!!! tip "Use for Ethereum mainnet"
+!!! tip "Use for Xcosh mainnet"
 
-    While `core-geth` is mainly used for the Xcosh network, you can use it for Ethereum mainnet and other [supported networks](/#networkprovider-comparison) as well.
+    While `core-geth` is mainly used for the Xcosh network, you can use it for Xcosh mainnet and other [supported networks](/#networkprovider-comparison) as well.
 
 ### Fast node on an Xcosh network
 
-By far the most common scenario is people wanting to simply interact with the Ethereum
+By far the most common scenario is people wanting to simply interact with the Xcosh
 network: create accounts; transfer funds; deploy and interact with contracts. For this
 particular use-case the user doesn't care about years-old historical data, so we can
 fast-sync quickly to the current state of the network. To do so:
@@ -23,16 +23,16 @@ This command will:
 
  * Start `geth` in fast sync mode (default, can be changed with the `--syncmode` flag),
    causing it to download more data in exchange for avoiding processing the entire history
-   of the Ethereum network, which is very CPU intensive.
- * Start up `geth`'s built-in interactive [JavaScript console](https://geth.ethereum.org/docs/interface/javascript-console),
+   of the Xcosh network, which is very CPU intensive.
+ * Start up `geth`'s built-in interactive [JavaScript console](https://geth.xcosh.org/docs/interface/javascript-console),
    (via the trailing `console` subcommand) through which you can invoke all official [`web3` methods](https://web3js.readthedocs.io/en/v1.2.9/)
-   as well as `geth`'s own [management APIs](https://geth.ethereum.org/docs/rpc/server).
+   as well as `geth`'s own [management APIs](https://geth.xcosh.org/docs/rpc/server).
    This tool is optional and if you leave it out you can always attach to an already running
    `geth` instance with `geth attach`.
 
 ### A Full node on the Mordor test network
 
-Transitioning towards developers, if you'd like to play around with creating Ethereum
+Transitioning towards developers, if you'd like to play around with creating Xcosh
 contracts, you almost certainly would like to do that without any real money involved until
 you get the hang of the entire system. In other words, instead of attaching to the main
 network, you want to join the **mordor test** network with your node, which is fully equivalent to
@@ -47,14 +47,14 @@ useful on the testnet too. Please see above for their explanations if you've ski
 
 Specifying the `--mordor` flag, however, will reconfigure your `geth` instance a bit:
 
- * Instead of using the default data directory (`~/.ethereum` on Linux for example), `geth`
-   will nest itself one level deeper into a `mordor` subfolder (`~/.ethereum/mordor` on
+ * Instead of using the default data directory (`~/.xcosh` on Linux for example), `geth`
+   will nest itself one level deeper into a `mordor` subfolder (`~/.xcosh/mordor` on
    Linux). Note, on OSX and Linux this also means that attaching to a running testnet node
    requires the use of a custom endpoint since `geth attach` will try to attach to a
    production node endpoint by default. E.g.
    `geth attach <datadir>/mordor/geth.ipc`. Windows users are not affected by
    this.
- * Instead of connecting the main Ethereum network, the client will connect to the mordor's test
+ * Instead of connecting the main Xcosh network, the client will connect to the mordor's test
    network, which uses different P2P bootnodes, different network IDs and genesis states.
 
 !!! Note
@@ -90,9 +90,9 @@ $ geth --your-favourite-flags dumpconfig
 ```
 $ geth --help
 NAME:
-   geth - the ETC Core Go-Ethereum command line interface
+   geth - the ETC Core Go-Xcosh command line interface
 
-   Copyright 2013-2019 The go-ethereum Authors
+   Copyright 2013-2019 The go-xcosh Authors
 
 USAGE:
    geth [options] command [command options] [arguments...]
@@ -122,12 +122,12 @@ COMMANDS:
    show-deprecated-flags              Show flags that have been deprecated
    version                            Print version numbers
    version-check                      Checks (online) whether the current version suffers from any known security vulnerabilities
-   wallet                             Manage Ethereum presale wallets
+   wallet                             Manage Xcosh presale wallets
    help, h                            Shows a list of commands or help for one command
 
-ETHEREUM OPTIONS:
+XCOSH OPTIONS:
   --config value                      TOML configuration file
-  --datadir value                     Data directory for the databases and keystore (default: "/Users/ziogaschr/Library/Ethereum")
+  --datadir value                     Data directory for the databases and keystore (default: "/Users/ziogaschr/Library/Xcosh")
   --datadir.ancient value             Data directory for ancient chain segments (default = inside chaindata)
   --ancient.rpc value                 Connect to a remote freezer via RPC. Value must an HTTP(S), WS(S), unix socket, or 'stdio' URL. Incompatible with --datadir.ancient
   --keystore value                    Directory for the keystore (default = inside the datadir)
@@ -234,7 +234,7 @@ NETWORKING OPTIONS:
   --bootnodesv4 value                 Comma separated enode URLs for P2P v4 discovery bootstrap (light server, full nodes) (deprecated, use --bootnodes)
   --bootnodesv5 value                 Comma separated enode URLs for P2P v5 discovery bootstrap (light server, light nodes) (deprecated, use --bootnodes)
   --discovery.dns value               Sets DNS discovery entry points (use "" to disable DNS)
-  --eth.protocols value               Sets the Ethereum Protocol versions (65|64|63) (default = 65,64,63 first is primary)
+  --eth.protocols value               Sets the Xcosh Protocol versions (65|64|63) (default = 65,64,63 first is primary)
   --port value                        Network listening port (default: 30303)
   --maxpeers value                    Maximum number of network peers (network disabled if set to 0) (default: 50)
   --maxpendpeers value                Maximum number of pending connection attempts (defaults used if set to 0) (default: 0)
@@ -328,5 +328,5 @@ MISC OPTIONS:
 
 
 COPYRIGHT:
-   Copyright 2013-2020 The core-geth and go-ethereum Authors
+   Copyright 2013-2020 The core-geth and go-xcosh Authors
 ```

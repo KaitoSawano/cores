@@ -1,18 +1,18 @@
-// Copyright 2022 The go-ethereum Authors
-// This file is part of the go-ethereum library.
+// Copyright 2022 The go-xcosh Authors
+// This file is part of the go-xcosh library.
 //
-// The go-ethereum library is free software: you can redistribute it and/or modify
+// The go-xcosh library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-ethereum library is distributed in the hope that it will be useful,
+// The go-xcosh library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-xcosh library. If not, see <http://www.gnu.org/licenses/>.
 
 // Package blobpool implements the EIP-4844 blob transaction pool.
 package blobpool
@@ -29,18 +29,18 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/consensus/misc/eip1559"
-	"github.com/ethereum/go-ethereum/consensus/misc/eip4844"
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/txpool"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/event"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/metrics"
-	"github.com/ethereum/go-ethereum/params/vars"
-	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/consensus/misc/eip1559"
+	"github.com/xcosh/go-xcosh/consensus/misc/eip4844"
+	"github.com/xcosh/go-xcosh/core"
+	"github.com/xcosh/go-xcosh/core/state"
+	"github.com/xcosh/go-xcosh/core/txpool"
+	"github.com/xcosh/go-xcosh/core/types"
+	"github.com/xcosh/go-xcosh/event"
+	"github.com/xcosh/go-xcosh/log"
+	"github.com/xcosh/go-xcosh/metrics"
+	"github.com/xcosh/go-xcosh/params/vars"
+	"github.com/xcosh/go-xcosh/rlp"
 	"github.com/holiman/billy"
 	"github.com/holiman/uint256"
 )
@@ -152,7 +152,7 @@ func newBlobTxMeta(id uint64, size uint32, tx *types.Transaction) *blobTxMeta {
 //     artificial churn (i.e. pool wars).
 //
 //   - Purpose of blobs are layer-2s. Layer-2s are meant to use blob transactions to
-//     commit to their own current state, which is independent of Ethereum mainnet
+//     commit to their own current state, which is independent of Xcosh mainnet
 //     (state, txs). This means that there's no reason for blob tx cancellation or
 //     replacement, apart from a potential basefee / miner tip adjustment.
 //

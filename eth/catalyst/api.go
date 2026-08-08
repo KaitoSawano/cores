@@ -1,18 +1,18 @@
-// Copyright 2021 The go-ethereum Authors
-// This file is part of the go-ethereum library.
+// Copyright 2021 The go-xcosh Authors
+// This file is part of the go-xcosh library.
 //
-// The go-ethereum library is free software: you can redistribute it and/or modify
+// The go-xcosh library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-ethereum library is distributed in the hope that it will be useful,
+// The go-xcosh library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-xcosh library. If not, see <http://www.gnu.org/licenses/>.
 
 // Package catalyst implements the temporary eth1/eth2 RPC integration.
 package catalyst
@@ -24,23 +24,23 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ethereum/go-ethereum/beacon/engine"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/eth"
-	"github.com/ethereum/go-ethereum/eth/downloader"
-	"github.com/ethereum/go-ethereum/internal/version"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/miner"
-	"github.com/ethereum/go-ethereum/node"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/xcosh/go-xcosh/beacon/engine"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/common/hexutil"
+	"github.com/xcosh/go-xcosh/core/rawdb"
+	"github.com/xcosh/go-xcosh/core/types"
+	"github.com/xcosh/go-xcosh/eth"
+	"github.com/xcosh/go-xcosh/eth/downloader"
+	"github.com/xcosh/go-xcosh/internal/version"
+	"github.com/xcosh/go-xcosh/log"
+	"github.com/xcosh/go-xcosh/miner"
+	"github.com/xcosh/go-xcosh/node"
+	"github.com/xcosh/go-xcosh/params"
+	"github.com/xcosh/go-xcosh/rpc"
 )
 
 // Register adds the engine API to the full node.
-func Register(stack *node.Node, backend *eth.Ethereum) error {
+func Register(stack *node.Node, backend *eth.Xcosh) error {
 	log.Warn("Engine API enabled", "protocol", "eth")
 	stack.RegisterAPIs([]rpc.API{
 		{
@@ -94,7 +94,7 @@ var caps = []string{
 }
 
 type ConsensusAPI struct {
-	eth *eth.Ethereum
+	eth *eth.Xcosh
 
 	remoteBlocks *headerQueue  // Cache of remote payloads received
 	localBlocks  *payloadQueue // Cache of local payloads generated
@@ -138,14 +138,14 @@ type ConsensusAPI struct {
 
 // NewConsensusAPI creates a new consensus api for the given backend.
 // The underlying blockchain needs to have a valid terminal total difficulty set.
-func NewConsensusAPI(eth *eth.Ethereum) *ConsensusAPI {
+func NewConsensusAPI(eth *eth.Xcosh) *ConsensusAPI {
 	api := newConsensusAPIWithoutHeartbeat(eth)
 	go api.heartbeat()
 	return api
 }
 
 // newConsensusAPIWithoutHeartbeat creates a new consensus api for the SimulatedBeacon Node.
-func newConsensusAPIWithoutHeartbeat(eth *eth.Ethereum) *ConsensusAPI {
+func newConsensusAPIWithoutHeartbeat(eth *eth.Xcosh) *ConsensusAPI {
 	if eth.BlockChain().Config().GetEthashTerminalTotalDifficulty() == nil {
 		log.Warn("Engine API started but chain not configured for merge yet")
 	}
@@ -199,7 +199,7 @@ func (api *ConsensusAPI) ForkchoiceUpdatedV2(update engine.ForkchoiceStateV1, pa
 
 		// This method validates the omission of withdrawals in the payload attributes
 		// IFF the latest fork is Paris.
-		// EIP4399 - Supplant DIFFICULTY opcode.... -- this is a placeholder/indicator for ethereum/go-ethereum's idea of fork == Paris.
+		// EIP4399 - Supplant DIFFICULTY opcode.... -- this is a placeholder/indicator for xcosh/go-xcosh's idea of fork == Paris.
 		eip4399 := api.eth.BlockChain().Config().IsEnabledByTime(api.eth.BlockChain().Config().GetEIP4399Transition, params.Number)
 		isParis := eip4399
 
@@ -231,7 +231,7 @@ func (api *ConsensusAPI) ForkchoiceUpdatedV2(update engine.ForkchoiceStateV1, pa
 // in the payload attributes. It supports only PayloadAttributesV3.
 func (api *ConsensusAPI) ForkchoiceUpdatedV3(update engine.ForkchoiceStateV1, params *engine.PayloadAttributes) (engine.ForkChoiceResponse, error) {
 	if params != nil {
-		// TODO(matt): according to https://github.com/ethereum/execution-apis/pull/498,
+		// TODO(matt): according to https://github.com/xcosh/execution-apis/pull/498,
 		// payload attributes that are invalid should return error
 		// engine.InvalidPayloadAttributes. Once hive updates this, we should update
 		// on our end.

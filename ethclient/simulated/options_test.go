@@ -1,18 +1,18 @@
-// Copyright 2024 The go-ethereum Authors
-// This file is part of the go-ethereum library.
+// Copyright 2024 The go-xcosh Authors
+// This file is part of the go-xcosh library.
 //
-// The go-ethereum library is free software: you can redistribute it and/or modify
+// The go-xcosh library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-ethereum library is distributed in the hope that it will be useful,
+// The go-xcosh library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-xcosh library. If not, see <http://www.gnu.org/licenses/>.
 
 package simulated
 
@@ -22,10 +22,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ethereum/go-ethereum"
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/params/types/genesisT"
-	"github.com/ethereum/go-ethereum/params/vars"
+	"github.com/xcosh/go-xcosh"
+	"github.com/xcosh/go-xcosh/core"
+	"github.com/xcosh/go-xcosh/params/types/genesisT"
+	"github.com/xcosh/go-xcosh/params/vars"
 )
 
 // Tests that the simulator starts with the initial gas limit in the genesis block,
@@ -63,7 +63,7 @@ func TestWithCallGasLimitOption(t *testing.T) {
 	defer sim.Close()
 
 	client := sim.Client()
-	_, err := client.CallContract(context.Background(), ethereum.CallMsg{
+	_, err := client.CallContract(context.Background(), xcosh.CallMsg{
 		From: testAddr,
 		To:   &testAddr,
 		Gas:  21000,

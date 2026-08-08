@@ -17,14 +17,14 @@ import (
 
 	"github.com/alecthomas/jsonschema"
 	go_openrpc_reflect "github.com/etclabscore/go-openrpc-reflect"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/eth/filters"
-	"github.com/ethereum/go-ethereum/eth/tracers"
-	"github.com/ethereum/go-ethereum/internal/debug"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/common/hexutil"
+	"github.com/xcosh/go-xcosh/core/types"
+	"github.com/xcosh/go-xcosh/eth/filters"
+	"github.com/xcosh/go-xcosh/eth/tracers"
+	"github.com/xcosh/go-xcosh/internal/debug"
+	"github.com/xcosh/go-xcosh/params"
+	"github.com/xcosh/go-xcosh/rpc"
 	meta_schema "github.com/open-rpc/meta-schema"
 )
 
@@ -121,8 +121,8 @@ func eligibleReturnSignature(method reflect.Method) bool {
 func newOpenRPCDocument() *go_openrpc_reflect.Document {
 	d := &go_openrpc_reflect.Document{}
 
-	// Use a provided Ethereum default configuration as a base.
-	appReflector := &go_openrpc_reflect.EthereumReflectorT{}
+	// Use a provided Xcosh default configuration as a base.
+	appReflector := &go_openrpc_reflect.XcoshReflectorT{}
 
 	// Install overrides for the json schema->type map fn used by the jsonschema reflect package.
 	appReflector.FnSchemaTypeMap = func() func(ty reflect.Type) *jsonschema.Type {
@@ -142,7 +142,7 @@ func newOpenRPCDocument() *go_openrpc_reflect.Document {
 		// This pattern matches all strings that start with Subscribe and are suffixed with a non-zero
 		// number of A-z characters.
 		pkgStr := method.Type.In(0).String()
-		if isPubSub(method.Type) && pkgStr == "*eth.PublicEthereumAPI" {
+		if isPubSub(method.Type) && pkgStr == "*eth.PublicXcoshAPI" {
 			// This catches MOST of them (except SubscribeSyncStatus)
 			return false
 		}
@@ -186,7 +186,7 @@ func newOpenRPCDocument() *go_openrpc_reflect.Document {
 		}
 
 		// Otherwise return the default.
-		return go_openrpc_reflect.EthereumReflector.GetContentDescriptorRequired(r, m, field)
+		return go_openrpc_reflect.XcoshReflector.GetContentDescriptorRequired(r, m, field)
 	}
 
 	appReflector.FnGetMethodExternalDocs = func(r reflect.Value, m reflect.Method, funcDecl *ast.FuncDecl) (*meta_schema.ExternalDocumentationObject, error) {
@@ -198,8 +198,8 @@ func newOpenRPCDocument() *go_openrpc_reflect.Document {
 		if got.Url == nil {
 			return got, nil
 		}
-		// Replace links to go-ethereum repo with current core-geth one
-		newLink := meta_schema.ExternalDocumentationObjectUrl(strings.Replace(string(*got.Url), "github.com/ethereum/go-ethereum", "github.com/etclabscore/core-geth", 1))
+		// Replace links to go-xcosh repo with current core-geth one
+		newLink := meta_schema.ExternalDocumentationObjectUrl(strings.Replace(string(*got.Url), "github.com/xcosh/go-xcosh", "github.com/etclabscore/core-geth", 1))
 		got.Url = &newLink
 		return got, nil
 	}

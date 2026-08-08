@@ -7,8 +7,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/params/types/coregeth"
-	"github.com/ethereum/go-ethereum/params/types/goethereum"
+	"github.com/xcosh/go-xcosh/params/types/coregeth"
+	"github.com/xcosh/go-xcosh/params/types/goxcosh"
 )
 
 func TestUnmarshalChainConfigurator(t *testing.T) {
@@ -18,7 +18,7 @@ func TestUnmarshalChainConfigurator(t *testing.T) {
 	}{
 		{
 			filepath.Join("..", "testdata", "geth_foundation.json"),
-			&goethereum.ChainConfig{},
+			&goxcosh.ChainConfig{},
 		},
 		{
 			filepath.Join("..", "testdata", "coregeth_foundation.json"),

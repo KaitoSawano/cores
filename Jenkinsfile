@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        GETH_EXPORTS = '/data/ethereum-exports'
+        GETH_EXPORTS = '/data/xcosh-exports'
         GETH_DATADIR = '/data/geth'
         GITHUB_NOTIFY_DESCRIPTION = 'Assert import of canonical chain data'
         GITHUB_OWNER_NAME = env.GIT_URL.replaceFirst(/^.*\/([^\/]+?)\/.+\.git$/, '$1')

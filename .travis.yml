@@ -1,5 +1,5 @@
 language: go
-go_import_path: github.com/ethereum/go-ethereum
+go_import_path: github.com/xcosh/go-xcosh
 sudo: false
 jobs:
   allow_failures:
@@ -22,11 +22,11 @@ jobs:
       services:
         - docker
       git:
-        submodules: false # avoid cloning ethereum/tests
+        submodules: false # avoid cloning xcosh/tests
       before_install:
         - export DOCKER_CLI_EXPERIMENTAL=enabled
       script:
-        - go run build/ci.go docker -image -manifest amd64,arm64 -upload ethereum/client-go
+        - go run build/ci.go docker -image -manifest amd64,arm64 -upload xcosh/client-go
 
     - stage: build
       if: type = push
@@ -39,11 +39,11 @@ jobs:
       services:
         - docker
       git:
-        submodules: false # avoid cloning ethereum/tests
+        submodules: false # avoid cloning xcosh/tests
       before_install:
         - export DOCKER_CLI_EXPERIMENTAL=enabled
       script:
-        - go run build/ci.go docker -image -manifest amd64,arm64 -upload ethereum/client-go
+        - go run build/ci.go docker -image -manifest amd64,arm64 -upload xcosh/client-go
 
     # This builder does the Linux Azure uploads
     - stage: build
@@ -55,7 +55,7 @@ jobs:
       env:
         - azure-linux
       git:
-        submodules: false # avoid cloning ethereum/tests
+        submodules: false # avoid cloning xcosh/tests
       addons:
         apt:
           packages:
@@ -89,7 +89,7 @@ jobs:
       env:
         - azure-osx
       git:
-        submodules: false # avoid cloning ethereum/tests
+        submodules: false # avoid cloning xcosh/tests
       script:
         - go run build/ci.go install -dlgo
         - go run build/ci.go archive -type tar -signer OSX_SIGNING_KEY -signify SIGNIFY_KEY -upload gethstore/builds
@@ -130,7 +130,7 @@ jobs:
       env:
         - ubuntu-ppa
       git:
-        submodules: false # avoid cloning ethereum/tests
+        submodules: false # avoid cloning xcosh/tests
       addons:
         apt:
           packages:
@@ -142,7 +142,7 @@ jobs:
             - python-paramiko
       script:
         - echo '|1|7SiYPr9xl3uctzovOTj4gMwAC1M=|t6ReES75Bo/PxlOPJ6/GsGbTrM0= ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA0aKz5UTUndYgIGG7dQBV+HaeuEZJ2xPHo2DS2iSKvUL4xNMSAY4UguNW+pX56nAQmZKIZZ8MaEvSj6zMEDiq6HFfn5JcTlM80UwlnyKe8B8p7Nk06PPQLrnmQt5fh0HmEcZx+JU9TZsfCHPnX7MNz4ELfZE6cFsclClrKim3BHUIGq//t93DllB+h4O9LHjEUsQ1Sr63irDLSutkLJD6RXchjROXkNirlcNVHH/jwLWR5RcYilNX7S5bIkK8NlWPjsn/8Ua5O7I9/YoE97PpO6i73DTGLh5H9JN/SITwCKBkgSDWUt61uPK3Y11Gty7o2lWsBjhBUm2Y38CBsoGmBw==' >> ~/.ssh/known_hosts
-        - go run build/ci.go debsrc -upload ethereum/ethereum -sftp-user geth-ci -signer "Go Ethereum Linux Builder <geth-ci@ethereum.org>"
+        - go run build/ci.go debsrc -upload xcosh/xcosh -sftp-user geth-ci -signer "Go Xcosh Linux Builder <geth-ci@xcosh.org>"
 
     # This builder does the Azure archive purges to avoid accumulating junk
     - stage: build
@@ -153,7 +153,7 @@ jobs:
       env:
         - azure-purge
       git:
-        submodules: false # avoid cloning ethereum/tests
+        submodules: false # avoid cloning xcosh/tests
       script:
         - go run build/ci.go purge -store gethstore/builds -days 14
 

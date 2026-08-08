@@ -96,17 +96,17 @@ const (
 	MessageType_MessageType_DebugLinkMemory      MessageType = 111
 	MessageType_MessageType_DebugLinkMemoryWrite MessageType = 112
 	MessageType_MessageType_DebugLinkFlashErase  MessageType = 113
-	// Ethereum
-	MessageType_MessageType_EthereumGetPublicKey     MessageType = 450
-	MessageType_MessageType_EthereumPublicKey        MessageType = 451
-	MessageType_MessageType_EthereumGetAddress       MessageType = 56
-	MessageType_MessageType_EthereumAddress          MessageType = 57
-	MessageType_MessageType_EthereumSignTx           MessageType = 58
-	MessageType_MessageType_EthereumTxRequest        MessageType = 59
-	MessageType_MessageType_EthereumTxAck            MessageType = 60
-	MessageType_MessageType_EthereumSignMessage      MessageType = 64
-	MessageType_MessageType_EthereumVerifyMessage    MessageType = 65
-	MessageType_MessageType_EthereumMessageSignature MessageType = 66
+	// Xcosh
+	MessageType_MessageType_XcoshGetPublicKey     MessageType = 450
+	MessageType_MessageType_XcoshPublicKey        MessageType = 451
+	MessageType_MessageType_XcoshGetAddress       MessageType = 56
+	MessageType_MessageType_XcoshAddress          MessageType = 57
+	MessageType_MessageType_XcoshSignTx           MessageType = 58
+	MessageType_MessageType_XcoshTxRequest        MessageType = 59
+	MessageType_MessageType_XcoshTxAck            MessageType = 60
+	MessageType_MessageType_XcoshSignMessage      MessageType = 64
+	MessageType_MessageType_XcoshVerifyMessage    MessageType = 65
+	MessageType_MessageType_XcoshMessageSignature MessageType = 66
 	// NEM
 	MessageType_MessageType_NEMGetAddress       MessageType = 67
 	MessageType_MessageType_NEMAddress          MessageType = 68
@@ -306,16 +306,16 @@ var MessageType_name = map[int32]string{
 	111: "MessageType_DebugLinkMemory",
 	112: "MessageType_DebugLinkMemoryWrite",
 	113: "MessageType_DebugLinkFlashErase",
-	450: "MessageType_EthereumGetPublicKey",
-	451: "MessageType_EthereumPublicKey",
-	56:  "MessageType_EthereumGetAddress",
-	57:  "MessageType_EthereumAddress",
-	58:  "MessageType_EthereumSignTx",
-	59:  "MessageType_EthereumTxRequest",
-	60:  "MessageType_EthereumTxAck",
-	64:  "MessageType_EthereumSignMessage",
-	65:  "MessageType_EthereumVerifyMessage",
-	66:  "MessageType_EthereumMessageSignature",
+	450: "MessageType_XcoshGetPublicKey",
+	451: "MessageType_XcoshPublicKey",
+	56:  "MessageType_XcoshGetAddress",
+	57:  "MessageType_XcoshAddress",
+	58:  "MessageType_XcoshSignTx",
+	59:  "MessageType_XcoshTxRequest",
+	60:  "MessageType_XcoshTxAck",
+	64:  "MessageType_XcoshSignMessage",
+	65:  "MessageType_XcoshVerifyMessage",
+	66:  "MessageType_XcoshMessageSignature",
 	67:  "MessageType_NEMGetAddress",
 	68:  "MessageType_NEMAddress",
 	69:  "MessageType_NEMSignTx",
@@ -502,16 +502,16 @@ var MessageType_value = map[string]int32{
 	"MessageType_DebugLinkMemory":                           111,
 	"MessageType_DebugLinkMemoryWrite":                      112,
 	"MessageType_DebugLinkFlashErase":                       113,
-	"MessageType_EthereumGetPublicKey":                      450,
-	"MessageType_EthereumPublicKey":                         451,
-	"MessageType_EthereumGetAddress":                        56,
-	"MessageType_EthereumAddress":                           57,
-	"MessageType_EthereumSignTx":                            58,
-	"MessageType_EthereumTxRequest":                         59,
-	"MessageType_EthereumTxAck":                             60,
-	"MessageType_EthereumSignMessage":                       64,
-	"MessageType_EthereumVerifyMessage":                     65,
-	"MessageType_EthereumMessageSignature":                  66,
+	"MessageType_XcoshGetPublicKey":                      450,
+	"MessageType_XcoshPublicKey":                         451,
+	"MessageType_XcoshGetAddress":                        56,
+	"MessageType_XcoshAddress":                           57,
+	"MessageType_XcoshSignTx":                            58,
+	"MessageType_XcoshTxRequest":                         59,
+	"MessageType_XcoshTxAck":                             60,
+	"MessageType_XcoshSignMessage":                       64,
+	"MessageType_XcoshVerifyMessage":                     65,
+	"MessageType_XcoshMessageSignature":                  66,
 	"MessageType_NEMGetAddress":                             67,
 	"MessageType_NEMAddress":                                68,
 	"MessageType_NEMSignTx":                                 69,

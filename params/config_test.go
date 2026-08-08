@@ -1,18 +1,18 @@
-// Copyright 2017 The go-ethereum Authors
-// This file is part of the go-ethereum library.
+// Copyright 2017 The go-xcosh Authors
+// This file is part of the go-xcosh library.
 //
-// The go-ethereum library is free software: you can redistribute it and/or modify
+// The go-xcosh library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-ethereum library is distributed in the hope that it will be useful,
+// The go-xcosh library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-xcosh library. If not, see <http://www.gnu.org/licenses/>.
 
 package params
 
@@ -21,18 +21,18 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/params/confp"
-	"github.com/ethereum/go-ethereum/params/types/coregeth"
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
-	"github.com/ethereum/go-ethereum/params/types/genesisT"
-	"github.com/ethereum/go-ethereum/params/types/goethereum"
-	"github.com/ethereum/go-ethereum/params/vars"
-	"github.com/ethereum/go-ethereum/trie"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/core/rawdb"
+	"github.com/xcosh/go-xcosh/core/state"
+	"github.com/xcosh/go-xcosh/core/types"
+	"github.com/xcosh/go-xcosh/ethdb"
+	"github.com/xcosh/go-xcosh/params/confp"
+	"github.com/xcosh/go-xcosh/params/types/coregeth"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/params/types/genesisT"
+	"github.com/xcosh/go-xcosh/params/types/goxcosh"
+	"github.com/xcosh/go-xcosh/params/vars"
+	"github.com/xcosh/go-xcosh/trie"
 	"github.com/holiman/uint256"
 )
 
@@ -52,15 +52,15 @@ func TestCheckCompatible(t *testing.T) {
 		{stored: AllEthashProtocolChanges, new: AllEthashProtocolChanges, headBlock: 0, headTimestamp: uint64(time.Now().Unix()), wantErr: nil},
 		{stored: AllEthashProtocolChanges, new: AllEthashProtocolChanges, headBlock: 100, wantErr: nil},
 		{
-			stored:    &goethereum.ChainConfig{Ethash: new(ctypes.EthashConfig), EIP150Block: big.NewInt(10)},
-			new:       &goethereum.ChainConfig{Ethash: new(ctypes.EthashConfig), EIP150Block: big.NewInt(20)},
+			stored:    &goxcosh.ChainConfig{Ethash: new(ctypes.EthashConfig), EIP150Block: big.NewInt(10)},
+			new:       &goxcosh.ChainConfig{Ethash: new(ctypes.EthashConfig), EIP150Block: big.NewInt(20)},
 			headBlock: 9,
 			wantErr:   nil,
 		},
 		// case index 4
 		{
 			stored:    AllEthashProtocolChanges,
-			new:       &goethereum.ChainConfig{Ethash: new(ctypes.EthashConfig), HomesteadBlock: nil},
+			new:       &goxcosh.ChainConfig{Ethash: new(ctypes.EthashConfig), HomesteadBlock: nil},
 			headBlock: 3,
 			wantErr: &confp.ConfigCompatError{
 				What:          "Homestead fork block",
@@ -72,7 +72,7 @@ func TestCheckCompatible(t *testing.T) {
 		// 5
 		{
 			stored:    AllEthashProtocolChanges,
-			new:       &goethereum.ChainConfig{Ethash: new(ctypes.EthashConfig), HomesteadBlock: big.NewInt(1)},
+			new:       &goxcosh.ChainConfig{Ethash: new(ctypes.EthashConfig), HomesteadBlock: big.NewInt(1)},
 			headBlock: 3,
 			wantErr: &confp.ConfigCompatError{
 				What:          "Homestead fork block",
@@ -85,8 +85,8 @@ func TestCheckCompatible(t *testing.T) {
 		// Want the EIP150 block error because it is below the head block AND below the Homestead blocks.
 		// The compat error should always be the earliest fork block incompatibility.
 		{
-			stored:    &goethereum.ChainConfig{Ethash: new(ctypes.EthashConfig), HomesteadBlock: big.NewInt(30), EIP150Block: big.NewInt(10)},
-			new:       &goethereum.ChainConfig{Ethash: new(ctypes.EthashConfig), HomesteadBlock: big.NewInt(25), EIP150Block: big.NewInt(20)},
+			stored:    &goxcosh.ChainConfig{Ethash: new(ctypes.EthashConfig), HomesteadBlock: big.NewInt(30), EIP150Block: big.NewInt(10)},
+			new:       &goxcosh.ChainConfig{Ethash: new(ctypes.EthashConfig), HomesteadBlock: big.NewInt(25), EIP150Block: big.NewInt(20)},
 			headBlock: 25,
 			wantErr: &confp.ConfigCompatError{
 				What:          "EIP150 fork block",
@@ -109,14 +109,14 @@ func TestCheckCompatible(t *testing.T) {
 		},
 		// 8
 		{
-			stored:    &goethereum.ChainConfig{Ethash: new(ctypes.EthashConfig), ByzantiumBlock: big.NewInt(30)},
+			stored:    &goxcosh.ChainConfig{Ethash: new(ctypes.EthashConfig), ByzantiumBlock: big.NewInt(30)},
 			new:       &coregeth.CoreGethChainConfig{Ethash: new(ctypes.EthashConfig), EIP211FBlock: big.NewInt(26)},
 			headBlock: 25,
 			wantErr:   nil,
 		},
 		// 9
 		{
-			stored:    &goethereum.ChainConfig{Ethash: new(ctypes.EthashConfig), ByzantiumBlock: big.NewInt(30)},
+			stored:    &goxcosh.ChainConfig{Ethash: new(ctypes.EthashConfig), ByzantiumBlock: big.NewInt(30)},
 			new:       &coregeth.CoreGethChainConfig{Ethash: new(ctypes.EthashConfig), EIP100FBlock: big.NewInt(26), EIP649FBlock: big.NewInt(26)},
 			headBlock: 25,
 			wantErr:   nil,
@@ -125,7 +125,7 @@ func TestCheckCompatible(t *testing.T) {
 		{
 			stored: MainnetChainConfig,
 			new: func() ctypes.ChainConfigurator {
-				c := &goethereum.ChainConfig{}
+				c := &goxcosh.ChainConfig{}
 				if err := confp.Crush(c, MainnetChainConfig, true); err != nil {
 					panic(err)
 				}
@@ -143,7 +143,7 @@ func TestCheckCompatible(t *testing.T) {
 		{
 			stored: MainnetChainConfig,
 			new: func() ctypes.ChainConfigurator {
-				c := &goethereum.ChainConfig{}
+				c := &goxcosh.ChainConfig{}
 				confp.Crush(c, MainnetChainConfig, true)
 				c.SetEthashEIP779Transition(nil)
 				return c
@@ -159,7 +159,7 @@ func TestCheckCompatible(t *testing.T) {
 		{
 			stored: MainnetChainConfig,
 			new: func() ctypes.ChainConfigurator {
-				c := &goethereum.ChainConfig{}
+				c := &goxcosh.ChainConfig{}
 				*c = *MainnetChainConfig
 				c.SetChainID(new(big.Int).Sub(MainnetChainConfig.EIP155Block, common.Big1))
 				return c
@@ -174,7 +174,7 @@ func TestCheckCompatible(t *testing.T) {
 		},
 		{
 			stored: func() ctypes.ChainConfigurator {
-				c := &goethereum.ChainConfig{
+				c := &goxcosh.ChainConfig{
 					Ethash:         new(ctypes.EthashConfig),
 					DAOForkBlock:   big.NewInt(3),
 					DAOForkSupport: false,
@@ -239,7 +239,7 @@ func TestCheckCompatible(t *testing.T) {
 				return c
 			}(),
 		},
-		// https://github.com/ethereum/go-ethereum/pull/21473
+		// https://github.com/xcosh/go-xcosh/pull/21473
 		// This is to enable private chains running on older Geth release 1.8.27 with Constantinople fork enabled (but not Petersburg) to apply Petersburg retroactively when upgrading to Geth 1.9.
 		// ... but @meowsbits thinks this isn't reasonable.
 		// This is allowance would presume that the private chains were unaffected by the constantinople vs. petersburg
@@ -247,14 +247,14 @@ func TestCheckCompatible(t *testing.T) {
 		// Are the configs equivalent? No. Do we have any observables in place to ensure that the chain data will not be
 		// retroactively corrupted? No.
 		// {
-		// 	stored:  &goethereum.ChainConfig{ConstantinopleBlock: big.NewInt(30)},
-		// 	new:     &goethereum.ChainConfig{ConstantinopleBlock: big.NewInt(30), PetersburgBlock: big.NewInt(30)},
+		// 	stored:  &goxcosh.ChainConfig{ConstantinopleBlock: big.NewInt(30)},
+		// 	new:     &goxcosh.ChainConfig{ConstantinopleBlock: big.NewInt(30), PetersburgBlock: big.NewInt(30)},
 		// 	headBlock:    40,
 		// 	wantErr: nil,
 		// },
 		{
-			stored:    &goethereum.ChainConfig{ConstantinopleBlock: big.NewInt(30)},
-			new:       &goethereum.ChainConfig{ConstantinopleBlock: big.NewInt(30), PetersburgBlock: big.NewInt(31)},
+			stored:    &goxcosh.ChainConfig{ConstantinopleBlock: big.NewInt(30)},
+			new:       &goxcosh.ChainConfig{ConstantinopleBlock: big.NewInt(30), PetersburgBlock: big.NewInt(31)},
 			headBlock: 40,
 			wantErr: &confp.ConfigCompatError{
 				What:          "Petersburg fork block",

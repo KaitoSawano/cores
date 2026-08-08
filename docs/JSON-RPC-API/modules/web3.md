@@ -82,7 +82,7 @@ func (s *web3API) ClientVersion() string {
 
 ### web3_sha3
 
-Sha3 applies the ethereum sha3 implementation on the input.
+Sha3 applies the xcosh sha3 implementation on the input.
 It assumes the input is hex encoded.
 
 
@@ -196,7 +196,7 @@ input <code>hexutil.Bytes</code>
 ```go
 func (s *web3API) Sha3(input hexutil.Bytes) hexutil.Bytes {
 	return crypto.Keccak256(input)
-}// Sha3 applies the ethereum sha3 implementation on the input.
+}// Sha3 applies the xcosh sha3 implementation on the input.
 // It assumes the input is hex encoded.
 
 ```

@@ -21,9 +21,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/ethereum/go-ethereum/params/types/coregeth"
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
-	"github.com/ethereum/go-ethereum/params/types/goethereum"
+	"github.com/xcosh/go-xcosh/params/types/coregeth"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/params/types/goxcosh"
 	"github.com/tidwall/gjson"
 )
 
@@ -41,7 +41,7 @@ func AsGenericCC(c ctypes.ChainConfigurator) GenericCC {
 }
 
 func (c GenericCC) DAOSupport() bool {
-	if gc, ok := c.ChainConfigurator.(*goethereum.ChainConfig); ok {
+	if gc, ok := c.ChainConfigurator.(*goxcosh.ChainConfig); ok {
 		return gc.DAOForkSupport
 	}
 	if mg, ok := c.ChainConfigurator.(*coregeth.CoreGethChainConfig); ok {
@@ -66,15 +66,15 @@ var (
 		"daoForkSupport", "config.daoForkSupport",
 	}
 
-	// Fields known to ethereum/go-ethereum.
-	goethereumSchemaSuffice = []string{
+	// Fields known to xcosh/go-xcosh.
+	goxcoshSchemaSuffice = []string{
 		"difficulty",
 		"byzantiumBlock", "config.byzantiumBlock",
 		"chainId", "config.chainId",
 		"homesteadBlock", "config.homesteadBlock",
 	}
-	// Fields unknown to ethereum/go-ethereum.
-	goethereumSchemaMustNot = []string{
+	// Fields unknown to xcosh/go-xcosh.
+	goxcoshSchemaMustNot = []string{
 		"engine",
 		"genesis.seal",
 		"networkId", "config.networkId",
@@ -88,7 +88,7 @@ func UnmarshalChainConfigurator(input []byte) (ctypes.ChainConfigurator, error) 
 		negates    []string
 	}{
 		{&coregeth.CoreGethChainConfig{}, coregethSchemaSuffice, coregethSchemaMustNot},
-		{&goethereum.ChainConfig{}, goethereumSchemaSuffice, goethereumSchemaMustNot},
+		{&goxcosh.ChainConfig{}, goxcoshSchemaSuffice, goxcoshSchemaMustNot},
 	}
 	for _, c := range cases {
 		ok, err := asMapHasAnyKey(input, c.sufficient)

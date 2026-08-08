@@ -1,18 +1,18 @@
-// Copyright 2015 The go-ethereum Authors
-// This file is part of the go-ethereum library.
+// Copyright 2015 The go-xcosh Authors
+// This file is part of the go-xcosh library.
 //
-// The go-ethereum library is free software: you can redistribute it and/or modify
+// The go-xcosh library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-ethereum library is distributed in the hope that it will be useful,
+// The go-xcosh library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-xcosh library. If not, see <http://www.gnu.org/licenses/>.
 
 package tests
 
@@ -30,12 +30,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/eth/tracers/logger"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/core"
+	"github.com/xcosh/go-xcosh/core/rawdb"
+	"github.com/xcosh/go-xcosh/core/types"
+	"github.com/xcosh/go-xcosh/core/vm"
+	"github.com/xcosh/go-xcosh/eth/tracers/logger"
 	"github.com/holiman/uint256"
 )
 
@@ -88,7 +88,7 @@ func initMatcher(st *testMatcher) {
 		st.skipFork("Cancun")   // ETH
 	}
 
-	// Un-skip this when https://github.com/ethereum/tests/issues/908 is closed
+	// Un-skip this when https://github.com/xcosh/tests/issues/908 is closed
 	st.skipLoad(`^stQuadraticComplexityTest/QuadraticComplexitySolidity_CallDataCopy`)
 
 	// Broken tests:
@@ -336,7 +336,7 @@ func runBenchmark(b *testing.B, t *StateTest) {
 				refund  uint64
 
 				// Berlin
-				// https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/berlin.md
+				// https://github.com/xcosh/execution-specs/blob/master/network-upgrades/mainnet-upgrades/berlin.md
 				// EIP-2930: Optional access lists
 				eip2930f = config.IsEnabled(config.GetEIP2930Transition, evm.Context.BlockNumber)
 

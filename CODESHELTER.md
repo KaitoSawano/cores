@@ -1,7 +1,7 @@
 ﻿# Note to Code Shelter maintainers
 
 The `multi-geth` project is an extension of upstream
-[go-ethereum](https://github.com/ethereum/go-ethereum) that add more
+[go-xcosh](https://github.com/xcosh/go-xcosh) that add more
 blockchain network support. Some philosophical notes to maintainers:
 
 * We accept all patches to add new network supports, as long as it's
@@ -14,7 +14,7 @@ upstream and making new releases. Thank you!
 
 ## Merge Upstream Changes
 
-Add `https://github.com/ethereum/go-ethereum` to one of your
+Add `https://github.com/xcosh/go-xcosh` to one of your
 remote. Then pull the upstream `master` branch (note that it must be
 `master` branch!), resolve conflicts and create a new PR.
 

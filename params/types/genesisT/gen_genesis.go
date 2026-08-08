@@ -7,13 +7,13 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/ethereum/go-ethereum/common/math"
-	"github.com/ethereum/go-ethereum/params/confp/generic"
-	"github.com/ethereum/go-ethereum/params/types/coregeth"
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
-	"github.com/ethereum/go-ethereum/params/types/goethereum"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/common/hexutil"
+	"github.com/xcosh/go-xcosh/common/math"
+	"github.com/xcosh/go-xcosh/params/confp/generic"
+	"github.com/xcosh/go-xcosh/params/types/coregeth"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/params/types/goxcosh"
 )
 
 var _ = (*genesisSpecMarshaling)(nil)
@@ -91,8 +91,8 @@ func (g *Genesis) UnmarshalJSON(input []byte) error {
 	switch conf.(type) {
 	case *coregeth.CoreGethChainConfig:
 		dec.Config = &coregeth.CoreGethChainConfig{}
-	case *goethereum.ChainConfig:
-		dec.Config = &goethereum.ChainConfig{}
+	case *goxcosh.ChainConfig:
+		dec.Config = &goxcosh.ChainConfig{}
 	default:
 		panic("unmarshal genesis chain config returned a type not supported by unmarshaling")
 	}

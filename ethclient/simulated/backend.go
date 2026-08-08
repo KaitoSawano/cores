@@ -1,55 +1,55 @@
-// Copyright 2023 The go-ethereum Authors
-// This file is part of the go-ethereum library.
+// Copyright 2023 The go-xcosh Authors
+// This file is part of the go-xcosh library.
 //
-// The go-ethereum library is free software: you can redistribute it and/or modify
+// The go-xcosh library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-ethereum library is distributed in the hope that it will be useful,
+// The go-xcosh library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-xcosh library. If not, see <http://www.gnu.org/licenses/>.
 
 package simulated
 
 import (
 	"time"
 
-	"github.com/ethereum/go-ethereum"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/eth"
-	"github.com/ethereum/go-ethereum/eth/catalyst"
-	"github.com/ethereum/go-ethereum/eth/downloader"
-	"github.com/ethereum/go-ethereum/eth/ethconfig"
-	"github.com/ethereum/go-ethereum/eth/filters"
-	"github.com/ethereum/go-ethereum/ethclient"
-	"github.com/ethereum/go-ethereum/node"
-	"github.com/ethereum/go-ethereum/p2p"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/params/types/genesisT"
-	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/xcosh/go-xcosh"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/eth"
+	"github.com/xcosh/go-xcosh/eth/catalyst"
+	"github.com/xcosh/go-xcosh/eth/downloader"
+	"github.com/xcosh/go-xcosh/eth/ethconfig"
+	"github.com/xcosh/go-xcosh/eth/filters"
+	"github.com/xcosh/go-xcosh/ethclient"
+	"github.com/xcosh/go-xcosh/node"
+	"github.com/xcosh/go-xcosh/p2p"
+	"github.com/xcosh/go-xcosh/params"
+	"github.com/xcosh/go-xcosh/params/types/genesisT"
+	"github.com/xcosh/go-xcosh/rpc"
 )
 
-// Client exposes the methods provided by the Ethereum RPC client.
+// Client exposes the methods provided by the Xcosh RPC client.
 type Client interface {
-	ethereum.BlockNumberReader
-	ethereum.ChainReader
-	ethereum.ChainStateReader
-	ethereum.ContractCaller
-	ethereum.GasEstimator
-	ethereum.GasPricer
-	ethereum.GasPricer1559
-	ethereum.FeeHistoryReader
-	ethereum.LogFilterer
-	ethereum.PendingStateReader
-	ethereum.PendingContractCaller
-	ethereum.TransactionReader
-	ethereum.TransactionSender
-	ethereum.ChainIDReader
+	xcosh.BlockNumberReader
+	xcosh.ChainReader
+	xcosh.ChainStateReader
+	xcosh.ContractCaller
+	xcosh.GasEstimator
+	xcosh.GasPricer
+	xcosh.GasPricer1559
+	xcosh.FeeHistoryReader
+	xcosh.LogFilterer
+	xcosh.PendingStateReader
+	xcosh.PendingContractCaller
+	xcosh.TransactionReader
+	xcosh.TransactionSender
+	xcosh.ChainIDReader
 }
 
 // simClient wraps ethclient. This exists to prevent extracting ethclient.Client
@@ -59,9 +59,9 @@ type simClient struct {
 }
 
 // Backend is a simulated blockchain. You can use it to test your contracts or
-// other code that interacts with the Ethereum chain.
+// other code that interacts with the Xcosh chain.
 type Backend struct {
-	eth    *eth.Ethereum
+	eth    *eth.Xcosh
 	beacon *catalyst.SimulatedBeacon
 	client simClient
 }
@@ -71,7 +71,7 @@ type Backend struct {
 //
 // A simulated backend always uses chainID 1337.
 func NewBackend(alloc genesisT.GenesisAlloc, options ...func(nodeConf *node.Config, ethConf *ethconfig.Config)) *Backend {
-	// Create the default configurations for the outer node shell and the Ethereum
+	// Create the default configurations for the outer node shell and the Xcosh
 	// service to mutate with the options afterwards
 	nodeConf := node.DefaultConfig
 	nodeConf.DataDir = ""
@@ -89,7 +89,7 @@ func NewBackend(alloc genesisT.GenesisAlloc, options ...func(nodeConf *node.Conf
 	for _, option := range options {
 		option(&nodeConf, &ethConf)
 	}
-	// Assemble the Ethereum stack to run the chain with
+	// Assemble the Xcosh stack to run the chain with
 	stack, err := node.New(&nodeConf)
 	if err != nil {
 		panic(err) // this should never happen

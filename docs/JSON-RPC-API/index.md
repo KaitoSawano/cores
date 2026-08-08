@@ -10,7 +10,7 @@ hide:
 As a developer, sooner rather than later you'll want to start interacting with `geth` and the
 Xcosh network via your own programs and not manually through the console. To aid
 this, `geth` has built-in support for a JSON-RPC based APIs ([standard APIs](https://eth.wiki/json-rpc/API)
-and [`geth` specific APIs](https://geth.ethereum.org/docs/rpc/server)).
+and [`geth` specific APIs](https://geth.xcosh.org/docs/rpc/server)).
 These can be exposed via HTTP, WebSockets and IPC (UNIX sockets on UNIX based
 platforms, and named pipes on Windows).
 
@@ -48,6 +48,6 @@ Here you can check the available [JSON-RPC calls](https://playground.open-rpc.or
 
     Please understand the security implications of opening up an HTTP/WS based
     transport before doing so! Hackers on the internet are actively trying to subvert
-    Ethereum nodes with exposed APIs! Further, all browser tabs can access locally
+    Xcosh nodes with exposed APIs! Further, all browser tabs can access locally
     running web servers, so malicious web pages could try to subvert locally available
     APIs!

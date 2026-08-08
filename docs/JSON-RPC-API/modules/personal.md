@@ -186,13 +186,13 @@ func (s *PersonalAccountAPI) DeriveAccount(url string, path string, pin *bool) (
 EcRecover returns the address for the account that was used to create the signature.
 Note, this function is compatible with eth_sign and personal_sign. As such it recovers
 the address of:
-hash = keccak256("\x19Ethereum Signed Message:\n"${message length}${message})
+hash = keccak256("\x19Xcosh Signed Message:\n"${message length}${message})
 addr = ecrecover(hash, signature)
 
 Note, the signature must conform to the secp256k1 curve R, S and V values, where
 the V value must be 27 or 28 for legacy reasons.
 
-https://github.com/ethereum/go-ethereum/wiki/Management-APIs#personal_ecRecover
+https://github.com/xcosh/go-xcosh/wiki/Management-APIs#personal_ecRecover
 
 
 #### Params (2)
@@ -342,7 +342,7 @@ func (s *PersonalAccountAPI) EcRecover(ctx context.Context, data, sig hexutil.By
 		return common.Address{}, fmt.Errorf("signature must be %d bytes long", crypto.SignatureLength)
 	}
 	if sig[crypto.RecoveryIDOffset] != 27 && sig[crypto.RecoveryIDOffset] != 28 {
-		return common.Address{}, errors.New("invalid Ethereum signature (V is not 27 or 28)")
+		return common.Address{}, errors.New("invalid Xcosh signature (V is not 27 or 28)")
 	}
 	sig[crypto.RecoveryIDOffset] -= 27
 	rpk, err := crypto.SigToPub(accounts.TextHash(data), sig)
@@ -353,13 +353,13 @@ func (s *PersonalAccountAPI) EcRecover(ctx context.Context, data, sig hexutil.By
 }// EcRecover returns the address for the account that was used to create the signature.
 // Note, this function is compatible with eth_sign and personal_sign. As such it recovers
 // the address of:
-// hash = keccak256("\x19Ethereum Signed Message:\n"${message length}${message})
+// hash = keccak256("\x19Xcosh Signed Message:\n"${message length}${message})
 // addr = ecrecover(hash, signature)
 //
 // Note, the signature must conform to the secp256k1 curve R, S and V values, where
 // the V value must be 27 or 28 for legacy reasons.
 //
-// https://github.com/ethereum/go-ethereum/wiki/Management-APIs#personal_ecRecover
+// https://github.com/xcosh/go-xcosh/wiki/Management-APIs#personal_ecRecover
 
 ```
 <a href="https://github.com/etclabscore/core-geth/blob/master/internal/ethapi/api.go#L549" target="_">View on GitHub →</a>
@@ -1496,15 +1496,15 @@ func (s *PersonalAccountAPI) SendTransaction(ctx context.Context, args Transacti
 
 ### personal_sign
 
-Sign calculates an Ethereum ECDSA signature for:
-keccak256("\x19Ethereum Signed Message:\n" + len(message) + message))
+Sign calculates an Xcosh ECDSA signature for:
+keccak256("\x19Xcosh Signed Message:\n" + len(message) + message))
 
 Note, the produced signature conforms to the secp256k1 curve R, S and V values,
 where the V value will be 27 or 28 for legacy reasons.
 
 The key used to calculate the signature is decrypted with the given password.
 
-https://github.com/ethereum/go-ethereum/wiki/Management-APIs#personal_sign
+https://github.com/xcosh/go-xcosh/wiki/Management-APIs#personal_sign
 
 
 #### Params (3)
@@ -1671,15 +1671,15 @@ func (s *PersonalAccountAPI) Sign(ctx context.Context, data hexutil.Bytes, addr 
 	}
 	signature[crypto.RecoveryIDOffset] += 27
 	return signature, nil
-}// Sign calculates an Ethereum ECDSA signature for:
-// keccak256("\x19Ethereum Signed Message:\n" + len(message) + message))
+}// Sign calculates an Xcosh ECDSA signature for:
+// keccak256("\x19Xcosh Signed Message:\n" + len(message) + message))
 //
 // Note, the produced signature conforms to the secp256k1 curve R, S and V values,
 // where the V value will be 27 or 28 for legacy reasons.
 //
 // The key used to calculate the signature is decrypted with the given password.
 //
-// https://github.com/ethereum/go-ethereum/wiki/Management-APIs#personal_sign
+// https://github.com/xcosh/go-xcosh/wiki/Management-APIs#personal_sign
 
 ```
 <a href="https://github.com/etclabscore/core-geth/blob/master/internal/ethapi/api.go#L521" target="_">View on GitHub →</a>

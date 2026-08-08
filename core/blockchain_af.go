@@ -8,9 +8,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/core/types"
+	"github.com/xcosh/go-xcosh/log"
 )
 
 // errReorgFinality represents an error caused by artificial finality mechanisms.
@@ -268,7 +268,7 @@ This was (one of?) Vitalik's "original" specs:
 > 1.0001 ** (number of seconds between when S1 was received and when S2 was received)
 - https://bitcointalk.org/index.php?topic=865169.msg16349234#msg16349234
 > gravity(B') = gravity(B) * 0.99 ^ n
-- https://blog.ethereum.org/2014/11/25/proof-stake-learned-love-weak-subjectivity/
+- https://blog.xcosh.org/2014/11/25/proof-stake-learned-love-weak-subjectivity/
 
 OPTION 1 (Original ESS)
 f(x)=1.0001^(x)

@@ -1,18 +1,18 @@
-// Copyright 2018 The go-ethereum Authors
-// This file is part of the go-ethereum library.
+// Copyright 2018 The go-xcosh Authors
+// This file is part of the go-xcosh library.
 //
-// The go-ethereum library is free software: you can redistribute it and/or modify
+// The go-xcosh library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-ethereum library is distributed in the hope that it will be useful,
+// The go-xcosh library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-xcosh library. If not, see <http://www.gnu.org/licenses/>.
 
 // This file contains a miner stress test based on the Ethash consensus engine.
 package main
@@ -27,22 +27,22 @@ import (
 
 	"golang.org/x/exp/slog"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/fdlimit"
-	"github.com/ethereum/go-ethereum/consensus/ethash"
-	"github.com/ethereum/go-ethereum/core/txpool/legacypool"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/eth"
-	"github.com/ethereum/go-ethereum/eth/downloader"
-	"github.com/ethereum/go-ethereum/eth/ethconfig"
-	"github.com/ethereum/go-ethereum/miner"
-	"github.com/ethereum/go-ethereum/node"
-	"github.com/ethereum/go-ethereum/p2p"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/params/types/genesisT"
-	"github.com/ethereum/go-ethereum/params/vars"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/common/fdlimit"
+	"github.com/xcosh/go-xcosh/consensus/ethash"
+	"github.com/xcosh/go-xcosh/core/txpool/legacypool"
+	"github.com/xcosh/go-xcosh/core/types"
+	"github.com/xcosh/go-xcosh/crypto"
+	"github.com/xcosh/go-xcosh/eth"
+	"github.com/xcosh/go-xcosh/eth/downloader"
+	"github.com/xcosh/go-xcosh/eth/ethconfig"
+	"github.com/xcosh/go-xcosh/miner"
+	"github.com/xcosh/go-xcosh/node"
+	"github.com/xcosh/go-xcosh/p2p"
+	"github.com/xcosh/go-xcosh/p2p/enode"
+	"github.com/xcosh/go-xcosh/params"
+	"github.com/xcosh/go-xcosh/params/types/genesisT"
+	"github.com/xcosh/go-xcosh/params/vars"
 )
 
 func main() {
@@ -66,7 +66,7 @@ func main() {
 
 	var (
 		stacks []*node.Node
-		nodes  []*eth.Ethereum
+		nodes  []*eth.Xcosh
 		enodes []*enode.Node
 	)
 	for i := 0; i < 4; i++ {
@@ -152,8 +152,8 @@ func makeGenesis(faucets []*ecdsa.PrivateKey) *genesisT.Genesis {
 	return genesis
 }
 
-func makeMiner(genesis *genesisT.Genesis) (*node.Node, *eth.Ethereum, error) {
-	// Define the basic configurations for the Ethereum node
+func makeMiner(genesis *genesisT.Genesis) (*node.Node, *eth.Xcosh, error) {
+	// Define the basic configurations for the Xcosh node
 	datadir, _ := os.MkdirTemp("", "")
 
 	config := &node.Config{
@@ -167,7 +167,7 @@ func makeMiner(genesis *genesisT.Genesis) (*node.Node, *eth.Ethereum, error) {
 		},
 		UseLightweightKDF: true,
 	}
-	// Create the node and configure a full Ethereum node on it
+	// Create the node and configure a full Xcosh node on it
 	stack, err := node.New(config)
 	if err != nil {
 		return nil, nil, err

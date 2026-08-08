@@ -34,7 +34,7 @@ func SetCoinTypeConfiguration(coinType uint32) {
 	LegacyLedgerBaseDerivationPath = DerivationPath{0x80000000 + 44, 0x80000000 + coinType, 0x80000000 + 0, 0}
 }
 
-// init configures the global coin type and root derivation path for Ethereum mainnet.
+// init configures the global coin type and root derivation path for Xcosh mainnet.
 func init() {
 	SetCoinTypeConfiguration(BIP0044CoinTypeEther)
 }

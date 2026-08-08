@@ -1,18 +1,18 @@
-// Copyright 2017 The go-ethereum Authors
-// This file is part of the go-ethereum library.
+// Copyright 2017 The go-xcosh Authors
+// This file is part of the go-xcosh library.
 //
-// The go-ethereum library is free software: you can redistribute it and/or modify
+// The go-xcosh library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-ethereum library is distributed in the hope that it will be useful,
+// The go-xcosh library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-xcosh library. If not, see <http://www.gnu.org/licenses/>.
 
 package ethash
 
@@ -25,20 +25,20 @@ import (
 	"time"
 
 	mapset "github.com/deckarep/golang-set/v2"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/math"
-	"github.com/ethereum/go-ethereum/consensus"
-	"github.com/ethereum/go-ethereum/consensus/misc"
-	"github.com/ethereum/go-ethereum/consensus/misc/eip1559"
-	"github.com/ethereum/go-ethereum/consensus/misc/eip4844"
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/params/mutations"
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
-	"github.com/ethereum/go-ethereum/params/vars"
-	"github.com/ethereum/go-ethereum/rlp"
-	"github.com/ethereum/go-ethereum/trie"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/common/math"
+	"github.com/xcosh/go-xcosh/consensus"
+	"github.com/xcosh/go-xcosh/consensus/misc"
+	"github.com/xcosh/go-xcosh/consensus/misc/eip1559"
+	"github.com/xcosh/go-xcosh/consensus/misc/eip4844"
+	"github.com/xcosh/go-xcosh/core/state"
+	"github.com/xcosh/go-xcosh/core/types"
+	"github.com/xcosh/go-xcosh/params"
+	"github.com/xcosh/go-xcosh/params/mutations"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/params/vars"
+	"github.com/xcosh/go-xcosh/rlp"
+	"github.com/xcosh/go-xcosh/trie"
 	"golang.org/x/crypto/sha3"
 )
 
@@ -70,7 +70,7 @@ func (ethash *Ethash) Author(header *types.Header) (common.Address, error) {
 }
 
 // VerifyHeader checks whether a header conforms to the consensus rules of the
-// stock Ethereum ethash engine.
+// stock Xcosh ethash engine.
 func (ethash *Ethash) VerifyHeader(chain consensus.ChainHeaderReader, header *types.Header, seal bool) error {
 	// If we're running a full engine faking, accept any input as valid
 	if ethash.config.PowMode == ModeFullFake {
@@ -169,7 +169,7 @@ func (ethash *Ethash) verifyHeaderWorker(chain consensus.ChainHeaderReader, head
 }
 
 // VerifyUncles verifies that the given block's uncles conform to the consensus
-// rules of the stock Ethereum ethash engine.
+// rules of the stock Xcosh ethash engine.
 func (ethash *Ethash) VerifyUncles(chain consensus.ChainReader, block *types.Block) error {
 	// If we're running a full engine faking, accept any input as valid
 	if ethash.config.PowMode == ModeFullFake {
@@ -232,7 +232,7 @@ func (ethash *Ethash) VerifyUncles(chain consensus.ChainReader, block *types.Blo
 }
 
 // verifyHeader checks whether a header conforms to the consensus rules of the
-// stock Ethereum ethash engine.
+// stock Xcosh ethash engine.
 // See YP section 4.3.4. "Block Header Validity"
 func (ethash *Ethash) verifyHeader(chain consensus.ChainHeaderReader, header, parent *types.Header, uncle bool, seal bool, unixNow int64) error {
 	// Ensure that the header's extra-data section is of a reasonable size (32)
@@ -372,7 +372,7 @@ func CalcDifficulty(config ctypes.ChainConfigurator, time uint64, parent *types.
 
 	// ADJUSTMENT algorithms
 	if config.IsEnabled(config.GetEthashEIP100BTransition, next) {
-		// https://github.com/ethereum/EIPs/issues/100
+		// https://github.com/xcosh/EIPs/issues/100
 		// algorithm:
 		// diff = (parent_diff +
 		//         (parent_diff / 2048 * max((2 if len(parent.uncles) else 1) - ((timestamp - parent.timestamp) // 9), -99))
@@ -388,7 +388,7 @@ func CalcDifficulty(config ctypes.ChainConfigurator, time uint64, parent *types.
 		out.Mul(parent_diff_over_dbd(parent), out)
 		out.Add(out, parent.Difficulty)
 	} else if config.IsEnabled(config.GetEIP2Transition, next) {
-		// https://github.com/ethereum/EIPs/blob/master/EIPS/eip-2.md
+		// https://github.com/xcosh/EIPs/blob/master/EIPS/eip-2.md
 		// algorithm:
 		// diff = (parent_diff +
 		//         (parent_diff / 2048 * max(1 - (block_timestamp - parent_timestamp) // 10, -99))
@@ -480,12 +480,12 @@ func CalcDifficulty(config ctypes.ChainConfigurator, time uint64, parent *types.
 	} else if config.IsEnabled(config.GetEthashEIP1234Transition, next) {
 		// calcDifficultyEIP1234 is the difficulty adjustment algorithm for Constantinople.
 		// The calculation uses the Byzantium rules, but with bomb offset 5M.
-		// Specification EIP-1234: https://eips.ethereum.org/EIPS/eip-1234
+		// Specification EIP-1234: https://eips.xcosh.org/EIPS/eip-1234
 		// Note, the calculations below looks at the parent number, which is 1 below
 		// the block number. Thus we remove one from the delay given
 
 		// calculate a fake block number for the ice-age delay
-		// Specification: https://eips.ethereum.org/EIPS/eip-1234
+		// Specification: https://eips.xcosh.org/EIPS/eip-1234
 		fakeBlockNumber := new(big.Int)
 		delayWithOffset := new(big.Int).Sub(vars.EIP1234DifficultyBombDelay.ToBig(), common.Big1)
 		if parent.Number.Cmp(delayWithOffset) >= 0 {
@@ -494,8 +494,8 @@ func CalcDifficulty(config ctypes.ChainConfigurator, time uint64, parent *types.
 		exPeriodRef.Set(fakeBlockNumber)
 	} else if config.IsEnabled(config.GetEthashEIP649Transition, next) {
 		// The calculation uses the Byzantium rules, with bomb offset of 3M.
-		// Specification EIP-649: https://eips.ethereum.org/EIPS/eip-649
-		// Related meta-ish EIP-669: https://github.com/ethereum/EIPs/pull/669
+		// Specification EIP-649: https://eips.xcosh.org/EIPS/eip-649
+		// Related meta-ish EIP-669: https://github.com/xcosh/EIPs/pull/669
 		// Note, the calculations below looks at the parent number, which is 1 below
 		// the block number. Thus we remove one from the delay given
 

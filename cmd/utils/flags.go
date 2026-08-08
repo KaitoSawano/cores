@@ -1,20 +1,20 @@
-// Copyright 2015 The go-ethereum Authors
-// This file is part of go-ethereum.
+// Copyright 2015 The go-xcosh Authors
+// This file is part of go-xcosh.
 //
-// go-ethereum is free software: you can redistribute it and/or modify
+// go-xcosh is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// go-ethereum is distributed in the hope that it will be useful,
+// go-xcosh is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with go-ethereum. If not, see <http://www.gnu.org/licenses/>.
+// along with go-xcosh. If not, see <http://www.gnu.org/licenses/>.
 
-// Package utils contains internal helper functions for go-ethereum commands.
+// Package utils contains internal helper functions for go-xcosh commands.
 package utils
 
 import (
@@ -36,49 +36,49 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ethereum/go-ethereum/accounts"
-	"github.com/ethereum/go-ethereum/accounts/keystore"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/fdlimit"
-	"github.com/ethereum/go-ethereum/consensus/ethash"
-	"github.com/ethereum/go-ethereum/consensus/lyra2"
+	"github.com/xcosh/go-xcosh/accounts"
+	"github.com/xcosh/go-xcosh/accounts/keystore"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/common/fdlimit"
+	"github.com/xcosh/go-xcosh/consensus/ethash"
+	"github.com/xcosh/go-xcosh/consensus/lyra2"
 
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/txpool/legacypool"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/crypto/kzg4844"
-	"github.com/ethereum/go-ethereum/eth"
-	"github.com/ethereum/go-ethereum/eth/catalyst"
-	"github.com/ethereum/go-ethereum/eth/downloader"
-	"github.com/ethereum/go-ethereum/eth/ethconfig"
-	"github.com/ethereum/go-ethereum/eth/filters"
-	"github.com/ethereum/go-ethereum/eth/gasprice"
-	"github.com/ethereum/go-ethereum/eth/tracers"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/ethdb/remotedb"
-	"github.com/ethereum/go-ethereum/ethstats"
-	"github.com/ethereum/go-ethereum/graphql"
-	"github.com/ethereum/go-ethereum/internal/ethapi"
-	"github.com/ethereum/go-ethereum/internal/flags"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/metrics"
-	"github.com/ethereum/go-ethereum/metrics/exp"
-	"github.com/ethereum/go-ethereum/metrics/influxdb"
-	"github.com/ethereum/go-ethereum/miner"
-	"github.com/ethereum/go-ethereum/node"
-	"github.com/ethereum/go-ethereum/p2p"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/p2p/nat"
-	"github.com/ethereum/go-ethereum/p2p/netutil"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/params/types/genesisT"
-	"github.com/ethereum/go-ethereum/params/vars"
-	"github.com/ethereum/go-ethereum/rpc"
-	"github.com/ethereum/go-ethereum/triedb"
-	"github.com/ethereum/go-ethereum/triedb/hashdb"
-	"github.com/ethereum/go-ethereum/triedb/pathdb"
+	"github.com/xcosh/go-xcosh/core"
+	"github.com/xcosh/go-xcosh/core/rawdb"
+	"github.com/xcosh/go-xcosh/core/txpool/legacypool"
+	"github.com/xcosh/go-xcosh/core/vm"
+	"github.com/xcosh/go-xcosh/crypto"
+	"github.com/xcosh/go-xcosh/crypto/kzg4844"
+	"github.com/xcosh/go-xcosh/eth"
+	"github.com/xcosh/go-xcosh/eth/catalyst"
+	"github.com/xcosh/go-xcosh/eth/downloader"
+	"github.com/xcosh/go-xcosh/eth/ethconfig"
+	"github.com/xcosh/go-xcosh/eth/filters"
+	"github.com/xcosh/go-xcosh/eth/gasprice"
+	"github.com/xcosh/go-xcosh/eth/tracers"
+	"github.com/xcosh/go-xcosh/ethdb"
+	"github.com/xcosh/go-xcosh/ethdb/remotedb"
+	"github.com/xcosh/go-xcosh/ethstats"
+	"github.com/xcosh/go-xcosh/graphql"
+	"github.com/xcosh/go-xcosh/internal/ethapi"
+	"github.com/xcosh/go-xcosh/internal/flags"
+	"github.com/xcosh/go-xcosh/log"
+	"github.com/xcosh/go-xcosh/metrics"
+	"github.com/xcosh/go-xcosh/metrics/exp"
+	"github.com/xcosh/go-xcosh/metrics/influxdb"
+	"github.com/xcosh/go-xcosh/miner"
+	"github.com/xcosh/go-xcosh/node"
+	"github.com/xcosh/go-xcosh/p2p"
+	"github.com/xcosh/go-xcosh/p2p/enode"
+	"github.com/xcosh/go-xcosh/p2p/nat"
+	"github.com/xcosh/go-xcosh/p2p/netutil"
+	"github.com/xcosh/go-xcosh/params"
+	"github.com/xcosh/go-xcosh/params/types/genesisT"
+	"github.com/xcosh/go-xcosh/params/vars"
+	"github.com/xcosh/go-xcosh/rpc"
+	"github.com/xcosh/go-xcosh/triedb"
+	"github.com/xcosh/go-xcosh/triedb/hashdb"
+	"github.com/xcosh/go-xcosh/triedb/pathdb"
 	pcsclite "github.com/gballet/go-libpcsclite"
 	gopsutil "github.com/shirou/gopsutil/mem"
 	"github.com/urfave/cli/v2"
@@ -153,7 +153,7 @@ var (
 	}
 	EthProtocolsFlag = &cli.StringFlag{
 		Name:     "eth.protocols",
-		Usage:    "Sets the Ethereum Protocol versions (first is primary)",
+		Usage:    "Sets the Xcosh Protocol versions (first is primary)",
 		Category: flags.EthCategory,
 		Value: strings.Join(func() (strings []string) {
 			for _, s := range ethconfig.Defaults.ProtocolVersions {
@@ -169,7 +169,7 @@ var (
 	}
 	MainnetFlag = &cli.BoolFlag{
 		Name:     "mainnet",
-		Usage:    "Ethereum mainnet",
+		Usage:    "Xcosh mainnet",
 		Category: flags.EthCategory,
 	}
 	MintMeFlag = &cli.BoolFlag{
@@ -313,7 +313,7 @@ var (
 	}
 	StateSchemeFlag = &cli.StringFlag{
 		Name:     "state.scheme",
-		Usage:    "Scheme to use for storing ethereum state ('hash' or 'path')",
+		Usage:    "Scheme to use for storing xcosh state ('hash' or 'path')",
 		Category: flags.StateCategory,
 	}
 	StateHistoryFlag = &cli.Uint64Flag{
@@ -2160,7 +2160,7 @@ func SetEthConfig(ctx *cli.Context, stack *node.Node, cfg *ethconfig.Config) {
 		}
 		cfg.ProtocolVersions = append(cfg.ProtocolVersions, uint(version))
 	}
-	log.Info("Configured Ethereum protocol versions", "capabilities", cfg.ProtocolVersions)
+	log.Info("Configured Xcosh protocol versions", "capabilities", cfg.ProtocolVersions)
 
 	// Set DNS discovery defaults for hard coded networks with DNS defaults.
 	// core-geth: NetworkID is configured several stanzas above, based on the returned genesis GetNetworkID() value.
@@ -2298,21 +2298,21 @@ func SetDNSDiscoveryDefaults(cfg *ethconfig.Config, genesis common.Hash) {
 	}
 }
 
-// RegisterEthService adds an Ethereum client to the stack.
+// RegisterEthService adds an Xcosh client to the stack.
 // The second return value is the full node instance.
-func RegisterEthService(stack *node.Node, cfg *ethconfig.Config) (ethapi.Backend, *eth.Ethereum) {
+func RegisterEthService(stack *node.Node, cfg *ethconfig.Config) (ethapi.Backend, *eth.Xcosh) {
 	backend, err := eth.New(stack, cfg)
 	if err != nil {
-		Fatalf("Failed to register the Ethereum service: %v", err)
+		Fatalf("Failed to register the Xcosh service: %v", err)
 	}
 	stack.RegisterAPIs(tracers.APIs(backend.APIBackend))
 	return backend.APIBackend, backend
 }
 
-// RegisterEthStatsService configures the Ethereum Stats daemon and adds it to the node.
+// RegisterEthStatsService configures the Xcosh Stats daemon and adds it to the node.
 func RegisterEthStatsService(stack *node.Node, backend ethapi.Backend, url string) {
 	if err := ethstats.New(stack, backend, backend.Engine(), url); err != nil {
-		Fatalf("Failed to register the Ethereum Stats service: %v", err)
+		Fatalf("Failed to register the Xcosh Stats service: %v", err)
 	}
 }
 
@@ -2337,7 +2337,7 @@ func RegisterFilterAPI(stack *node.Node, backend ethapi.Backend, ethcfg *ethconf
 }
 
 // RegisterFullSyncTester adds the full-sync tester service into node.
-func RegisterFullSyncTester(stack *node.Node, eth *eth.Ethereum, target common.Hash) {
+func RegisterFullSyncTester(stack *node.Node, eth *eth.Xcosh, target common.Hash) {
 	catalyst.RegisterFullSyncTester(stack, eth, target)
 	log.Info("Registered full-sync tester", "hash", target)
 }

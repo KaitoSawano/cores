@@ -29,8 +29,8 @@ jobs:
           name: core-geth
           path: ./core-geth.txt
 
-  bench_go_ethereum:
-    name: Benchmark go-ethereum
+  bench_go_xcosh:
+    name: Benchmark go-xcosh
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
@@ -43,22 +43,22 @@ jobs:
       - name: Check out code into the Go module directory
         uses: actions/checkout@v2
         with:
-          repository: 'ethereum/go-ethereum'
+          repository: 'xcosh/go-xcosh'
           ref: 'v1.10.26'
 
-      - name: Benchmark ethereum/go-ethereum
+      - name: Benchmark xcosh/go-xcosh
         id: bench
         run: |
-          go test -short ./trie -count 1 -p 1 -timeout 60m -run NONE -bench=. -v |& tee go-ethereum.txt
+          go test -short ./trie -count 1 -p 1 -timeout 60m -run NONE -bench=. -v |& tee go-xcosh.txt
 
       - uses: actions/upload-artifact@v4
         with:
-          name: go-ethereum
-          path: ./go-ethereum.txt
+          name: go-xcosh
+          path: ./go-xcosh.txt
 
   compare:
     name: Compare
-    needs: [bench_core_geth, bench_go_ethereum]
+    needs: [bench_core_geth, bench_go_xcosh]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -76,9 +76,9 @@ jobs:
           go install golang.org/x/perf/cmd/benchstat@latest
 
       - uses: actions/download-artifact@v4
-        name: Get go-ethereum artifact
+        name: Get go-xcosh artifact
         with:
-          name: go-ethereum
+          name: go-xcosh
 
       - uses: actions/download-artifact@v4
         name: Get core-geth artifact
@@ -87,8 +87,8 @@ jobs:
 
       - name: "Analyze Results [COMPRESSED]"
         run: |
-          benchstat go-ethereum.txt core-geth.txt
+          benchstat go-xcosh.txt core-geth.txt
 
       - name: "Analyze Results [RAW DELTA]"
         run: |
-          benchstat go-ethereum.txt core-geth.txt
+          benchstat go-xcosh.txt core-geth.txt

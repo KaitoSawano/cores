@@ -1,18 +1,18 @@
-// Copyright 2015 The go-ethereum Authors
-// This file is part of the go-ethereum library.
+// Copyright 2015 The go-xcosh Authors
+// This file is part of the go-xcosh library.
 //
-// The go-ethereum library is free software: you can redistribute it and/or modify
+// The go-xcosh library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-ethereum library is distributed in the hope that it will be useful,
+// The go-xcosh library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-xcosh library. If not, see <http://www.gnu.org/licenses/>.
 
 package bind
 
@@ -21,9 +21,9 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/ethereum/go-ethereum"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/types"
+	"github.com/xcosh/go-xcosh"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/core/types"
 )
 
 var (
@@ -52,9 +52,9 @@ type ContractCaller interface {
 	// between contract internal errors and the local chain being out of sync.
 	CodeAt(ctx context.Context, contract common.Address, blockNumber *big.Int) ([]byte, error)
 
-	// CallContract executes an Ethereum contract call with the specified data as the
+	// CallContract executes an Xcosh contract call with the specified data as the
 	// input.
-	CallContract(ctx context.Context, call ethereum.CallMsg, blockNumber *big.Int) ([]byte, error)
+	CallContract(ctx context.Context, call xcosh.CallMsg, blockNumber *big.Int) ([]byte, error)
 }
 
 // PendingContractCaller defines methods to perform contract calls on the pending state.
@@ -64,8 +64,8 @@ type PendingContractCaller interface {
 	// PendingCodeAt returns the code of the given account in the pending state.
 	PendingCodeAt(ctx context.Context, contract common.Address) ([]byte, error)
 
-	// PendingCallContract executes an Ethereum contract call against the pending state.
-	PendingCallContract(ctx context.Context, call ethereum.CallMsg) ([]byte, error)
+	// PendingCallContract executes an Xcosh contract call against the pending state.
+	PendingCallContract(ctx context.Context, call xcosh.CallMsg) ([]byte, error)
 }
 
 // BlockHashContractCaller defines methods to perform contract calls on a specific block hash.
@@ -75,8 +75,8 @@ type BlockHashContractCaller interface {
 	// CodeAtHash returns the code of the given account in the state at the specified block hash.
 	CodeAtHash(ctx context.Context, contract common.Address, blockHash common.Hash) ([]byte, error)
 
-	// CallContractAtHash executes an Ethereum contract call against the state at the specified block hash.
-	CallContractAtHash(ctx context.Context, call ethereum.CallMsg, blockHash common.Hash) ([]byte, error)
+	// CallContractAtHash executes an Xcosh contract call against the state at the specified block hash.
+	CallContractAtHash(ctx context.Context, call xcosh.CallMsg, blockHash common.Hash) ([]byte, error)
 }
 
 // ContractTransactor defines the methods needed to allow operating with a contract
@@ -84,10 +84,10 @@ type BlockHashContractCaller interface {
 // used when the user does not provide some needed values, but rather leaves it up
 // to the transactor to decide.
 type ContractTransactor interface {
-	ethereum.GasEstimator
-	ethereum.GasPricer
-	ethereum.GasPricer1559
-	ethereum.TransactionSender
+	xcosh.GasEstimator
+	xcosh.GasPricer
+	xcosh.GasPricer1559
+	xcosh.TransactionSender
 
 	// HeaderByNumber returns a block header from the current canonical chain. If
 	// number is nil, the latest known header is returned.
@@ -109,7 +109,7 @@ type DeployBackend interface {
 // ContractFilterer defines the methods needed to access log events using one-off
 // queries or continuous event subscriptions.
 type ContractFilterer interface {
-	ethereum.LogFilterer
+	xcosh.LogFilterer
 }
 
 // ContractBackend defines the methods needed to work with contracts on a read-write basis.

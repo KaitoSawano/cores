@@ -19,8 +19,8 @@ package params
 import (
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/ethereum/go-ethereum/params/types/genesisT"
+	"github.com/xcosh/go-xcosh/common/hexutil"
+	"github.com/xcosh/go-xcosh/params/types/genesisT"
 )
 
 // ClassicGenesisBlock returns the Xcosh genesis block.

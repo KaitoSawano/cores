@@ -29,15 +29,15 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/internal/build"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/params/confp"
-	"github.com/ethereum/go-ethereum/params/types/coregeth"
-	"github.com/ethereum/go-ethereum/params/types/genesisT"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/core/rawdb"
+	"github.com/xcosh/go-xcosh/core/types"
+	"github.com/xcosh/go-xcosh/core/vm"
+	"github.com/xcosh/go-xcosh/internal/build"
+	"github.com/xcosh/go-xcosh/params"
+	"github.com/xcosh/go-xcosh/params/confp"
+	"github.com/xcosh/go-xcosh/params/types/coregeth"
+	"github.com/xcosh/go-xcosh/params/types/genesisT"
 	"github.com/go-test/deep"
 	"github.com/iancoleman/strcase"
 )
@@ -471,7 +471,7 @@ func TestGenStateCoreGethConfigs(t *testing.T) {
 // state tests) is equivalent to the configuration coded at Forks["Berlin"].
 // Note that when run with COREGETH_TESTS_CHAINCONFIG_FEATURE_EQUIVALENCE_COREGETH, for example,
 // the coded configuration will have been init'd with a CoreGeth-struct value (as opposed
-// to the default go-ethereum value).
+// to the default go-xcosh value).
 func TestGeneratedConfigsEq(t *testing.T) {
 	specPath := filepath.Join(coregethSpecsDir, "berlin_test.json")
 	gen := &genesisT.Genesis{

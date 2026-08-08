@@ -1,18 +1,18 @@
-// Copyright 2014 The go-ethereum Authors
-// This file is part of the go-ethereum library.
+// Copyright 2014 The go-xcosh Authors
+// This file is part of the go-xcosh library.
 //
-// The go-ethereum library is free software: you can redistribute it and/or modify
+// The go-xcosh library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-ethereum library is distributed in the hope that it will be useful,
+// The go-xcosh library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-xcosh library. If not, see <http://www.gnu.org/licenses/>.
 
 package core
 
@@ -21,12 +21,12 @@ import (
 	"math"
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/common"
-	cmath "github.com/ethereum/go-ethereum/common/math"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/crypto/kzg4844"
-	"github.com/ethereum/go-ethereum/params/vars"
+	"github.com/xcosh/go-xcosh/common"
+	cmath "github.com/xcosh/go-xcosh/common/math"
+	"github.com/xcosh/go-xcosh/core/types"
+	"github.com/xcosh/go-xcosh/core/vm"
+	"github.com/xcosh/go-xcosh/crypto/kzg4844"
+	"github.com/xcosh/go-xcosh/params/vars"
 	"github.com/holiman/uint256"
 )
 
@@ -396,17 +396,17 @@ func (st *StateTransition) TransitionDb() (*ExecutionResult, error) {
 		eip2f = st.evm.ChainConfig().IsEnabled(st.evm.ChainConfig().GetEIP2Transition, st.evm.Context.BlockNumber)
 
 		// Istanbul
-		// https://eips.ethereum.org/EIPS/eip-1679
+		// https://eips.xcosh.org/EIPS/eip-1679
 		// EIP-2028: Calldata gas cost reduction
 		eip2028f = st.evm.ChainConfig().IsEnabled(st.evm.ChainConfig().GetEIP2028Transition, st.evm.Context.BlockNumber)
 
 		// Berlin
-		// https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/berlin.md
+		// https://github.com/xcosh/execution-specs/blob/master/network-upgrades/mainnet-upgrades/berlin.md
 		// EIP-2930: Optional access lists
 		eip2930f = st.evm.ChainConfig().IsEnabled(st.evm.ChainConfig().GetEIP2930Transition, st.evm.Context.BlockNumber)
 
 		// London
-		// https://github.com/ethereum/execution-specs/blob/master/network-upgrades/mainnet-upgrades/london.md
+		// https://github.com/xcosh/execution-specs/blob/master/network-upgrades/mainnet-upgrades/london.md
 		// EIP-1559: Fee market change: burn fee and tips
 		eip1559f = st.evm.ChainConfig().IsEnabled(st.evm.ChainConfig().GetEIP1559Transition, st.evm.Context.BlockNumber)
 

@@ -24,9 +24,9 @@ import (
 	"sort"
 	"strconv"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/math"
-	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/common/math"
+	"github.com/xcosh/go-xcosh/crypto"
 	"github.com/holiman/uint256"
 )
 
@@ -308,13 +308,13 @@ type BlockSealingT int
 
 const (
 	BlockSealing_Unknown = iota
-	BlockSealing_Ethereum
+	BlockSealing_Xcosh
 )
 
 func (b BlockSealingT) String() string {
 	switch b {
-	case BlockSealing_Ethereum:
-		return "ethereum"
+	case BlockSealing_Xcosh:
+		return "xcosh"
 	default:
 		return "unknown"
 	}

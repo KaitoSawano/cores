@@ -3,8 +3,8 @@ package internal
 import (
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
-	"github.com/ethereum/go-ethereum/params/vars"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/params/vars"
 )
 
 type GlobalVarsConfigurator struct {

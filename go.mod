@@ -1,4 +1,4 @@
-module github.com/ethereum/go-ethereum
+module github.com/xcosh/go-xcosh
 
 go 1.21
 
@@ -24,8 +24,8 @@ require (
 	github.com/dop251/goja v0.0.0-20230806174421-c933cf95e127
 	github.com/edsrzf/mmap-go v1.1.0
 	github.com/etclabscore/go-openrpc-reflect v0.0.37
-	github.com/ethereum/c-kzg-4844 v0.4.0
-	github.com/ethereum/evmc/v7 v7.5.0
+	github.com/xcosh/c-kzg-4844 v0.4.0
+	github.com/xcosh/evmc/v7 v7.5.0
 	github.com/fatih/color v1.13.0
 	github.com/ferranbt/fastssz v0.1.2
 	github.com/fjl/gencodec v0.0.0-20230517082657-f9840df7b83e

@@ -21,7 +21,7 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
 )
 
 // CloneChainConfigurator creates a copy of the given ChainConfigurator.
@@ -66,7 +66,7 @@ func Crush(dest, source interface{}, crushZeroValues bool) error {
 		// Set Genesis.
 		et := fromGener.GetSealingType()
 		switch et {
-		case ctypes.BlockSealing_Ethereum:
+		case ctypes.BlockSealing_Xcosh:
 			k := reflect.TypeOf((*ctypes.GenesisBlocker)(nil)).Elem()
 			if err := crush(k, fromGener, toGener, crushZeroValues); err != nil {
 				return err

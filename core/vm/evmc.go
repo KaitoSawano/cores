@@ -1,21 +1,21 @@
-// Copyright 2019 The go-ethereum Authors
-// This file is part of the go-ethereum library.
+// Copyright 2019 The go-xcosh Authors
+// This file is part of the go-xcosh library.
 //
-// The go-ethereum library is free software: you can redistribute it and/or modify
+// The go-xcosh library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-ethereum library is distributed in the hope that it will be useful,
+// The go-xcosh library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-xcosh library. If not, see <http://www.gnu.org/licenses/>.
 
 // Implements interaction with EVMC-based VMs.
-// https://github.com/ethereum/evmc
+// https://github.com/xcosh/evmc
 
 package vm
 
@@ -26,17 +26,17 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/ethereum/evmc/v7/bindings/go/evmc"
-	"github.com/ethereum/go-ethereum/params/vars"
+	"github.com/xcosh/evmc/v7/bindings/go/evmc"
+	"github.com/xcosh/go-xcosh/params/vars"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/core/types"
+	"github.com/xcosh/go-xcosh/log"
 	"github.com/holiman/uint256"
 )
 
 // EVMC represents the reference to a common EVMC-based VM instance and
-// the current execution context as required by go-ethereum design.
+// the current execution context as required by go-xcosh design.
 type EVMC struct {
 	instance *evmc.VM        // The reference to the EVMC VM instance.
 	env      *EVM            // The execution context.

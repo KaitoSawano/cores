@@ -26,11 +26,11 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/params/confp"
-	"github.com/ethereum/go-ethereum/params/types/coregeth"
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
-	"github.com/ethereum/go-ethereum/params/types/genesisT"
-	"github.com/ethereum/go-ethereum/params/types/goethereum"
+	"github.com/xcosh/go-xcosh/params/confp"
+	"github.com/xcosh/go-xcosh/params/types/coregeth"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/params/types/genesisT"
+	"github.com/xcosh/go-xcosh/params/types/goxcosh"
 )
 
 func mustReadTestdataTo(t *testing.T, fabbrev string, into interface{}) {
@@ -53,10 +53,10 @@ func Test_UnmarshalJSON(t *testing.T) {
 			c := &genesisT.Genesis{}
 			mustReadTestdataTo(t, f, c)
 			if c.Config.GetChainID().Cmp(big.NewInt(1)) != 0 {
-				t.Errorf("go-ethereum: wrong chainid")
+				t.Errorf("go-xcosh: wrong chainid")
 			}
-			if _, ok := c.Config.(*goethereum.ChainConfig); !ok {
-				t.Errorf("go-ethereum: wrong type")
+			if _, ok := c.Config.(*goxcosh.ChainConfig); !ok {
+				t.Errorf("go-xcosh: wrong type")
 			}
 		case "coregeth":
 			c := &genesisT.Genesis{}
@@ -97,10 +97,10 @@ func testCrush(t *testing.T, aType string, a, b ctypes.ChainConfigurator) {
 }
 
 func TestCrush(t *testing.T) {
-	testCrush(t, "geth", &goethereum.ChainConfig{}, &goethereum.ChainConfig{})
+	testCrush(t, "geth", &goxcosh.ChainConfig{}, &goxcosh.ChainConfig{})
 	testCrush(t, "coregeth", &coregeth.CoreGethChainConfig{}, &coregeth.CoreGethChainConfig{})
-	testCrush(t, "geth", &goethereum.ChainConfig{}, &coregeth.CoreGethChainConfig{})
-	testCrush(t, "coregeth", &coregeth.CoreGethChainConfig{}, &goethereum.ChainConfig{})
+	testCrush(t, "geth", &goxcosh.ChainConfig{}, &coregeth.CoreGethChainConfig{})
+	testCrush(t, "coregeth", &coregeth.CoreGethChainConfig{}, &goxcosh.ChainConfig{})
 }
 
 func TestCrush_SkipZeroValues(t *testing.T) {
@@ -163,7 +163,7 @@ func TestIdentical(t *testing.T) {
 	}
 	configs := []ctypes.ChainConfigurator{
 		&coregeth.CoreGethChainConfig{},
-		&goethereum.ChainConfig{},
+		&goxcosh.ChainConfig{},
 		&coregeth.CoreGethChainConfig{}, // Complete combination test set.
 	}
 	for i := range configs {
@@ -190,7 +190,7 @@ func TestIdentical(t *testing.T) {
 // to fulfil certain interfaces do fill them.
 func TestConfiguratorImplementationsSatisfied(t *testing.T) {
 	for _, ty := range []interface{}{
-		&goethereum.ChainConfig{},
+		&goxcosh.ChainConfig{},
 		&coregeth.CoreGethChainConfig{},
 	} {
 		_ = ty.(ctypes.ChainConfigurator)
@@ -204,7 +204,7 @@ func TestConfiguratorImplementationsSatisfied(t *testing.T) {
 }
 
 func TestCompatible(t *testing.T) {
-	spec := &goethereum.ChainConfig{}
+	spec := &goxcosh.ChainConfig{}
 	fns, names := confp.Transitions(spec)
 	for i, fn := range fns {
 		t.Log(names[i], fn())
@@ -233,10 +233,10 @@ func TestCloneChainConfigurator(t *testing.T) {
 			c := &genesisT.Genesis{}
 			mustReadTestdataTo(t, f, c)
 			if c.Config.GetChainID().Cmp(big.NewInt(1)) != 0 {
-				t.Errorf("go-ethereum: wrong chainid")
+				t.Errorf("go-xcosh: wrong chainid")
 			}
-			if _, ok := c.Config.(*goethereum.ChainConfig); !ok {
-				t.Errorf("go-ethereum: wrong type")
+			if _, ok := c.Config.(*goxcosh.ChainConfig); !ok {
+				t.Errorf("go-xcosh: wrong type")
 			}
 			cloned, err := confp.CloneChainConfigurator(c.Config)
 			if err != nil {

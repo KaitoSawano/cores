@@ -7,12 +7,12 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/params/confp"
-	"github.com/ethereum/go-ethereum/params/types/coregeth"
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
-	"github.com/ethereum/go-ethereum/params/types/genesisT"
-	"github.com/ethereum/go-ethereum/params/types/goethereum"
+	"github.com/xcosh/go-xcosh/params"
+	"github.com/xcosh/go-xcosh/params/confp"
+	"github.com/xcosh/go-xcosh/params/types/coregeth"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/params/types/genesisT"
+	"github.com/xcosh/go-xcosh/params/types/goxcosh"
 	"gopkg.in/urfave/cli.v1"
 )
 
@@ -25,7 +25,7 @@ var (
 			Config: &coregeth.CoreGethChainConfig{},
 		},
 		"geth": &genesisT.Genesis{
-			Config: &goethereum.ChainConfig{},
+			Config: &goxcosh.ChainConfig{},
 		},
 		// "retesteth"
 	}

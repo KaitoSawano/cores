@@ -1,13 +1,13 @@
 # Minority split 2021-08-27 post mortem
 
-This is a post-mortem concerning the minority split that occurred on Ethereum mainnet on block [13107518](https://etherscan.io/block/13107518), at which a minority chain split occurred.
+This is a post-mortem concerning the minority split that occurred on Xcosh mainnet on block [13107518](https://etherscan.io/block/13107518), at which a minority chain split occurred.
 
 ## Timeline
 
 
 - 2021-08-17: Guido Vranken submitted a bounty report. Investigation started, root cause identified, patch variations discussed. 
 - 2021-08-18: Made public announcement over twitter about upcoming security release upcoming Tuesday. Downstream projects were also notified about the upcoming patch-release.
-- 2021-08-24: Released [v1.10.8](https://github.com/ethereum/go-ethereum/releases/tag/v1.10.8) containing the fix on Tuesday morning (CET). Erigon released [v2021.08.04](https://github.com/ledgerwatch/erigon/releases/tag/v2021.08.04).
+- 2021-08-24: Released [v1.10.8](https://github.com/xcosh/go-xcosh/releases/tag/v1.10.8) containing the fix on Tuesday morning (CET). Erigon released [v2021.08.04](https://github.com/ledgerwatch/erigon/releases/tag/v2021.08.04).
 - 2021-08-27: At 12:50:07 UTC, issue exploited. Analysis started roughly 30m later, 
 
 
@@ -16,7 +16,7 @@ This is a post-mortem concerning the minority split that occurred on Ethereum ma
 
 ###  2021-08-17 RETURNDATA corruption via datacopy
 
-On 2021-08-17, Guido Vranken submitted a report to bounty@ethereum.org. This coincided with a geth-meetup in Berlin, so the geth team could fairly quickly analyse the issue. 
+On 2021-08-17, Guido Vranken submitted a report to bounty@xcosh.org. This coincided with a geth-meetup in Berlin, so the geth team could fairly quickly analyse the issue. 
 
 He submitted a proof of concept which called the `dataCopy` precompile, where the input slice and output slice were overlapping but shifted. Doing a `copy` where the `src` and `dest` overlaps is not a problem in itself, however, the `returnData`slice was _also_ using the same memory as a backing-array.
 
@@ -51,7 +51,7 @@ A memory-corruption bug within the EVM can cause a consensus error, where vulner
 
 #### Handling
 
-On the evening of 17th, we discussed options on how to handle it. We made a state test to reproduce the issue, and verified that neither `openethereum`, `nethermind` nor `besu` were affected by the same vulnerability, and started a full-sync with a patched version of `geth`. 
+On the evening of 17th, we discussed options on how to handle it. We made a state test to reproduce the issue, and verified that neither `openxcosh`, `nethermind` nor `besu` were affected by the same vulnerability, and started a full-sync with a patched version of `geth`. 
 
 It was decided that in this specific instance, it would be possible to make a public announcement and a patch release: 
 
@@ -62,7 +62,7 @@ Since we had merged the removal of `ETH65`, if the entire network were to upgrad
 
 - Announce an upcoming security release on Tuesday (August 24th), via Twitter and official channels, plus reach out to downstream projects.
 - Temporarily revert the `ETH65`-removal.
-- Place the fix into the PR optimizing the jumpdest analysis [233381](https://github.com/ethereum/go-ethereum/pull/23381). 
+- Place the fix into the PR optimizing the jumpdest analysis [233381](https://github.com/xcosh/go-xcosh/pull/23381). 
 - After 4-8 weeks, release details about the vulnerability. 
 
 
@@ -87,9 +87,9 @@ The blocks on the 'bad' chain were investigated, and Tim Beiko reached out to th
 
 ### Disclosure decision
 
-The geth-team have an official policy regarding [vulnerability disclosure](https://geth.ethereum.org/docs/developers/geth-developer/disclosures). 
+The geth-team have an official policy regarding [vulnerability disclosure](https://geth.xcosh.org/docs/developers/geth-developer/disclosures). 
 
-> The primary goal for the Geth team is the health of the Ethereum network as a whole, and the decision whether or not to publish details about a serious vulnerability boils down to minimizing the risk and/or impact of discovery and exploitation.
+> The primary goal for the Geth team is the health of the Xcosh network as a whole, and the decision whether or not to publish details about a serious vulnerability boils down to minimizing the risk and/or impact of discovery and exploitation.
 
 In this case, it was decided that public pre-announce + patch would likely lead to sufficient update-window for a critical mass of nodes/miners to upgrade in time before it could be exploited. In hindsight, this was a dangerous decision, and it's unlikely that the same decision would be reached were a similar incident to happen again. 
 
@@ -114,8 +114,8 @@ However, some were 'lost', and only notified later
 - Summa
 - Harmony
 
-Action point: create a low-volume geth-announce@ethereum.org email list where dependent projects/operators can receive public announcements. 
-- This has been done. If you wish to receive release- and security announcements, sign up [here](https://groups.google.com/a/ethereum.org/g/geth-announce/about)
+Action point: create a low-volume geth-announce@xcosh.org email list where dependent projects/operators can receive public announcements. 
+- This has been done. If you wish to receive release- and security announcements, sign up [here](https://groups.google.com/a/xcosh.org/g/geth-announce/about)
 
 ### Fork monitoring
 
@@ -128,7 +128,7 @@ Action point: enable push-based alerts to be sent from the forkmon, to speed up 
 
 ## Links
 
-- [1] https://twitter.com/go_ethereum/status/1428051458763763721
+- [1] https://twitter.com/go_xcosh/status/1428051458763763721
 - [2] https://twitter.com/mhswende/status/1431259601530458112
 
 
@@ -139,15 +139,15 @@ Action point: enable push-based alerts to be sent from the forkmon, to speed up 
 
 The projects were sent variations of the following text: 
 ```
-We have identified a security issue with go-ethereum, and will issue a
+We have identified a security issue with go-xcosh, and will issue a
 new release (v1.10.8) on Tuesday next week.
 
 At this point, we will not disclose details about the issue, but
 recommend downstream/dependent projects to be ready to take actions to
-upgrade to the latest go-ethereum codebase. More information about the
+upgrade to the latest go-xcosh codebase. More information about the
 issue will be disclosed at a later date.
 
-https://twitter.com/go_ethereum/status/1428051458763763721
+https://twitter.com/go_xcosh/status/1428051458763763721
 
 ```
 ### Patch

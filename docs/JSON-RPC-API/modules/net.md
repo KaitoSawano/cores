@@ -172,7 +172,7 @@ func (s *NetAPI) PeerCount() hexutil.Uint {
 
 ### net_version
 
-Version returns the current ethereum protocol version.
+Version returns the current xcosh protocol version.
 
 
 #### Params (0)
@@ -224,7 +224,7 @@ _None_
 ```go
 func (s *NetAPI) Version() string {
 	return fmt.Sprintf("%d", s.networkVersion)
-}// Version returns the current ethereum protocol version.
+}// Version returns the current xcosh protocol version.
 
 ```
 <a href="https://github.com/etclabscore/core-geth/blob/master/internal/ethapi/api.go#L2322" target="_">View on GitHub →</a>

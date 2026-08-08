@@ -2,7 +2,7 @@
 
 The trace module is for getting a deeper insight into transaction processing. It includes two sets of calls; the transaction trace filtering API and the ad-hoc tracing API. You can find the documentation for the supported methods [here](/JSON-RPC-API/modules/trace/).
 
-It's good to mention that `trace_*` methods are nothing more than aliases to some existing `debug_*` methods. The reason for creating those aliases, was to reach compatibility with OpenEthereum's (aka Parity) trace module, which has been requested by the community in order they can fully use core-geth. For achieving this, the `trace_*` methods set the default tracer to `callTracerParity` if none is set.
+It's good to mention that `trace_*` methods are nothing more than aliases to some existing `debug_*` methods. The reason for creating those aliases, was to reach compatibility with OpenXcosh's (aka Parity) trace module, which has been requested by the community in order they can fully use core-geth. For achieving this, the `trace_*` methods set the default tracer to `callTracerParity` if none is set.
 
 !!! Note "Full sync"
     In order to use the Transaction-Trace Filtering API, core-geth must be fully synced using `--syncmode=full --gcmode=archive`. Otherwise, you can set the number of blocks to `reexec` back for rebuilding the state, though taking longer for a trace call to finish.
@@ -30,9 +30,9 @@ These APIs allow you to get a full externality trace on any transaction executed
 
 ## Available tracers
 
-- `callTracerParity` Transaction trace returning a response equivalent to OpenEthereum's (aka Parity) response schema. For documentation on this response value see [here](#calltracerparity).
+- `callTracerParity` Transaction trace returning a response equivalent to OpenXcosh's (aka Parity) response schema. For documentation on this response value see [here](#calltracerparity).
 - `vmTrace` Virtual Machine execution trace. Provides a full trace of the VM’s state throughout the execution of the transaction, including for any subcalls. *(Not implemented yet)*
-- `stateDiffTracer` State difference. Provides information detailing all altered portions of the Ethereum state made due to the execution of the transaction. For documentation on this response value see [here](#statedifftracer).
+- `stateDiffTracer` State difference. Provides information detailing all altered portions of the Xcosh state made due to the execution of the transaction. For documentation on this response value see [here](#statedifftracer).
 
 !!! Example "Example trace_* API method config (last method argument)"
 
@@ -41,7 +41,7 @@ These APIs allow you to get a full externality trace on any transaction executed
         "tracer": "stateDiffTracer",
         "timeout: "10s",
         "reexec: "10000",               // number of block to reexec back for calculating state
-        "nestedTraceOutput": true  // in Ad-hoc Tracing methods the response is nested similar to OpenEthereum's output
+        "nestedTraceOutput": true  // in Ad-hoc Tracing methods the response is nested similar to OpenXcosh's output
     }
     ```
 
@@ -101,7 +101,7 @@ Each object that represents an internal transaction consists of:
 
 #### stateDiffTracer
 
-Provides information detailing all **altered portions** of the Ethereum state made due to the execution of the transaction.
+Provides information detailing all **altered portions** of the Xcosh state made due to the execution of the transaction.
 
 Each address object provides the state differences for `balance`, `nonce`, `code` and `storage`.
 Actually, under the `storage` object, we can find the state differences for each contract's storage key.
@@ -142,12 +142,12 @@ Actually, under the `storage` object, we can find the state differences for each
 }
 ```
 
-## "stateDiff" tracer differences with OpenEthereum
+## "stateDiff" tracer differences with OpenXcosh
 
-1. **SSTORE** in some edge cases persists data in state but are not being returned on stateDiff storage results on OpenEthereum output.
+1. **SSTORE** in some edge cases persists data in state but are not being returned on stateDiff storage results on OpenXcosh output.
    > Happens only on 2 transactions on **Mordor** testnet, as of **block 2,519,999**. (TX hashes: *0xab73afe7b92ad9b537df3f168de0d06f275ed34edf9e19b36362ac6fa304c0bf*, *0x15a7c727a9bbfdd43d09805288668cc4a0ec647772d717957e882a71ace80b1a*)
-2. When error **ErrInsufficientFundsForTransfer** happens, **OpenEthereum** leaves the tracer run producing negative balances, though using safe math for overflows it **returns 0 balance**, on the other hand the `to` account **receives the full amount**.
+2. When error **ErrInsufficientFundsForTransfer** happens, **OpenXcosh** leaves the tracer run producing negative balances, though using safe math for overflows it **returns 0 balance**, on the other hand the `to` account **receives the full amount**.
 **Core-geth removes only the gas cost** from the sender and **adds it to the coinbase balance**.
 3. Same as in 2, but on top of that, the **sender account doesn't have to pay for the gas cost** even. In this case, **core-geth returns an empty JSON**, as in reality this transaction will remain in the tx_pool and never be executed, neither change the state.
-4. On **OpenEthereum the block gasLimit is set to be U256::max()**, which leads into problems on contracts using it for pseudo-randomness. On **core-geth**, we believe that the user utilising the trace_* wants to **see what will happen in reality**, though we **leave the block untouched to its true values**.
-5. When an internal call fails with out of gas, and its state is not being persisted, we don't add it in stateDiff output, as it happens on OpenEthereum.
+4. On **OpenXcosh the block gasLimit is set to be U256::max()**, which leads into problems on contracts using it for pseudo-randomness. On **core-geth**, we believe that the user utilising the trace_* wants to **see what will happen in reality**, though we **leave the block untouched to its true values**.
+5. When an internal call fails with out of gas, and its state is not being persisted, we don't add it in stateDiff output, as it happens on OpenXcosh.

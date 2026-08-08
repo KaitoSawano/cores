@@ -18,11 +18,11 @@ package ethash
 import (
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
 )
 
 func ecip1010Explosion(config ctypes.ChainConfigurator, next *big.Int, exPeriodRef *big.Int) {
-	// https://github.com/ethereumproject/ECIPs/blob/master/ECIPs/ECIP-1010.md
+	// https://github.com/xcoshproject/ECIPs/blob/master/ECIPs/ECIP-1010.md
 
 	if next.Uint64() < *config.GetEthashECIP1010ContinueTransition() {
 		exPeriodRef.SetUint64(*config.GetEthashECIP1010PauseTransition())

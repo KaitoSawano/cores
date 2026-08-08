@@ -24,10 +24,10 @@ index 392b710fd..573d8fba7 100644
 --- a/params/types/gen_genesis.go
 +++ b/params/types/gen_genesis.go
 @@ -11,6 +11,7 @@ import (
- 	"github.com/ethereum/go-ethereum/common/hexutil"
- 	"github.com/ethereum/go-ethereum/common/math"
- 	common0 "github.com/ethereum/go-ethereum/params/types/common"
-+	"github.com/ethereum/go-ethereum/params/types/goethereum"
+ 	"github.com/xcosh/go-xcosh/common/hexutil"
+ 	"github.com/xcosh/go-xcosh/common/math"
+ 	common0 "github.com/xcosh/go-xcosh/params/types/common"
++	"github.com/xcosh/go-xcosh/params/types/goxcosh"
  )
  
  var _ = (*genesisSpecMarshaling)(nil)
@@ -42,7 +42,7 @@ index 392b710fd..573d8fba7 100644
 +	// unmarshaling.
 +	dec.Config = &MultiGethChainConfig{}
 +	if err := json.Unmarshal(input, &dec); err != nil || common0.IsValid(dec.Config, nil) != nil {
-+		dec.Config = &goethereum.ChainConfig{}
++		dec.Config = &goxcosh.ChainConfig{}
 +		if err := json.Unmarshal(input, &dec); err != nil {
 +			return err
 +		}

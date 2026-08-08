@@ -24,19 +24,19 @@ import (
 	"testing"
 
 	"github.com/davecgh/go-spew/spew"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/consensus/ethash"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/params/confp"
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
-	"github.com/ethereum/go-ethereum/params/types/genesisT"
-	"github.com/ethereum/go-ethereum/params/types/goethereum"
-	"github.com/ethereum/go-ethereum/params/vars"
-	"github.com/ethereum/go-ethereum/triedb"
-	"github.com/ethereum/go-ethereum/triedb/pathdb"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/consensus/ethash"
+	"github.com/xcosh/go-xcosh/core/rawdb"
+	"github.com/xcosh/go-xcosh/core/vm"
+	"github.com/xcosh/go-xcosh/ethdb"
+	"github.com/xcosh/go-xcosh/params"
+	"github.com/xcosh/go-xcosh/params/confp"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/params/types/genesisT"
+	"github.com/xcosh/go-xcosh/params/types/goxcosh"
+	"github.com/xcosh/go-xcosh/params/vars"
+	"github.com/xcosh/go-xcosh/triedb"
+	"github.com/xcosh/go-xcosh/triedb/pathdb"
 )
 
 func TestSetupGenesisBlock(t *testing.T) {
@@ -82,14 +82,14 @@ func testSetupGenesis(t *testing.T, scheme string) {
 	var (
 		customghash = common.HexToHash("0x89c99d90b79719238d2645c7642f2c9295246e80775b38cfd162b696817fbd50")
 		customg     = genesisT.Genesis{
-			Config: &goethereum.ChainConfig{HomesteadBlock: big.NewInt(3)},
+			Config: &goxcosh.ChainConfig{HomesteadBlock: big.NewInt(3)},
 			Alloc: genesisT.GenesisAlloc{
 				{1}: {Balance: big.NewInt(1), Storage: map[common.Hash]common.Hash{{1}: {1}}},
 			},
 		}
 		oldcustomg = customg
 	)
-	oldcustomg.Config = &goethereum.ChainConfig{HomesteadBlock: big.NewInt(2)}
+	oldcustomg.Config = &goxcosh.ChainConfig{HomesteadBlock: big.NewInt(2)}
 	tests := []struct {
 		name       string
 		fn         func(ethdb.Database) (ctypes.ChainConfigurator, common.Hash, error)
@@ -220,7 +220,7 @@ func TestGenesisHashes(t *testing.T) {
 		if have := MustCommitGenesis(rawdb.NewMemoryDatabase(), triedb.NewDatabase(db, triedb.HashDefaults), c.genesis).Hash(); have != c.want {
 			t.Errorf("case: %d a), want: %s, got: %s", i, c.want.Hex(), have.Hex())
 		}
-		// TODO(meowsbits): go-ethereum has an additional Test via ToBlock. Is there a comparable method that we should also test here?
+		// TODO(meowsbits): go-xcosh has an additional Test via ToBlock. Is there a comparable method that we should also test here?
 	}
 }
 
@@ -291,7 +291,7 @@ func newDbConfig(scheme string) *triedb.Config {
 
 func TestVerkleGenesisCommit(t *testing.T) {
 	var verkleTime uint64 = 0
-	verkleConfig := &goethereum.ChainConfig{
+	verkleConfig := &goxcosh.ChainConfig{
 		ChainID:                       big.NewInt(1),
 		HomesteadBlock:                big.NewInt(0),
 		DAOForkBlock:                  nil,

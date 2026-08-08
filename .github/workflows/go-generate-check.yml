@@ -7,7 +7,7 @@ env:
   # These patterns are matched (negatively) against 'go list' output.
   #
   # - trezor: Ignore generating trezor package based on this comment:
-  #   https://github.com/ethereum/go-ethereum/blob/master/accounts/usbwallet/trezor/trezor.go#L21-L43
+  #   https://github.com/xcosh/go-xcosh/blob/master/accounts/usbwallet/trezor/trezor.go#L21-L43
   GENERATE_EXCEPTIONS: |
     trezor
 jobs:

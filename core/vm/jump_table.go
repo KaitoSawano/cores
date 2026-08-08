@@ -1,18 +1,18 @@
-// Copyright 2015 The go-ethereum Authors
-// This file is part of the go-ethereum library.
+// Copyright 2015 The go-xcosh Authors
+// This file is part of the go-xcosh library.
 //
-// The go-ethereum library is free software: you can redistribute it and/or modify
+// The go-xcosh library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-ethereum library is distributed in the hope that it will be useful,
+// The go-xcosh library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-xcosh library. If not, see <http://www.gnu.org/licenses/>.
 
 package vm
 
@@ -20,8 +20,8 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
-	"github.com/ethereum/go-ethereum/params/vars"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/params/vars"
 )
 
 type (
@@ -173,25 +173,25 @@ func instructionSetForConfig(config ctypes.ChainConfigurator, isPostMerge bool, 
 		}
 	}
 	if config.IsEnabled(config.GetEIP1344Transition, bn) {
-		enable1344(instructionSet) // ChainID opcode - https://eips.ethereum.org/EIPS/eip-1344
+		enable1344(instructionSet) // ChainID opcode - https://eips.xcosh.org/EIPS/eip-1344
 	}
 	if config.IsEnabled(config.GetEIP1884Transition, bn) {
-		enable1884(instructionSet) // Reprice reader opcodes - https://eips.ethereum.org/EIPS/eip-1884
+		enable1884(instructionSet) // Reprice reader opcodes - https://eips.xcosh.org/EIPS/eip-1884
 	}
 	if config.IsEnabled(config.GetECIP1080Transition, bn) {
 		enableSelfBalance(instructionSet)
 	}
 	if config.IsEnabled(config.GetEIP2200Transition, bn) && !config.IsEnabled(config.GetEIP2200DisableTransition, bn) {
-		enable2200(instructionSet) // Net metered SSTORE - https://eips.ethereum.org/EIPS/eip-2200
+		enable2200(instructionSet) // Net metered SSTORE - https://eips.xcosh.org/EIPS/eip-2200
 	}
 	if config.IsEnabled(config.GetEIP2929Transition, bn) {
-		enable2929(instructionSet) // Access lists for trie accesses https://eips.ethereum.org/EIPS/eip-2929
+		enable2929(instructionSet) // Access lists for trie accesses https://eips.xcosh.org/EIPS/eip-2929
 	}
 	if config.IsEnabled(config.GetEIP3529Transition, bn) {
-		enable3529(instructionSet) // Reduction in refunds https://eips.ethereum.org/EIPS/eip-3529
+		enable3529(instructionSet) // Reduction in refunds https://eips.xcosh.org/EIPS/eip-3529
 	}
 	if config.IsEnabled(config.GetEIP3198Transition, bn) {
-		enable3198(instructionSet) // BASEFEE opcode https://eips.ethereum.org/EIPS/eip-3198
+		enable3198(instructionSet) // BASEFEE opcode https://eips.xcosh.org/EIPS/eip-3198
 	}
 	if isPostMerge || config.IsEnabled(config.GetEIP4399Transition, bn) { // EIP4399: Supplant DIFFICULTY opcode with PREVRANDAO (ETH @ PoS)
 		instructionSet[PREVRANDAO] = &operation{

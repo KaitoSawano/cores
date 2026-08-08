@@ -1,6 +1,6 @@
 # Project information
 site_name: CoreGeth Documentation
-site_description: Documentation for CoreGeth Ethereum Protocol Provider
+site_description: Documentation for CoreGeth Xcosh Protocol Provider
 site_url: https://etclabscore.github.io/core-geth/
 site_author: CoreGeth Team
 
@@ -10,7 +10,7 @@ repo_url: https://github.com/etclabscore/core-geth
 edit_uri: edit/master/docs/
 
 # Copyright
-copyright: 'Copyright &copy; 2021 etclabscore/core-geth and ethereum/go-ethereum authors; see <a href="https://github.com/etclabscore/core-geth/tree/master/COPYING" target="_">COPYING file</a> - All rights reserved'
+copyright: 'Copyright &copy; 2021 etclabscore/core-geth and xcosh/go-xcosh authors; see <a href="https://github.com/etclabscore/core-geth/tree/master/COPYING" target="_">COPYING file</a> - All rights reserved'
 
 # Configuration
 theme:

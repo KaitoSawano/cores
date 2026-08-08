@@ -5,7 +5,7 @@ hide:
 
 # Running Geth with an External VM
 
-Geth supports the __[EVMC](https://github.com/ethereum/evmc/) VM connector API Version 7__ as an experimental feature. This interface provides support for external EVM and EWASM interpreters.
+Geth supports the __[EVMC](https://github.com/xcosh/evmc/) VM connector API Version 7__ as an experimental feature. This interface provides support for external EVM and EWASM interpreters.
 
 External interpreters can be configured on the command line via
 a `--vm.`-prefixed flag for normal instantiation, and `--evmc.` for testing.
@@ -30,9 +30,9 @@ These tests run exclusively via Github Actions, configured at `.github/workflows
 ## Discussion: Customizing EVMC Configuration
 
 While core-geth supports highly granular EIP/ECIP/xIP chain feature configuration (ie fork feature configs),
-EVMC does not. EVMC only supports the Fork configurations supported by ethereum/go-ethereum (eg. Byzantium, Constantinople, &c).
+EVMC does not. EVMC only supports the Fork configurations supported by xcosh/go-xcosh (eg. Byzantium, Constantinople, &c).
 Thus, the implementation at core-geth of EVMC requires a somewhat arbitrary mapping of granular features as keys toggling
-entire Ethereum fork configurations.
+entire Xcosh fork configurations.
 
 The following code snippet, taken from [`./core/vm/evmc.go`](https://github.com/etclabscore/core-geth/blob/master/core/vm/evmc.go#L301-L327), handles this translation.
 
@@ -68,7 +68,7 @@ func getRevision(env *EVM) evmc.Revision {
 
 As you can see, individual features, like EIP1884, are translated as proxy signifiers for entire fork configurations
 (in this case, an Istanbul-featured VM revision).
-This approach, rather than requiring a complete set of the compositional features for any of these given Ethereum forks,
+This approach, rather than requiring a complete set of the compositional features for any of these given Xcosh forks,
 trades a descriptive 1:1 mapping for application flexibility. Pursuing a necessarily complete feature-set -> fork
 map would presume chain features that are not necessarily relevant to the virtual machine, like block reward configurations,
 or difficulty configurations, for example. This approach allows applications to use advanced opcodes with the fewest

@@ -31,8 +31,8 @@ jobs:
           name: core-geth
           path: ./core-geth.txt
 
-  bench_go_ethereum:
-    name: Benchmark go-ethereum
+  bench_go_xcosh:
+    name: Benchmark go-xcosh
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
@@ -47,24 +47,24 @@ jobs:
         with:
           submodules: 'recursive'
 
-      - name: Benchmark ethereum/go-ethereum
+      - name: Benchmark xcosh/go-xcosh
         id: bench
         run: |
-          git remote add foundation https://github.com/ethereum/go-ethereum.git
+          git remote add foundation https://github.com/xcosh/go-xcosh.git
           git fetch foundation
           git checkout v1.11.5
           # git submodule update
           git checkout $GITHUB_SHA -- tests/vm_bench_test.go
-          go test -short ./tests -count 1 -p 1 -timeout 60m -run NONE -bench=VM -v |& tee go-ethereum.txt
+          go test -short ./tests -count 1 -p 1 -timeout 60m -run NONE -bench=VM -v |& tee go-xcosh.txt
 
       - uses: actions/upload-artifact@v4
         with:
-          name: go-ethereum
-          path: ./go-ethereum.txt
+          name: go-xcosh
+          path: ./go-xcosh.txt
 
   compare:
     name: Compare
-    needs: [bench_core_geth, bench_go_ethereum]
+    needs: [bench_core_geth, bench_go_xcosh]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -82,9 +82,9 @@ jobs:
           go install golang.org/x/perf/cmd/benchstat@latest
 
       - uses: actions/download-artifact@v4
-        name: Get go-ethereum artifact
+        name: Get go-xcosh artifact
         with:
-          name: go-ethereum
+          name: go-xcosh
 
       - uses: actions/download-artifact@v4
         name: Get core-geth artifact
@@ -94,12 +94,12 @@ jobs:
       - name: Prepare data
         run: |
           cat core-geth.txt | ./build/bench-suite-compress.sh | tee core-geth_compress.txt
-          cat go-ethereum.txt | ./build/bench-suite-compress.sh | tee go-ethereum_compress.txt
+          cat go-xcosh.txt | ./build/bench-suite-compress.sh | tee go-xcosh_compress.txt
 
       - name: "Analyze Results [COMPRESSED]"
         run: |
-          benchstat go-ethereum_compress.txt core-geth_compress.txt
+          benchstat go-xcosh_compress.txt core-geth_compress.txt
 
       - name: "Analyze Results [RAW DELTA]"
         run: |
-          benchstat go-ethereum.txt core-geth.txt
+          benchstat go-xcosh.txt core-geth.txt

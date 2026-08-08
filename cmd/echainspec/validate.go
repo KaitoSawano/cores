@@ -4,8 +4,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/ethereum/go-ethereum/common/math"
-	"github.com/ethereum/go-ethereum/params/confp"
+	"github.com/xcosh/go-xcosh/common/math"
+	"github.com/xcosh/go-xcosh/params/confp"
 	"gopkg.in/urfave/cli.v1"
 )
 

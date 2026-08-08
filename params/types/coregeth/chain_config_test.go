@@ -4,8 +4,8 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
 )
 
 // nolint:unused

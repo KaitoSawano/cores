@@ -5,8 +5,8 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/crypto/ecies"
+	"github.com/xcosh/go-xcosh/crypto"
+	"github.com/xcosh/go-xcosh/crypto/ecies"
 )
 
 func TestHandshakeECIESInvalidCurveOracle(t *testing.T) {

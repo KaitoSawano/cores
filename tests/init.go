@@ -1,18 +1,18 @@
-// Copyright 2015 The go-ethereum Authors
-// This file is part of the go-ethereum library.
+// Copyright 2015 The go-xcosh Authors
+// This file is part of the go-xcosh library.
 //
-// The go-ethereum library is free software: you can redistribute it and/or modify
+// The go-xcosh library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-ethereum library is distributed in the hope that it will be useful,
+// The go-xcosh library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-xcosh library. If not, see <http://www.gnu.org/licenses/>.
 
 package tests
 
@@ -21,31 +21,31 @@ import (
 	"math/big"
 	"sort"
 
-	"github.com/ethereum/go-ethereum/params/types/coregeth"
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
-	"github.com/ethereum/go-ethereum/params/types/goethereum"
+	"github.com/xcosh/go-xcosh/params/types/coregeth"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/params/types/goxcosh"
 )
 
 func u64(val uint64) *uint64 { return &val }
 
 // Forks table defines supported forks and their chain config.
 var Forks = map[string]ctypes.ChainConfigurator{
-	"Frontier": &goethereum.ChainConfig{
+	"Frontier": &goxcosh.ChainConfig{
 		Ethash:  new(ctypes.EthashConfig),
 		ChainID: big.NewInt(1),
 	},
-	"Homestead": &goethereum.ChainConfig{
+	"Homestead": &goxcosh.ChainConfig{
 		Ethash:         new(ctypes.EthashConfig),
 		ChainID:        big.NewInt(1),
 		HomesteadBlock: big.NewInt(0),
 	},
-	"EIP150": &goethereum.ChainConfig{
+	"EIP150": &goxcosh.ChainConfig{
 		Ethash:         new(ctypes.EthashConfig),
 		ChainID:        big.NewInt(1),
 		HomesteadBlock: big.NewInt(0),
 		EIP150Block:    big.NewInt(0),
 	},
-	"EIP158": &goethereum.ChainConfig{
+	"EIP158": &goxcosh.ChainConfig{
 		Ethash:         new(ctypes.EthashConfig),
 		ChainID:        big.NewInt(1),
 		HomesteadBlock: big.NewInt(0),
@@ -53,7 +53,7 @@ var Forks = map[string]ctypes.ChainConfigurator{
 		EIP155Block:    big.NewInt(0),
 		EIP158Block:    big.NewInt(0),
 	},
-	"Byzantium": &goethereum.ChainConfig{
+	"Byzantium": &goxcosh.ChainConfig{
 		Ethash:         new(ctypes.EthashConfig),
 		ChainID:        big.NewInt(1),
 		HomesteadBlock: big.NewInt(0),
@@ -92,7 +92,7 @@ var Forks = map[string]ctypes.ChainConfigurator{
 		ECIP1010PauseBlock: nil,
 		ECIP1010Length:     nil,
 	},
-	"Constantinople": &goethereum.ChainConfig{
+	"Constantinople": &goxcosh.ChainConfig{
 		Ethash:              new(ctypes.EthashConfig),
 		ChainID:             big.NewInt(1),
 		HomesteadBlock:      big.NewInt(0),
@@ -103,7 +103,7 @@ var Forks = map[string]ctypes.ChainConfigurator{
 		ConstantinopleBlock: big.NewInt(0),
 		PetersburgBlock:     nil,
 	},
-	"ConstantinopleFix": &goethereum.ChainConfig{
+	"ConstantinopleFix": &goxcosh.ChainConfig{
 		Ethash:              new(ctypes.EthashConfig),
 		ChainID:             big.NewInt(1),
 		HomesteadBlock:      big.NewInt(0),
@@ -144,7 +144,7 @@ var Forks = map[string]ctypes.ChainConfigurator{
 		ECIP1010PauseBlock: nil,
 		ECIP1010Length:     nil,
 	},
-	"Istanbul": &goethereum.ChainConfig{
+	"Istanbul": &goxcosh.ChainConfig{
 		Ethash:              new(ctypes.EthashConfig),
 		ChainID:             big.NewInt(1),
 		HomesteadBlock:      big.NewInt(0),
@@ -195,25 +195,25 @@ var Forks = map[string]ctypes.ChainConfigurator{
 		ECIP1010PauseBlock: nil,
 		ECIP1010Length:     nil,
 	},
-	"FrontierToHomesteadAt5": &goethereum.ChainConfig{
+	"FrontierToHomesteadAt5": &goxcosh.ChainConfig{
 		Ethash:         new(ctypes.EthashConfig),
 		ChainID:        big.NewInt(1),
 		HomesteadBlock: big.NewInt(5),
 	},
-	"HomesteadToEIP150At5": &goethereum.ChainConfig{
+	"HomesteadToEIP150At5": &goxcosh.ChainConfig{
 		Ethash:         new(ctypes.EthashConfig),
 		ChainID:        big.NewInt(1),
 		HomesteadBlock: big.NewInt(0),
 		EIP150Block:    big.NewInt(5),
 	},
-	"HomesteadToDaoAt5": &goethereum.ChainConfig{
+	"HomesteadToDaoAt5": &goxcosh.ChainConfig{
 		Ethash:         new(ctypes.EthashConfig),
 		ChainID:        big.NewInt(1),
 		HomesteadBlock: big.NewInt(0),
 		DAOForkBlock:   big.NewInt(5),
 		DAOForkSupport: true,
 	},
-	"EIP158ToByzantiumAt5": &goethereum.ChainConfig{
+	"EIP158ToByzantiumAt5": &goxcosh.ChainConfig{
 		Ethash:         new(ctypes.EthashConfig),
 		ChainID:        big.NewInt(1),
 		HomesteadBlock: big.NewInt(0),
@@ -222,7 +222,7 @@ var Forks = map[string]ctypes.ChainConfigurator{
 		EIP158Block:    big.NewInt(0),
 		ByzantiumBlock: big.NewInt(5),
 	},
-	"ByzantiumToConstantinopleAt5": &goethereum.ChainConfig{
+	"ByzantiumToConstantinopleAt5": &goxcosh.ChainConfig{
 		Ethash:              new(ctypes.EthashConfig),
 		ChainID:             big.NewInt(1),
 		HomesteadBlock:      big.NewInt(0),
@@ -232,7 +232,7 @@ var Forks = map[string]ctypes.ChainConfigurator{
 		ByzantiumBlock:      big.NewInt(0),
 		ConstantinopleBlock: big.NewInt(5),
 	},
-	"ByzantiumToConstantinopleFixAt5": &goethereum.ChainConfig{
+	"ByzantiumToConstantinopleFixAt5": &goxcosh.ChainConfig{
 		Ethash:              new(ctypes.EthashConfig),
 		ChainID:             big.NewInt(1),
 		HomesteadBlock:      big.NewInt(0),
@@ -243,7 +243,7 @@ var Forks = map[string]ctypes.ChainConfigurator{
 		ConstantinopleBlock: big.NewInt(5),
 		PetersburgBlock:     big.NewInt(5),
 	},
-	"ConstantinopleFixToIstanbulAt5": &goethereum.ChainConfig{
+	"ConstantinopleFixToIstanbulAt5": &goxcosh.ChainConfig{
 		Ethash:              new(ctypes.EthashConfig),
 		ChainID:             big.NewInt(1),
 		HomesteadBlock:      big.NewInt(0),
@@ -255,7 +255,7 @@ var Forks = map[string]ctypes.ChainConfigurator{
 		PetersburgBlock:     big.NewInt(0),
 		IstanbulBlock:       big.NewInt(5),
 	},
-	"MuirGlacier": &goethereum.ChainConfig{
+	"MuirGlacier": &goxcosh.ChainConfig{
 		ChainID:             big.NewInt(1),
 		HomesteadBlock:      big.NewInt(0),
 		EIP150Block:         big.NewInt(0),
@@ -268,7 +268,7 @@ var Forks = map[string]ctypes.ChainConfigurator{
 		IstanbulBlock:       big.NewInt(0),
 		MuirGlacierBlock:    big.NewInt(0),
 	},
-	"Berlin": &goethereum.ChainConfig{
+	"Berlin": &goxcosh.ChainConfig{
 		Ethash:              new(ctypes.EthashConfig),
 		ChainID:             big.NewInt(1),
 		HomesteadBlock:      big.NewInt(0),
@@ -282,7 +282,7 @@ var Forks = map[string]ctypes.ChainConfigurator{
 		MuirGlacierBlock:    big.NewInt(0),
 		BerlinBlock:         big.NewInt(0),
 	},
-	"BerlinToLondonAt5": &goethereum.ChainConfig{
+	"BerlinToLondonAt5": &goxcosh.ChainConfig{
 		Ethash:              new(ctypes.EthashConfig),
 		ChainID:             big.NewInt(1),
 		HomesteadBlock:      big.NewInt(0),
@@ -297,7 +297,7 @@ var Forks = map[string]ctypes.ChainConfigurator{
 		BerlinBlock:         big.NewInt(0),
 		LondonBlock:         big.NewInt(5),
 	},
-	"London": &goethereum.ChainConfig{
+	"London": &goxcosh.ChainConfig{
 		Ethash:              new(ctypes.EthashConfig),
 		ChainID:             big.NewInt(1),
 		HomesteadBlock:      big.NewInt(0),
@@ -312,7 +312,7 @@ var Forks = map[string]ctypes.ChainConfigurator{
 		BerlinBlock:         big.NewInt(0),
 		LondonBlock:         big.NewInt(0),
 	},
-	"ArrowGlacier": &goethereum.ChainConfig{
+	"ArrowGlacier": &goxcosh.ChainConfig{
 		ChainID:             big.NewInt(1),
 		HomesteadBlock:      big.NewInt(0),
 		EIP150Block:         big.NewInt(0),
@@ -327,7 +327,7 @@ var Forks = map[string]ctypes.ChainConfigurator{
 		LondonBlock:         big.NewInt(0),
 		ArrowGlacierBlock:   big.NewInt(0),
 	},
-	"ArrowGlacierToMergeAtDiffC0000": &goethereum.ChainConfig{
+	"ArrowGlacierToMergeAtDiffC0000": &goxcosh.ChainConfig{
 		ChainID:                 big.NewInt(1),
 		HomesteadBlock:          big.NewInt(0),
 		EIP150Block:             big.NewInt(0),
@@ -345,7 +345,7 @@ var Forks = map[string]ctypes.ChainConfigurator{
 		MergeNetsplitBlock:      big.NewInt(0),
 		TerminalTotalDifficulty: big.NewInt(0xC0000),
 	},
-	"GrayGlacier": &goethereum.ChainConfig{
+	"GrayGlacier": &goxcosh.ChainConfig{
 		ChainID:             big.NewInt(1),
 		HomesteadBlock:      big.NewInt(0),
 		EIP150Block:         big.NewInt(0),
@@ -361,7 +361,7 @@ var Forks = map[string]ctypes.ChainConfigurator{
 		ArrowGlacierBlock:   big.NewInt(0),
 		GrayGlacierBlock:    big.NewInt(0),
 	},
-	"Merge": &goethereum.ChainConfig{
+	"Merge": &goxcosh.ChainConfig{
 		ChainID:                       big.NewInt(1),
 		HomesteadBlock:                big.NewInt(0),
 		EIP150Block:                   big.NewInt(0),
@@ -485,7 +485,7 @@ var Forks = map[string]ctypes.ChainConfigurator{
 		ECIP1010PauseBlock: nil,
 		ECIP1010Length:     nil,
 	},
-	"Shanghai": &goethereum.ChainConfig{
+	"Shanghai": &goxcosh.ChainConfig{
 		ChainID:                 big.NewInt(1),
 		HomesteadBlock:          big.NewInt(0),
 		EIP150Block:             big.NewInt(0),
@@ -503,7 +503,7 @@ var Forks = map[string]ctypes.ChainConfigurator{
 		TerminalTotalDifficulty: big.NewInt(0),
 		ShanghaiTime:            u64(0),
 	},
-	"MergeToShanghaiAtTime15k": &goethereum.ChainConfig{
+	"MergeToShanghaiAtTime15k": &goxcosh.ChainConfig{
 		ChainID:                 big.NewInt(1),
 		HomesteadBlock:          big.NewInt(0),
 		EIP150Block:             big.NewInt(0),
@@ -591,7 +591,7 @@ var Forks = map[string]ctypes.ChainConfigurator{
 		ECIP1010PauseBlock: nil,
 		ECIP1010Length:     nil,
 	},
-	"Cancun": &goethereum.ChainConfig{
+	"Cancun": &goxcosh.ChainConfig{
 		ChainID:                 big.NewInt(1),
 		HomesteadBlock:          big.NewInt(0),
 		EIP150Block:             big.NewInt(0),
@@ -610,7 +610,7 @@ var Forks = map[string]ctypes.ChainConfigurator{
 		ShanghaiTime:            u64(0),
 		CancunTime:              u64(0),
 	},
-	"ShanghaiToCancunAtTime15k": &goethereum.ChainConfig{
+	"ShanghaiToCancunAtTime15k": &goxcosh.ChainConfig{
 		ChainID:                 big.NewInt(1),
 		HomesteadBlock:          big.NewInt(0),
 		EIP150Block:             big.NewInt(0),

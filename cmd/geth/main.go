@@ -1,20 +1,20 @@
-// Copyright 2014 The go-ethereum Authors
-// This file is part of go-ethereum.
+// Copyright 2014 The go-xcosh Authors
+// This file is part of go-xcosh.
 //
-// go-ethereum is free software: you can redistribute it and/or modify
+// go-xcosh is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// go-ethereum is distributed in the hope that it will be useful,
+// go-xcosh is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with go-ethereum. If not, see <http://www.gnu.org/licenses/>.
+// along with go-xcosh. If not, see <http://www.gnu.org/licenses/>.
 
-// geth is a command-line client for Ethereum.
+// geth is a command-line client for Xcosh.
 package main
 
 import (
@@ -25,25 +25,25 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ethereum/go-ethereum/accounts"
-	"github.com/ethereum/go-ethereum/accounts/keystore"
-	"github.com/ethereum/go-ethereum/cmd/utils"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/console/prompt"
-	"github.com/ethereum/go-ethereum/eth"
-	"github.com/ethereum/go-ethereum/eth/downloader"
-	"github.com/ethereum/go-ethereum/ethclient"
-	"github.com/ethereum/go-ethereum/internal/debug"
-	"github.com/ethereum/go-ethereum/internal/ethapi"
-	"github.com/ethereum/go-ethereum/internal/flags"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/metrics"
-	"github.com/ethereum/go-ethereum/node"
+	"github.com/xcosh/go-xcosh/accounts"
+	"github.com/xcosh/go-xcosh/accounts/keystore"
+	"github.com/xcosh/go-xcosh/cmd/utils"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/console/prompt"
+	"github.com/xcosh/go-xcosh/eth"
+	"github.com/xcosh/go-xcosh/eth/downloader"
+	"github.com/xcosh/go-xcosh/ethclient"
+	"github.com/xcosh/go-xcosh/internal/debug"
+	"github.com/xcosh/go-xcosh/internal/ethapi"
+	"github.com/xcosh/go-xcosh/internal/flags"
+	"github.com/xcosh/go-xcosh/log"
+	"github.com/xcosh/go-xcosh/metrics"
+	"github.com/xcosh/go-xcosh/node"
 	"go.uber.org/automaxprocs/maxprocs"
 
 	// Force-load the tracer engines to trigger registration
-	_ "github.com/ethereum/go-ethereum/eth/tracers/js"
-	_ "github.com/ethereum/go-ethereum/eth/tracers/native"
+	_ "github.com/xcosh/go-xcosh/eth/tracers/js"
+	_ "github.com/xcosh/go-xcosh/eth/tracers/native"
 
 	"github.com/urfave/cli/v2"
 )
@@ -225,7 +225,7 @@ var (
 	}
 )
 
-var app = flags.NewApp("the go-ethereum command line interface")
+var app = flags.NewApp("the go-xcosh command line interface")
 
 func init() {
 	// Initialize the CLI app and start Geth
@@ -357,7 +357,7 @@ func checkMainnet(ctx *cli.Context) bool {
 		log.Info("Starting Geth on MintMe.com Coin mainnet...")
 
 	case !ctx.IsSet(utils.NetworkIdFlag.Name):
-		log.Info("Starting Geth on Ethereum mainnet...")
+		log.Info("Starting Geth on Xcosh mainnet...")
 		isMainnet = true
 	}
 
@@ -485,13 +485,13 @@ func startNode(ctx *cli.Context, stack *node.Node, backend ethapi.Backend, isCon
 	// Start auxiliary services if enabled
 	isDeveloperMode := ctx.Bool(utils.DeveloperFlag.Name) || ctx.Bool(utils.DeveloperPoWFlag.Name)
 	if ctx.Bool(utils.MiningEnabledFlag.Name) || isDeveloperMode {
-		// Mining only makes sense if a full Ethereum node is running
+		// Mining only makes sense if a full Xcosh node is running
 		if ctx.String(utils.SyncModeFlag.Name) == "light" {
 			utils.Fatalf("Light clients do not support mining")
 		}
 		ethBackend, ok := backend.(*eth.EthAPIBackend)
 		if !ok {
-			utils.Fatalf("Ethereum service not running")
+			utils.Fatalf("Xcosh service not running")
 		}
 		// Set the gas price to the limits from the CLI and start mining
 		gasprice := flags.GlobalBig(ctx, utils.MinerGasPriceFlag.Name)

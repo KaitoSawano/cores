@@ -5,19 +5,19 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/consensus"
-	"github.com/ethereum/go-ethereum/consensus/clique"
-	"github.com/ethereum/go-ethereum/consensus/ethash"
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/params/types/coregeth"
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
-	"github.com/ethereum/go-ethereum/params/types/goethereum"
-	"github.com/ethereum/go-ethereum/triedb"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/consensus"
+	"github.com/xcosh/go-xcosh/consensus/clique"
+	"github.com/xcosh/go-xcosh/consensus/ethash"
+	"github.com/xcosh/go-xcosh/core"
+	"github.com/xcosh/go-xcosh/core/rawdb"
+	"github.com/xcosh/go-xcosh/core/types"
+	"github.com/xcosh/go-xcosh/core/vm"
+	"github.com/xcosh/go-xcosh/params"
+	"github.com/xcosh/go-xcosh/params/types/coregeth"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/params/types/goxcosh"
+	"github.com/xcosh/go-xcosh/triedb"
 )
 
 func testGenerateBlockAndImportCG(t *testing.T, chainConfig ctypes.ChainConfigurator, numBlocks int) {
@@ -99,7 +99,7 @@ func TestGenerateBlockAndImport_CG1(t *testing.T) {
 		{
 			name: "eth-dao=true-ethash",
 			conf: func() ctypes.ChainConfigurator {
-				c := &goethereum.ChainConfig{
+				c := &goxcosh.ChainConfig{
 					NetworkID:               1,
 					ChainID:                 big.NewInt(1),
 					HomesteadBlock:          big.NewInt(1),
@@ -129,7 +129,7 @@ func TestGenerateBlockAndImport_CG1(t *testing.T) {
 		{
 			name: "eth-dao=false-ethash",
 			conf: func() ctypes.ChainConfigurator {
-				c := &goethereum.ChainConfig{
+				c := &goxcosh.ChainConfig{
 					NetworkID:               1,
 					ChainID:                 big.NewInt(1),
 					HomesteadBlock:          big.NewInt(1),

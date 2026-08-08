@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/ethereum/go-ethereum/common/math"
-	"github.com/ethereum/go-ethereum/params/types/genesisT"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/common/hexutil"
+	"github.com/xcosh/go-xcosh/common/math"
+	"github.com/xcosh/go-xcosh/params/types/genesisT"
 )
 
 type stPre map[common.Address]stPreAccount
@@ -31,8 +31,8 @@ func (p stPre) toGenesisAlloc() genesisT.GenesisAlloc {
 
 // stPreAccount is structurally equivalent to genesisT.GenesisAccount, but
 // removes the 'omitempty' json tags for code, storage, and balance, since
-// the ethereum/tests JSON schema defines these annotations as 'required'.
-// See ethereum/tests/JSONSchema/st-schema.json.
+// the xcosh/tests JSON schema defines these annotations as 'required'.
+// See xcosh/tests/JSONSchema/st-schema.json.
 type stPreAccount struct {
 	// GenesisAccount is an account in the state of the genesis block.
 	Code       []byte                      `json:"code"`

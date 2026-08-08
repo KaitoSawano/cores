@@ -1,28 +1,28 @@
-// Copyright 2016 The go-ethereum Authors
-// This file is part of the go-ethereum library.
+// Copyright 2016 The go-xcosh Authors
+// This file is part of the go-xcosh library.
 //
-// The go-ethereum library is free software: you can redistribute it and/or modify
+// The go-xcosh library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-ethereum library is distributed in the hope that it will be useful,
+// The go-xcosh library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-xcosh library. If not, see <http://www.gnu.org/licenses/>.
 
 package params
 
 import (
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
-	"github.com/ethereum/go-ethereum/params/types/goethereum"
-	"github.com/ethereum/go-ethereum/params/vars"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/params/types/goxcosh"
+	"github.com/xcosh/go-xcosh/params/vars"
 )
 
 // Genesis hashes to enforce below configs on.
@@ -42,7 +42,7 @@ var (
 	MainnetTerminalTotalDifficulty, _ = new(big.Int).SetString("58_750_000_000_000_000_000_000", 0)
 
 	// MainnetChainConfig is the chain parameters to run a node on the main network.
-	MainnetChainConfig = &goethereum.ChainConfig{
+	MainnetChainConfig = &goxcosh.ChainConfig{
 		ChainID:                       big.NewInt(1),
 		SupportedProtocolVersions:     vars.DefaultProtocolVersions,
 		HomesteadBlock:                big.NewInt(1_150_000),
@@ -67,7 +67,7 @@ var (
 		Ethash:                        new(ctypes.EthashConfig),
 	}
 	// HoleskyChainConfig contains the chain parameters to run a node on the Holesky test network.
-	HoleskyChainConfig = &goethereum.ChainConfig{
+	HoleskyChainConfig = &goxcosh.ChainConfig{
 		ChainID:                       big.NewInt(17000),
 		HomesteadBlock:                big.NewInt(0),
 		DAOForkBlock:                  nil,
@@ -92,7 +92,7 @@ var (
 		Ethash:                        new(ctypes.EthashConfig),
 	}
 	// SepoliaChainConfig contains the chain parameters to run a node on the Sepolia test network.
-	SepoliaChainConfig = &goethereum.ChainConfig{
+	SepoliaChainConfig = &goxcosh.ChainConfig{
 		ChainID:                       big.NewInt(11155111),
 		HomesteadBlock:                big.NewInt(0),
 		DAOForkBlock:                  nil,
@@ -118,8 +118,8 @@ var (
 	}
 
 	// AllEthashProtocolChanges contains every protocol change (EIPs) introduced
-	// and accepted by the Ethereum core developers into the Ethash consensus.
-	AllEthashProtocolChanges = &goethereum.ChainConfig{
+	// and accepted by the Xcosh core developers into the Ethash consensus.
+	AllEthashProtocolChanges = &goxcosh.ChainConfig{
 		ChainID:                       big.NewInt(1337),
 		HomesteadBlock:                big.NewInt(0),
 		DAOForkBlock:                  nil,
@@ -147,7 +147,7 @@ var (
 		Clique:                        nil,
 	}
 
-	AllDevChainProtocolChanges = &goethereum.ChainConfig{
+	AllDevChainProtocolChanges = &goxcosh.ChainConfig{
 		ChainID:                       big.NewInt(1337),
 		HomesteadBlock:                big.NewInt(0),
 		EIP150Block:                   big.NewInt(0),
@@ -168,8 +168,8 @@ var (
 	}
 
 	// AllCliqueProtocolChanges contains every protocol change (EIPs) introduced
-	// and accepted by the Ethereum core developers into the Clique consensus.
-	AllCliqueProtocolChanges = &goethereum.ChainConfig{
+	// and accepted by the Xcosh core developers into the Clique consensus.
+	AllCliqueProtocolChanges = &goxcosh.ChainConfig{
 		ChainID:                       big.NewInt(1337),
 		HomesteadBlock:                big.NewInt(0),
 		DAOForkBlock:                  nil,
@@ -201,8 +201,8 @@ var (
 	}
 
 	// TestChainConfig contains every protocol change (EIPs) introduced
-	// and accepted by the Ethereum core developers for testing purposes.
-	TestChainConfig = &goethereum.ChainConfig{
+	// and accepted by the Xcosh core developers for testing purposes.
+	TestChainConfig = &goxcosh.ChainConfig{
 		ChainID:                       big.NewInt(1),
 		HomesteadBlock:                big.NewInt(0),
 		DAOForkBlock:                  nil,
@@ -231,8 +231,8 @@ var (
 	}
 
 	// MergedTestChainConfig contains every protocol change (EIPs) introduced
-	// and accepted by the Ethereum core developers for testing purposes.
-	MergedTestChainConfig = &goethereum.ChainConfig{
+	// and accepted by the Xcosh core developers for testing purposes.
+	MergedTestChainConfig = &goxcosh.ChainConfig{
 		ChainID:                       big.NewInt(1),
 		HomesteadBlock:                big.NewInt(0),
 		DAOForkBlock:                  nil,
@@ -262,7 +262,7 @@ var (
 
 	// NonActivatedConfig defines the chain configuration without activating
 	// any protocol change (EIPs).
-	NonActivatedConfig = &goethereum.ChainConfig{
+	NonActivatedConfig = &goxcosh.ChainConfig{
 		ChainID:                       big.NewInt(1),
 		HomesteadBlock:                nil,
 		DAOForkBlock:                  nil,
@@ -299,7 +299,7 @@ var NetworkNames = map[string]string{
 }
 
 /*
-							https://github.com/ethereum/go-ethereum/blob/master/params/config.go#L242
+							https://github.com/xcosh/go-xcosh/blob/master/params/config.go#L242
 
 								AllEthashProtocolChanges = &ChainConfig{
 								big.NewInt(1337),
@@ -335,7 +335,7 @@ var NetworkNames = map[string]string{
 					DAOForkBlock   *big.Int `json:"daoForkBlock,omitempty"`   // TheDAO hard-fork switch block (nil = no fork)
 					DAOForkSupport bool     `json:"daoForkSupport,omitempty"` // Whether the nodes supports or opposes the DAO hard-fork
 
-					// EIP150 implements the Gas price changes (https://github.com/ethereum/EIPs/issues/150)
+					// EIP150 implements the Gas price changes (https://github.com/xcosh/EIPs/issues/150)
 					EIP150Block *big.Int    `json:"eip150Block,omitempty"` // EIP150 HF block (nil = no fork)
 					EIP155Block *big.Int `json:"eip155Block,omitempty"` // EIP155 HF block
 					EIP158Block *big.Int `json:"eip158Block,omitempty"` // EIP158 HF block

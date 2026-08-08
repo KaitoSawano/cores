@@ -1,18 +1,18 @@
-// Copyright 2023 The go-ethereum Authors
-// This file is part of go-ethereum.
+// Copyright 2023 The go-xcosh Authors
+// This file is part of go-xcosh.
 //
-// go-ethereum is free software: you can redistribute it and/or modify
+// go-xcosh is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// go-ethereum is distributed in the hope that it will be useful,
+// go-xcosh is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with go-ethereum. If not, see <http://www.gnu.org/licenses/>.
+// along with go-xcosh. If not, see <http://www.gnu.org/licenses/>.
 
 package main
 
@@ -27,17 +27,17 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/internal/era"
-	"github.com/ethereum/go-ethereum/internal/ethapi"
-	"github.com/ethereum/go-ethereum/internal/flags"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/trie"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/core/types"
+	"github.com/xcosh/go-xcosh/internal/era"
+	"github.com/xcosh/go-xcosh/internal/ethapi"
+	"github.com/xcosh/go-xcosh/internal/flags"
+	"github.com/xcosh/go-xcosh/params"
+	"github.com/xcosh/go-xcosh/trie"
 	"github.com/urfave/cli/v2"
 )
 
-var app = flags.NewApp("go-ethereum era tool")
+var app = flags.NewApp("go-xcosh era tool")
 
 var (
 	dirFlag = &cli.StringFlag{

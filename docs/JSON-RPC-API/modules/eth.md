@@ -103,7 +103,7 @@ commonAddress <code>[]common.Address</code>
 <details><summary>Source code</summary>
 <p>
 ```go
-func (s *EthereumAccountAPI) Accounts() [ // Accounts returns the collection of accounts this node manages.
+func (s *XcoshAccountAPI) Accounts() [ // Accounts returns the collection of accounts this node manages.
 ]common.Address {
 	return s.am.Accounts()
 }
@@ -739,7 +739,7 @@ func (s *BlockChainAPI) Call(ctx context.Context, args TransactionArgs, blockNrO
 
 ### eth_chainId
 
-ChainId is the EIP-155 replay-protection chain id for the current Ethereum chain config.
+ChainId is the EIP-155 replay-protection chain id for the current Xcosh chain config.
 
 Note, this method does not conform to EIP-695 because the configured chain ID is always
 returned, regardless of the current head block. We used to return an error when the chain
@@ -821,7 +821,7 @@ _None_
 ```go
 func (api *BlockChainAPI) ChainId() *hexutil.Big {
 	return (*hexutil.Big)(api.b.ChainConfig().GetChainID())
-}// ChainId is the EIP-155 replay-protection chain id for the current Ethereum chain config.
+}// ChainId is the EIP-155 replay-protection chain id for the current Xcosh chain config.
 //
 // Note, this method does not conform to EIP-695 because the configured chain ID is always
 // returned, regardless of the current head block. We used to return an error when the chain
@@ -914,7 +914,7 @@ _None_
 <details><summary>Source code</summary>
 <p>
 ```go
-func (api *EthereumAPI) Coinbase() (common.Address, error) {
+func (api *XcoshAPI) Coinbase() (common.Address, error) {
 	return api.Etherbase()
 }// Coinbase is the address that mining rewards will be sent to (alias for Etherbase).
 
@@ -1786,7 +1786,7 @@ _None_
 <details><summary>Source code</summary>
 <p>
 ```go
-func (api *EthereumAPI) Etherbase() (common.Address, error) {
+func (api *XcoshAPI) Etherbase() (common.Address, error) {
 	return api.e.Etherbase()
 }// Etherbase is the address that mining rewards will be sent to.
 
@@ -2078,7 +2078,7 @@ rewardPercentiles <code>[]float64</code>
 <details><summary>Source code</summary>
 <p>
 ```go
-func (s *EthereumAPI) FeeHistory(ctx context.Context, blockCount math.HexOrDecimal64, lastBlock rpc.BlockNumber, rewardPercentiles [ // FeeHistory returns the fee market history.
+func (s *XcoshAPI) FeeHistory(ctx context.Context, blockCount math.HexOrDecimal64, lastBlock rpc.BlockNumber, rewardPercentiles [ // FeeHistory returns the fee market history.
 ]float64) (*feeHistoryResult, error) {
 	oldest, reward, baseFee, gasUsed, err := s.b.FeeHistory(ctx, uint64(blockCount), lastBlock, rewardPercentiles)
 	if err != nil {
@@ -2500,7 +2500,7 @@ _None_
 <details><summary>Source code</summary>
 <p>
 ```go
-func (s *EthereumAPI) GasPrice(ctx context.Context) (*hexutil.Big, error) {
+func (s *XcoshAPI) GasPrice(ctx context.Context) (*hexutil.Big, error) {
 	tipcap, err := s.b.SuggestGasTipCap(ctx)
 	if err != nil {
 		return nil, err
@@ -9507,7 +9507,7 @@ _None_
 <details><summary>Source code</summary>
 <p>
 ```go
-func (api *EthereumAPI) Hashrate() hexutil.Uint64 {
+func (api *XcoshAPI) Hashrate() hexutil.Uint64 {
 	return hexutil.Uint64(api.e.Miner().Hashrate())
 }// Hashrate returns the POW hashrate.
 
@@ -9703,7 +9703,7 @@ func (api *FilterAPI) Logs(ctx context.Context, crit FilterCriteria) (*rpc.Subsc
 		matchedLogs	= make(chan [ // Logs creates a subscription that fires for all new log that match the given filter criteria.
 		]*types.Log)
 	)
-	logsSub, err := api.events.SubscribeLogs(ethereum.FilterQuery(crit), matchedLogs)
+	logsSub, err := api.events.SubscribeLogs(xcosh.FilterQuery(crit), matchedLogs)
 	if err != nil {
 		return nil, err
 	}
@@ -9812,7 +9812,7 @@ _None_
 <details><summary>Source code</summary>
 <p>
 ```go
-func (s *EthereumAPI) MaxPriorityFeePerGas(ctx context.Context) (*hexutil.Big, error) {
+func (s *XcoshAPI) MaxPriorityFeePerGas(ctx context.Context) (*hexutil.Big, error) {
 	tipcap, err := s.b.SuggestGasTipCap(ctx)
 	if err != nil {
 		return nil, err
@@ -9881,7 +9881,7 @@ _None_
 <details><summary>Source code</summary>
 <p>
 ```go
-func (api *EthereumAPI) Mining() bool {
+func (api *XcoshAPI) Mining() bool {
 	return api.e.IsMining()
 }// Mining returns an indication if this node is currently mining.
 
@@ -10190,7 +10190,7 @@ func (api *FilterAPI) NewFilter(crit FilterCriteria) (rpc.ID, error) {
 	//
 	// In case "fromBlock" > "toBlock" an error is returned.
 	]*types.Log)
-	logsSub, err := api.events.SubscribeLogs(ethereum.FilterQuery(crit), logs)
+	logsSub, err := api.events.SubscribeLogs(xcosh.FilterQuery(crit), logs)
 	if err != nil {
 		return "", err
 	}
@@ -11955,14 +11955,14 @@ func (s *TransactionAPI) SendTransaction(ctx context.Context, args TransactionAr
 ### eth_sign
 
 Sign calculates an ECDSA signature for:
-keccak256("\x19Ethereum Signed Message:\n" + len(message) + message).
+keccak256("\x19Xcosh Signed Message:\n" + len(message) + message).
 
 Note, the produced signature conforms to the secp256k1 curve R, S and V values,
 where the V value will be 27 or 28 for legacy reasons.
 
 The account associated with addr must be unlocked.
 
-https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_sign
+https://github.com/xcosh/wiki/wiki/JSON-RPC#eth_sign
 
 
 #### Params (2)
@@ -12119,14 +12119,14 @@ func (s *TransactionAPI) Sign(addr common.Address, data hexutil.Bytes) (hexutil.
 	}
 	return signature, err
 }// Sign calculates an ECDSA signature for:
-// keccak256("\x19Ethereum Signed Message:\n" + len(message) + message).
+// keccak256("\x19Xcosh Signed Message:\n" + len(message) + message).
 //
 // Note, the produced signature conforms to the secp256k1 curve R, S and V values,
 // where the V value will be 27 or 28 for legacy reasons.
 //
 // The account associated with addr must be unlocked.
 //
-// https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_sign
+// https://github.com/xcosh/wiki/wiki/JSON-RPC#eth_sign
 
 ```
 <a href="https://github.com/etclabscore/core-geth/blob/master/internal/ethapi/api.go#L2029" target="_">View on GitHub →</a>
@@ -12993,7 +12993,7 @@ func (sub *RPCEthSubscription) Subscribe(subscriptionName RPCEthSubscriptionPara
 
 ### eth_syncing
 
-Syncing provides information when this nodes starts synchronising with the Ethereum network and when it's finished.
+Syncing provides information when this nodes starts synchronising with the Xcosh network and when it's finished.
 
 
 #### Params (0)
@@ -13079,7 +13079,7 @@ func (api *DownloaderAPI) Syncing(ctx context.Context) (*rpc.Subscription, error
 		}
 	}()
 	return rpcSub, nil
-}// Syncing provides information when this nodes starts synchronising with the Ethereum network and when it's finished.
+}// Syncing provides information when this nodes starts synchronising with the Xcosh network and when it's finished.
 
 ```
 <a href="https://github.com/etclabscore/core-geth/blob/master/eth/downloader/api.go#L93" target="_">View on GitHub →</a>
@@ -13147,7 +13147,7 @@ interface <code>interface{}</code>
 <details><summary>Source code</summary>
 <p>
 ```go
-func (s *EthereumAPI) Syncing() (interface{}, error) {
+func (s *XcoshAPI) Syncing() (interface{}, error) {
 	progress := s.b.SyncProgress()
 	if progress.CurrentBlock >= progress.HighestBlock {
 		return false, nil

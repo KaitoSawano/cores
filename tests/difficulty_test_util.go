@@ -1,18 +1,18 @@
-// Copyright 2017 The go-ethereum Authors
-// This file is part of the go-ethereum library.
+// Copyright 2017 The go-xcosh Authors
+// This file is part of the go-xcosh library.
 //
-// The go-ethereum library is free software: you can redistribute it and/or modify
+// The go-xcosh library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-ethereum library is distributed in the hope that it will be useful,
+// The go-xcosh library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-xcosh library. If not, see <http://www.gnu.org/licenses/>.
 
 package tests
 
@@ -20,13 +20,13 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/math"
-	"github.com/ethereum/go-ethereum/consensus/ethash"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/params/types/coregeth"
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
-	"github.com/ethereum/go-ethereum/params/types/goethereum"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/common/math"
+	"github.com/xcosh/go-xcosh/consensus/ethash"
+	"github.com/xcosh/go-xcosh/core/types"
+	"github.com/xcosh/go-xcosh/params/types/coregeth"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/params/types/goxcosh"
 )
 
 //go:generate go run github.com/fjl/gencodec -type DifficultyTest -field-override difficultyTestMarshaling -out gen_difficultytest.go
@@ -76,7 +76,7 @@ func (test *DifficultyTest) Run(config ctypes.ChainConfigurator) error {
 }
 
 var (
-	mainnetChainConfig = &goethereum.ChainConfig{
+	mainnetChainConfig = &goxcosh.ChainConfig{
 		Ethash:         new(ctypes.EthashConfig),
 		ChainID:        big.NewInt(1),
 		HomesteadBlock: big.NewInt(1150000),
@@ -91,22 +91,22 @@ var (
 )
 
 var difficultyChainConfigurations = map[string]ctypes.ChainConfigurator{
-	"Frontier": &goethereum.ChainConfig{},
-	"Homestead": &goethereum.ChainConfig{
+	"Frontier": &goxcosh.ChainConfig{},
+	"Homestead": &goxcosh.ChainConfig{
 		Ethash:         new(ctypes.EthashConfig),
 		HomesteadBlock: big.NewInt(0),
 	},
-	"Byzantium": &goethereum.ChainConfig{
+	"Byzantium": &goxcosh.ChainConfig{
 		Ethash:         new(ctypes.EthashConfig),
 		ByzantiumBlock: big.NewInt(0),
 	},
-	"GrayGlacier": &goethereum.ChainConfig{
+	"GrayGlacier": &goxcosh.ChainConfig{
 		Ethash:           new(ctypes.EthashConfig),
 		GrayGlacierBlock: big.NewInt(0),
 	},
 	"MainNetwork":       mainnetChainConfig,
 	"CustomMainNetwork": mainnetChainConfig,
-	"Constantinople": &goethereum.ChainConfig{
+	"Constantinople": &goxcosh.ChainConfig{
 		Ethash:              new(ctypes.EthashConfig),
 		HomesteadBlock:      big.NewInt(0),
 		ByzantiumBlock:      big.NewInt(0),
@@ -235,7 +235,7 @@ var difficultyChainConfigurations = map[string]ctypes.ChainConfigurator{
 		ECIP1010Length:     big.NewInt(0),
 		ECBP1100FBlock:     big.NewInt(0), // ETA 09 Oct 2020
 	},
-	"EIP2384": &goethereum.ChainConfig{
+	"EIP2384": &goxcosh.ChainConfig{
 		Ethash:              new(ctypes.EthashConfig),
 		HomesteadBlock:      big.NewInt(0),
 		ByzantiumBlock:      big.NewInt(0),

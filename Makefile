@@ -123,6 +123,6 @@ devtools:
 
 #? help: Get more info on make commands.
 help: Makefile
-	@echo " Choose a command run in go-ethereum:"
+	@echo " Choose a command run in go-xcosh:"
 	@sed -n 's/^#?//p' $< | column -t -s ':' |  sort | sed -e 's/^/ /'
 .PHONY: help

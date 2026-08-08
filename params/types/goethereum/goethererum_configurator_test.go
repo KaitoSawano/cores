@@ -1,10 +1,10 @@
-package goethereum
+package goxcosh
 
 import (
 	"reflect"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
 )
 
 func TestChainConfig_converting(t *testing.T) {

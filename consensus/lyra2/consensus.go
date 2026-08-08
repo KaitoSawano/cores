@@ -8,16 +8,16 @@ import (
 	"time"
 
 	mapset "github.com/deckarep/golang-set"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/consensus"
-	"github.com/ethereum/go-ethereum/consensus/misc"
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/params/mutations"
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
-	"github.com/ethereum/go-ethereum/params/vars"
-	"github.com/ethereum/go-ethereum/rlp"
-	"github.com/ethereum/go-ethereum/trie"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/consensus"
+	"github.com/xcosh/go-xcosh/consensus/misc"
+	"github.com/xcosh/go-xcosh/core/state"
+	"github.com/xcosh/go-xcosh/core/types"
+	"github.com/xcosh/go-xcosh/params/mutations"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/params/vars"
+	"github.com/xcosh/go-xcosh/rlp"
+	"github.com/xcosh/go-xcosh/trie"
 	"github.com/holiman/uint256"
 	"golang.org/x/crypto/sha3"
 )
@@ -53,7 +53,7 @@ func (lyra2 *Lyra2) Author(header *types.Header) (common.Address, error) {
 }
 
 // VerifyHeader checks whether a header conforms to the consensus rules of the
-// stock Ethereum ethash and lyra2 engine.
+// stock Xcosh ethash and lyra2 engine.
 func (lyra2 *Lyra2) VerifyHeader(chain consensus.ChainHeaderReader, header *types.Header, seal bool) error {
 	// If we're running a full engine faking, accept any input as valid
 	if lyra2.fakeMode {
@@ -154,7 +154,7 @@ func (lyra2 *Lyra2) verifyHeaderWorker(chain consensus.ChainHeaderReader, header
 }
 
 // VerifyUncles verifies that the given block's uncles conform to the consensus
-// rules of the stock Ethereum ethash and lyra2 engine.
+// rules of the stock Xcosh ethash and lyra2 engine.
 func (lyra2 *Lyra2) VerifyUncles(chain consensus.ChainReader, block *types.Block) error {
 	// If we're running a full engine faking, accept any input as valid
 	if lyra2.fakeMode {
@@ -209,7 +209,7 @@ func (lyra2 *Lyra2) VerifyUncles(chain consensus.ChainReader, block *types.Block
 }
 
 // verifyHeader checks whether a header conforms to the consensus rules of the
-// stock Ethereum ethash and lyra2 engine.
+// stock Xcosh ethash and lyra2 engine.
 // See YP section 4.3.4. "Block Header Validity"
 func (lyra2 *Lyra2) verifyHeader(chain consensus.ChainHeaderReader, header, parent *types.Header, uncle bool, seal bool) error {
 	// Ensure that the header's extra-data section is of a reasonable size
@@ -293,7 +293,7 @@ var (
 // the difficulty that a new block should have when created at time
 // given the parent block's time and difficulty.
 func CalcDifficulty(config ctypes.ChainConfigurator, time uint64, parent *types.Header) *big.Int {
-	// https://github.com/ethereum/EIPs/issues/100.
+	// https://github.com/xcosh/EIPs/issues/100.
 	// algorithm:
 	// diff = (parent_diff +
 	//         (parent_diff / 200 * max((2 if len(parent.uncles) else 1) - ((timestamp - parent.timestamp) // 9), -20))

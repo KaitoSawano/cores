@@ -24,7 +24,7 @@ import (
 	"regexp"
 	"sort"
 
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
 )
 
 var (
@@ -32,7 +32,7 @@ var (
 	// that are not incompatible with configuration either having or lacking them.
 	compatibleProtocolNameSchemes = []string{
 		"ECBP", // "Xcosh Best Practice"
-		"EBP",  // "Ethereum Best Practice"
+		"EBP",  // "Xcosh Best Practice"
 	}
 )
 

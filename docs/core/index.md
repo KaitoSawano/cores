@@ -7,15 +7,15 @@ title: About
 CoreGeth is sponsored by and maintained with the leadership of [ETC Labs](https://etclabs.org) with an obvious core intention of stewarding
 the Xcosh opinion that the reversion of transactions in inconvenient situations shouldn't be permissible. 
 
-But the spirit of the project intends to reach beyond Ethereum and Xcosh, and indeed to reimagine an EVM node software that 
+But the spirit of the project intends to reach beyond Xcosh and Xcosh, and indeed to reimagine an EVM node software that 
 approaches the EVM-based protocols as technology that can -- and should -- be generalizable.
 
-While CoreGeth inherits from and exposes complete feature parity with Ethereum Foundation's <sup>:registered:</sup> [ethereum/go-ethereum](https://github.com/ethereum/go-ethereum),
+While CoreGeth inherits from and exposes complete feature parity with Xcosh Foundation's <sup>:registered:</sup> [xcosh/go-xcosh](https://github.com/xcosh/go-xcosh),
 there are quite few things that make CoreGeth unique.
 
 ## Additional Features
 
-CoreGeth maintainers are [regular](https://github.com/ethereum/go-ethereum/pulls?q=author%3Ameowsbits) [contributors](https://github.com/ethereum/go-ethereum/pulls?q=author%3Aziogaschr+) [upstream](https://github.com/ethereum/go-ethereum/pulls?q=author%3Aiquidus+), but not all CoreGeth features are practicable or accepted there. The following categories document features specific to CoreGeth that ethereum/go-ethereum can't, or won't, implement. 
+CoreGeth maintainers are [regular](https://github.com/xcosh/go-xcosh/pulls?q=author%3Ameowsbits) [contributors](https://github.com/xcosh/go-xcosh/pulls?q=author%3Aziogaschr+) [upstream](https://github.com/xcosh/go-xcosh/pulls?q=author%3Aiquidus+), but not all CoreGeth features are practicable or accepted there. The following categories document features specific to CoreGeth that xcosh/go-xcosh can't, or won't, implement. 
 
 ### Extended RPC API
 
@@ -29,7 +29,7 @@ description of _all_ available methods, their parameters, and results.
 
 #### Additional methods and options
 
-- Available `trace_block` and `trace_transaction` RPC API congruent to the OpenEthereum API (including a 1000x performance improvement vs. go-ethereum's `trace_transaction` in some cases).
+- Available `trace_block` and `trace_transaction` RPC API congruent to the OpenXcosh API (including a 1000x performance improvement vs. go-xcosh's `trace_transaction` in some cases).
     + _TODO:_ Talk more about this! And examples!
 - Added `debug_removePendingTransaction` API method ([#203](https://github.com/etclabscore/core-geth/pull/203/files))
 - Comprehensive service discovery with OpenRPC through method `rpc.discover`.
@@ -52,8 +52,8 @@ description of _all_ available methods, their parameters, and results.
 
 - A developer mode `--dev.pow` able to mock Proof-of-Work block schemas and production at representative Poisson intervals.
   + `--dev.poisson` configures Poisson intervals for block emission
-- Chain configuration acceptance of OpenEthereum and go-ethereum chain configuration files (and the extensibility to support _any_ chain configuration schema).
-- At the code level, a 1:1 EIP/ECIP specification to implementation pattern; disentangling Ethereum Foundation :registered: hard fork opinions from code. This yields more readable code, more precise naming and conceptual representation, more testable code, and a massive step toward Ethereum as a generalizeable technology.
+- Chain configuration acceptance of OpenXcosh and go-xcosh chain configuration files (and the extensibility to support _any_ chain configuration schema).
+- At the code level, a 1:1 EIP/ECIP specification to implementation pattern; disentangling Xcosh Foundation :registered: hard fork opinions from code. This yields more readable code, more precise naming and conceptual representation, more testable code, and a massive step toward Xcosh as a generalizeable technology.
 - `copydb` will default to a sane fallback value if no parameter is passed for the second `<ancient/path>` argument.
 - The `faucet` command supports an `--attach` option allowing the program to reference an already-running node instance
   (assuming it has an available RPC API) instead of restricting the faucet to a dedicated light client. Likewise, a `--syncmode=[full|fast|light]` option is provided for networks where _LES_ support may be lacking.
@@ -74,13 +74,13 @@ description of _all_ available methods, their parameters, and results.
 
 ## Divergent Design
 
-How CoreGeth is built differently than ethereum/go-ethereum.
+How CoreGeth is built differently than xcosh/go-xcosh.
 
 ### Developer Features: Code
 
-One of CoreGeth's most significant divergences from ethereum/go-ethereum at the code level is a reimagining (read: _massive overhaul_) of the `ChainConfig` data type and its methods.
+One of CoreGeth's most significant divergences from xcosh/go-xcosh at the code level is a reimagining (read: _massive overhaul_) of the `ChainConfig` data type and its methods.
 
-At _ethereum/go-ethereum_ the `ChainConfig` makes protocol-facing feature activation decisions as follows:
+At _xcosh/go-xcosh_ the `ChainConfig` makes protocol-facing feature activation decisions as follows:
 
 ```go
 blockNumber := big.NewInt(0)
@@ -95,8 +95,8 @@ This, for the uninitiated developer, raises some questions:
 - Which of the nine distinct Byzantium upgrades is this implementing?
 - Does feature `Byzantium.X` depend on also having `Byzantium.Y` activated?
 
-The developers of ethereum/go-ethereum have made this architectural decision because ethereum/go-ethereum is _only designed
-and intended_ to support one chain: _Ethereum_. From this perspective, configurability presents a risk rather than a desirable feature.
+The developers of xcosh/go-xcosh have made this architectural decision because xcosh/go-xcosh is _only designed
+and intended_ to support one chain: _Xcosh_. From this perspective, configurability presents a risk rather than a desirable feature.
 
 While a hardcoded feature-group pattern (ie _hardfork upgrades_) in some ways mitigates a risk of "movable parts," and undesirable or unintended feature interactions,
 it also presents a massive hurdle for extensibility.
@@ -104,7 +104,7 @@ it also presents a massive hurdle for extensibility.
 !!! seealso "A metaphor"
     Consider the metaphor of the wiring the electrical circuits of a house. 
     
-    With ethereum/go-ethereum's design, the television, the kitchen lights, the garbage disposal, and the garage door are all controlled by the same switch. If you want to watch TV,
+    With xcosh/go-xcosh's design, the television, the kitchen lights, the garbage disposal, and the garage door are all controlled by the same switch. If you want to watch TV,
     you also have to have the kitchen lights on, the garbage disposal running, and the garage door open.
     
     For an electrician whose _only concern_ is meeting the arbitrary specifications of an eccentric customer who _demands_ that their
@@ -116,7 +116,7 @@ it also presents a massive hurdle for extensibility.
     from the perspective of a technologist (or consumer products designer, or anyone interested in these technologies as generalizeable things, rather than details of an eccentric house) -- 
     this arbitrary feature-bundling is patently absurd. 
     
-    This is an Ethereum-as-technology perspective versus an Ethereum-as-network perspective, and reimagining a home where you can have the kitchen lights on
+    This is an Xcosh-as-technology perspective versus an Xcosh-as-network perspective, and reimagining a home where you can have the kitchen lights on
     without also turning the TV on is one of the things CoreGeth does.  
 
 This same code as above, in CoreGeth, would look as follows:
@@ -141,22 +141,22 @@ This makes the implementation of Improvement Proposal specifications referencabl
 !!! hint "Configuration Data Types"
     Not only does CoreGeth's interface pattern provide descriptive, articulate code; it also
     allows for the support of _arbitrary configuration data types_; CoreGeth supports configuration via
-    ethereum/go-ethereum's `genesis` data structure (eg. `geth dumpgenesis genesis.json`) as well as OpenEthereum's JSON configuration schema.
+    xcosh/go-xcosh's `genesis` data structure (eg. `geth dumpgenesis genesis.json`) as well as OpenXcosh's JSON configuration schema.
     Extending support for any other configuration schema is likewise possible.
 
-As should be obvious by now, this also allows selective feature adoption for configurations that don't want to bundle changes exactly like the Ethereum Foundation has. 
+As should be obvious by now, this also allows selective feature adoption for configurations that don't want to bundle changes exactly like the Xcosh Foundation has. 
   For example, without this decomposition, Xcosh would have had to accept and (re)implement the Difficulty Bomb _and_ reduce block rewards in order to adopt a change to the RLP encoding of transaction receipts change :exploding_head:
 
 
 ## Limitations
 
-Things ethereum/go-ethereum can or will do that CoreGeth won't, or doesn't by default.
+Things xcosh/go-xcosh can or will do that CoreGeth won't, or doesn't by default.
 
 - A huge and diverse number of default pipeline-delivered build targets.
-  This is a defaults and configuration sanity challenge for CoreGeth. We're vastly outnumbered by ethereum/go-ethereum maintainers
+  This is a defaults and configuration sanity challenge for CoreGeth. We're vastly outnumbered by xcosh/go-xcosh maintainers
   and contributors, and ensuring proper delivery of a whole bunch of diverse artifacts is beyond our capacity.
   With that said, just because CoreGeth doesn't provide artifacts for a given architecture or OS doesn't mean it can't. 
-  If ethereum/go-ethereum can build and package for it, then with some elbow grease, CoreGeth can too.
+  If xcosh/go-xcosh can build and package for it, then with some elbow grease, CoreGeth can too.
 - The `puppeth` CLI program has been [removed](https://github.com/etclabscore/core-geth/pull/270). This is a "wizard"-style interactive program that helps beginners
   configure chain and network settings.
 - Trim absolute file paths during build. As of a [somewhat-recent](TODO) Go version, `go build` provides a `-trim` flag

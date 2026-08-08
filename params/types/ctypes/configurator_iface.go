@@ -19,7 +19,7 @@ package ctypes
 import (
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/common"
+	"github.com/xcosh/go-xcosh/common"
 )
 
 // This file holds the Configurator interfaces.
@@ -51,7 +51,7 @@ type ChainConfigurator interface {
 }
 
 // ProtocolSpecifier defines protocol interfaces that are agnostic of consensus engine.
-// https://github.com/ethereum/execution-specs?tab=readme-ov-file
+// https://github.com/xcosh/execution-specs?tab=readme-ov-file
 type ProtocolSpecifier interface {
 	GetAccountStartNonce() *uint64
 	SetAccountStartNonce(n *uint64) error
@@ -151,66 +151,66 @@ type ProtocolSpecifier interface {
 
 	// Berlin:
 
-	// GetEIP2565Transition implements EIP-2565: ModExp Gas Cost - https://eips.ethereum.org/EIPS/eip-2565
+	// GetEIP2565Transition implements EIP-2565: ModExp Gas Cost - https://eips.xcosh.org/EIPS/eip-2565
 	GetEIP2565Transition() *uint64
 	SetEIP2565Transition(n *uint64) error
 
-	// GetEIP2929Transition implements EIP-2929: Gas cost increases for state access opcodes - https://eips.ethereum.org/EIPS/eip-2929
+	// GetEIP2929Transition implements EIP-2929: Gas cost increases for state access opcodes - https://eips.xcosh.org/EIPS/eip-2929
 	GetEIP2929Transition() *uint64
 	SetEIP2929Transition(n *uint64) error
 
-	// GetEIP2930Transition implements EIP-2930: Optional access lists - https://eips.ethereum.org/EIPS/eip-2930
+	// GetEIP2930Transition implements EIP-2930: Optional access lists - https://eips.xcosh.org/EIPS/eip-2930
 	GetEIP2930Transition() *uint64
 	SetEIP2930Transition(n *uint64) error
 
-	// GetEIP2718Transition implements EIP-2718: Typed transaction envelope - https://eips.ethereum.org/EIPS/eip-2718
+	// GetEIP2718Transition implements EIP-2718: Typed transaction envelope - https://eips.xcosh.org/EIPS/eip-2718
 	GetEIP2718Transition() *uint64
 	SetEIP2718Transition(n *uint64) error
 
 	// London:
 
-	// GetEIP1559Transition implements EIP-1559: Fee market change for ETH 1.0 chain - https://eips.ethereum.org/EIPS/eip-1559
+	// GetEIP1559Transition implements EIP-1559: Fee market change for ETH 1.0 chain - https://eips.xcosh.org/EIPS/eip-1559
 	GetEIP1559Transition() *uint64
 	SetEIP1559Transition(n *uint64) error
 
-	// GetEIP3541Transition implements EIP-3541: Reject new contract code starting with the 0xEF byte - https://eips.ethereum.org/EIPS/eip-3541
+	// GetEIP3541Transition implements EIP-3541: Reject new contract code starting with the 0xEF byte - https://eips.xcosh.org/EIPS/eip-3541
 	GetEIP3541Transition() *uint64
 	SetEIP3541Transition(n *uint64) error
 
-	// GetEIP3529Transition implements EIP-3529: Reduction in refunds - https://eips.ethereum.org/EIPS/eip-3529
+	// GetEIP3529Transition implements EIP-3529: Reduction in refunds - https://eips.xcosh.org/EIPS/eip-3529
 	GetEIP3529Transition() *uint64
 	SetEIP3529Transition(n *uint64) error
 
-	// GetEIP3198Transition implements EIP-3198: BASEFEE opcode - https://eips.ethereum.org/EIPS/eip-3198
+	// GetEIP3198Transition implements EIP-3198: BASEFEE opcode - https://eips.xcosh.org/EIPS/eip-3198
 	GetEIP3198Transition() *uint64
 	SetEIP3198Transition(n *uint64) error
 
 	// Paris:
 	// EIP3675 - "Upgrade" consensus to Proof-of-Stake
 
-	// GetEIP4399Transition implements EIP-4399: Supplant DIFFICULTY opcode with PREVRANDAO - https://eips.ethereum.org/EIPS/eip-4399
+	// GetEIP4399Transition implements EIP-4399: Supplant DIFFICULTY opcode with PREVRANDAO - https://eips.xcosh.org/EIPS/eip-4399
 	GetEIP4399Transition() *uint64
 	SetEIP4399Transition(n *uint64) error
 
 	// Shanghai:
 
-	// GetEIP3651TransitionTime implements EIP3651: Warm COINBASE - https://eips.ethereum.org/EIPS/eip-3651
+	// GetEIP3651TransitionTime implements EIP3651: Warm COINBASE - https://eips.xcosh.org/EIPS/eip-3651
 	GetEIP3651TransitionTime() *uint64
 	SetEIP3651TransitionTime(n *uint64) error
 
-	// GetEIP3855TransitionTime implements EIP3855: PUSH0 instruction - https://eips.ethereum.org/EIPS/eip-3855
+	// GetEIP3855TransitionTime implements EIP3855: PUSH0 instruction - https://eips.xcosh.org/EIPS/eip-3855
 	GetEIP3855TransitionTime() *uint64
 	SetEIP3855TransitionTime(n *uint64) error
 
-	// GetEIP3860TransitionTime implements EIP3860: Limit and meter initcode - https://eips.ethereum.org/EIPS/eip-3860
+	// GetEIP3860TransitionTime implements EIP3860: Limit and meter initcode - https://eips.xcosh.org/EIPS/eip-3860
 	GetEIP3860TransitionTime() *uint64
 	SetEIP3860TransitionTime(n *uint64) error
 
-	// GetEIP4895TransitionTime implements EIP4895: Beacon chain push WITHDRAWALS as operations - https://eips.ethereum.org/EIPS/eip-4895
+	// GetEIP4895TransitionTime implements EIP4895: Beacon chain push WITHDRAWALS as operations - https://eips.xcosh.org/EIPS/eip-4895
 	GetEIP4895TransitionTime() *uint64
 	SetEIP4895TransitionTime(n *uint64) error
 
-	// GetEIP6049TransitionTime implements EIP6049: Deprecate SELFDESTRUCT - https://eips.ethereum.org/EIPS/eip-6049
+	// GetEIP6049TransitionTime implements EIP6049: Deprecate SELFDESTRUCT - https://eips.xcosh.org/EIPS/eip-6049
 	GetEIP6049TransitionTime() *uint64
 	SetEIP6049TransitionTime(n *uint64) error
 
@@ -233,27 +233,27 @@ type ProtocolSpecifier interface {
 
 	// Cancun:
 
-	// GetEIP4844TransitionTime implements EIP4844 - Shard Blob Transactions - https://eips.ethereum.org/EIPS/eip-4844
+	// GetEIP4844TransitionTime implements EIP4844 - Shard Blob Transactions - https://eips.xcosh.org/EIPS/eip-4844
 	GetEIP4844TransitionTime() *uint64
 	SetEIP4844TransitionTime(n *uint64) error
 
-	// GetEIP7516TransitionTime implements EIP7516 - Blob Base Fee Opcode - https://eips.ethereum.org/EIPS/eip-7516
+	// GetEIP7516TransitionTime implements EIP7516 - Blob Base Fee Opcode - https://eips.xcosh.org/EIPS/eip-7516
 	GetEIP7516TransitionTime() *uint64
 	SetEIP7516TransitionTime(n *uint64) error
 
-	// GetEIP1153TransitionTime implements EIP1153 - Transient Storage opcodes - https://eips.ethereum.org/EIPS/eip-1153
+	// GetEIP1153TransitionTime implements EIP1153 - Transient Storage opcodes - https://eips.xcosh.org/EIPS/eip-1153
 	GetEIP1153TransitionTime() *uint64
 	SetEIP1153TransitionTime(n *uint64) error
 
-	// GetEIP5656TransitionTime implements EIP5656 - MCOPY - Memory copying instruction - https://eips.ethereum.org/EIPS/eip-5656
+	// GetEIP5656TransitionTime implements EIP5656 - MCOPY - Memory copying instruction - https://eips.xcosh.org/EIPS/eip-5656
 	GetEIP5656TransitionTime() *uint64
 	SetEIP5656TransitionTime(n *uint64) error
 
-	// GetEIP6780TransitionTime implements EIP6780 - SELFDESTRUCT only in same transaction - https://eips.ethereum.org/EIPS/eip-6780
+	// GetEIP6780TransitionTime implements EIP6780 - SELFDESTRUCT only in same transaction - https://eips.xcosh.org/EIPS/eip-6780
 	GetEIP6780TransitionTime() *uint64
 	SetEIP6780TransitionTime(n *uint64) error
 
-	// GetEIP4788TransitionTime implements EIP4788 - Beacon block root in the EVM - https://eips.ethereum.org/EIPS/eip-4788
+	// GetEIP4788TransitionTime implements EIP4788 - Beacon block root in the EVM - https://eips.xcosh.org/EIPS/eip-4788
 	GetEIP4788TransitionTime() *uint64
 	SetEIP4788TransitionTime(n *uint64) error
 
@@ -376,14 +376,14 @@ type Lyra2Configurator interface {
 type BlockSealer interface {
 	GetSealingType() BlockSealingT
 	SetSealingType(t BlockSealingT) error
-	BlockSealerEthereum
+	BlockSealerXcosh
 }
 
-type BlockSealerEthereum interface {
-	GetGenesisSealerEthereumNonce() uint64
-	SetGenesisSealerEthereumNonce(n uint64) error
-	GetGenesisSealerEthereumMixHash() common.Hash
-	SetGenesisSealerEthereumMixHash(h common.Hash) error
+type BlockSealerXcosh interface {
+	GetGenesisSealerXcoshNonce() uint64
+	SetGenesisSealerXcoshNonce(n uint64) error
+	GetGenesisSealerXcoshMixHash() common.Hash
+	SetGenesisSealerXcoshMixHash(h common.Hash) error
 }
 
 type GenesisBlocker interface {

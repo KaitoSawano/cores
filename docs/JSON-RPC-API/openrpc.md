@@ -28,7 +28,7 @@ CoreGeth supports [OpenRPC's Service Discovery method](https://spec.open-rpc.org
             "name": "Apache 2.0",
             "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
           },
-          "title": "Ethereum JSON-RPC",
+          "title": "Xcosh JSON-RPC",
           "version": "1.0.0"
         },
         "servers": [],

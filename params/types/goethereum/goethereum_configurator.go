@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with the multi-geth library. If not, see <http://www.gnu.org/licenses/>.
 
-package goethereum
+package goxcosh
 
 import (
 	"math/big"
@@ -22,13 +22,13 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/params/types/ctypes"
-	"github.com/ethereum/go-ethereum/params/types/internal"
-	"github.com/ethereum/go-ethereum/params/vars"
+	"github.com/xcosh/go-xcosh/common"
+	"github.com/xcosh/go-xcosh/params/types/ctypes"
+	"github.com/xcosh/go-xcosh/params/types/internal"
+	"github.com/xcosh/go-xcosh/params/vars"
 )
 
-// File contains the go-ethereum implementation of the Configurator interface.
+// File contains the go-xcosh implementation of the Configurator interface.
 // TODO: Handle 'unsupported' Feature, Fork-only cases (where unequal feature settings cause _undetermined_ behavior),
 // eg. where SetEIP1052 -> Constantinople AND SetEIP145 -> Constantinople;
 // If these values are different, the GetConstantinople result is undetermined.
@@ -431,7 +431,7 @@ func (c *ChainConfig) SetEIP1706Transition(n *uint64) error {
 }
 
 // GetEIP2537Transition implements EIP2537.
-// This logic is written but not configured for any Ethereum-supported networks, yet.
+// This logic is written but not configured for any Xcosh-supported networks, yet.
 func (c *ChainConfig) GetEIP2537Transition() *uint64 {
 	return nil
 }
@@ -462,7 +462,7 @@ func (c *ChainConfig) SetECBP1100DeactivateTransition(n *uint64) error {
 }
 
 // GetEIP2315Transition implements EIP2537.
-// This logic is written but not configured for any Ethereum-supported networks, yet.
+// This logic is written but not configured for any Xcosh-supported networks, yet.
 func (c *ChainConfig) GetEIP2315Transition() *uint64 {
 	return nil
 }

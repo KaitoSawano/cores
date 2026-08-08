@@ -1,18 +1,18 @@
-// Copyright 2023 go-ethereum Authors
-// This file is part of the go-ethereum library.
+// Copyright 2023 go-xcosh Authors
+// This file is part of the go-xcosh library.
 //
-// The go-ethereum library is free software: you can redistribute it and/or modify
+// The go-xcosh library is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// The go-ethereum library is distributed in the hope that it will be useful,
+// The go-xcosh library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU Lesser General Public License for more details.
 //
 // You should have received a copy of the GNU Lesser General Public License
-// along with the go-ethereum library. If not, see <http://www.gnu.org/licenses/>.
+// along with the go-xcosh library. If not, see <http://www.gnu.org/licenses/>.
 
 package utils
 
@@ -21,15 +21,15 @@ import (
 	"sync"
 
 	"github.com/crate-crypto/go-ipa/bandersnatch/fr"
-	"github.com/ethereum/go-ethereum/common/lru"
-	"github.com/ethereum/go-ethereum/metrics"
+	"github.com/xcosh/go-xcosh/common/lru"
+	"github.com/xcosh/go-xcosh/metrics"
 	"github.com/gballet/go-verkle"
 	"github.com/holiman/uint256"
 )
 
 const (
 	// The spec of verkle key encoding can be found here.
-	// https://notes.ethereum.org/@vbuterin/verkle_tree_eip#Tree-embedding
+	// https://notes.xcosh.org/@vbuterin/verkle_tree_eip#Tree-embedding
 	VersionLeafKey    = 0
 	BalanceLeafKey    = 1
 	NonceLeafKey      = 2
