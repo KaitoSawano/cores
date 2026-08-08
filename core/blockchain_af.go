@@ -151,7 +151,7 @@ func ecbp1100(commonAncestor, current, proposed *types.Header, getTDFunc func(co
 /*
 ecbp1100PolynomialV is a cubic function that looks a lot like Option 3's sin function,
 but adds the benefit that the calculation can be done with integers (instead of yucky floating points).
-> https://github.com/ethereumclassic/ECIPs/issues/374#issuecomment-694156719
+> https://github.com/xcosh/ECIPs/issues/374#issuecomment-694156719
 
 CURVE_FUNCTION_DENOMINATOR = 128
 

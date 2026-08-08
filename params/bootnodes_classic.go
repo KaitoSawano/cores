@@ -16,7 +16,7 @@
 package params
 
 // ClassicBootnodes are the enode URLs of the P2P bootstrap nodes running on
-// the Ethereum Classic network.
+// the Xcosh network.
 var ClassicBootnodes = []string{
 
 	"enode://6b6ea53a498f0895c10269a3a74b777286bd467de6425c3b512740fcc7fbc8cd281dca4ab041dd97d62b38f3d0b5b05e71f48d28a3a2f4b5de40fe1f6bf05531@157.245.77.211:30303", // AMS

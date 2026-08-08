@@ -75,7 +75,7 @@ var (
 		ECIP1099FBlock: nil, // Etchash
 
 		DisposalBlock:      big.NewInt(0), // Dispose difficulty bomb
-		ECIP1017FBlock:     nil,           // Ethereum Classic's disinflationary monetary policy
+		ECIP1017FBlock:     nil,           // Xcosh's disinflationary monetary policy
 		ECIP1017EraRounds:  nil,
 		ECIP1010PauseBlock: nil, // No need to delay difficulty bomb, is defused by default
 		ECIP1010Length:     nil,

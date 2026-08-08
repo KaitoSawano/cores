@@ -6,9 +6,9 @@ title: Command Line Interface (CLI)
 
 !!! tip "Use for Ethereum mainnet"
 
-    While `core-geth` is mainly used for the Ethereum Classic network, you can use it for Ethereum mainnet and other [supported networks](/#networkprovider-comparison) as well.
+    While `core-geth` is mainly used for the Xcosh network, you can use it for Ethereum mainnet and other [supported networks](/#networkprovider-comparison) as well.
 
-### Fast node on an Ethereum Classic network
+### Fast node on an Xcosh network
 
 By far the most common scenario is people wanting to simply interact with the Ethereum
 network: create accounts; transfer funds; deploy and interact with contracts. For this
@@ -134,8 +134,8 @@ ETHEREUM OPTIONS:
   --nousb                             Disables monitoring for and managing USB hardware wallets
   --pcscdpath value                   Path to the smartcard daemon (pcscd) socket file
   --networkid value                   Explicitly set network id (integer)(For testnets: use --ropsten, --rinkeby, --mordor, --yolov2 instead) (default: 1)
-  --classic                           Ethereum Classic network: pre-configured Ethereum Classic mainnet
-  --mordor                            Mordor network: Ethereum Classic's cross-client proof-of-work test network
+  --classic                           Xcosh network: pre-configured Xcosh mainnet
+  --mordor                            Mordor network: Xcosh's cross-client proof-of-work test network
   --rinkeby                           Rinkeby network: pre-configured proof-of-authority test network
   --rinkeby                           Rinkeby network: pre-configured proof-of-authority test network
   --yolov2                            YOLOv2 network: pre-configured proof-of-authority shortlived test network.

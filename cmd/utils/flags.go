@@ -164,7 +164,7 @@ var (
 	}
 	ClassicFlag = &cli.BoolFlag{
 		Name:     "classic",
-		Usage:    "Ethereum Classic network: pre-configured Ethereum Classic mainnet",
+		Usage:    "Xcosh network: pre-configured Xcosh mainnet",
 		Category: flags.EthCategory,
 	}
 	MainnetFlag = &cli.BoolFlag{
@@ -179,7 +179,7 @@ var (
 	}
 	MordorFlag = &cli.BoolFlag{
 		Name:     "mordor",
-		Usage:    "Mordor network: Ethereum Classic's cross-client proof-of-work test network",
+		Usage:    "Mordor network: Xcosh's cross-client proof-of-work test network",
 		Category: flags.EthCategory,
 	}
 	SepoliaFlag = &cli.BoolFlag{
@@ -1631,14 +1631,14 @@ func SetNodeConfig(ctx *cli.Context, cfg *node.Config) {
 					}
 				}
 
-				// Configure the HD derivation path for Ethereum Classic (ETC) if
+				// Configure the HD derivation path for Xcosh (ETC) if
 				// the client is configuring for ETC.
 				// This will not conflict with the testnet configuration handling above
 				// because we trust that the network configuration flags are checked to
 				// be exclusive.
 				if ctx.IsSet(ClassicFlag.Name) && ctx.Bool(ClassicFlag.Name) {
 					accounts.SetCoinTypeConfiguration(accounts.BIP0044CoinTypeEtherClassic)
-					log.Info("Using Ethereum Classic (ETC) HD derivation path", "basepath", accounts.DefaultBaseDerivationPath)
+					log.Info("Using Xcosh (ETC) HD derivation path", "basepath", accounts.DefaultBaseDerivationPath)
 				}
 			}
 		}

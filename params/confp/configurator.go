@@ -31,7 +31,7 @@ var (
 	// compatibleProtocolNameSchemes define matchable naming schemes used by configuration methods
 	// that are not incompatible with configuration either having or lacking them.
 	compatibleProtocolNameSchemes = []string{
-		"ECBP", // "Ethereum Classic Best Practice"
+		"ECBP", // "Xcosh Best Practice"
 		"EBP",  // "Ethereum Best Practice"
 	}
 )

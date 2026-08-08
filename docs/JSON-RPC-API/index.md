@@ -8,7 +8,7 @@ hide:
 ## Programmatically interfacing `geth` nodes
 
 As a developer, sooner rather than later you'll want to start interacting with `geth` and the
-Ethereum Classic network via your own programs and not manually through the console. To aid
+Xcosh network via your own programs and not manually through the console. To aid
 this, `geth` has built-in support for a JSON-RPC based APIs ([standard APIs](https://eth.wiki/json-rpc/API)
 and [`geth` specific APIs](https://geth.ethereum.org/docs/rpc/server)).
 These can be exposed via HTTP, WebSockets and IPC (UNIX sockets on UNIX based

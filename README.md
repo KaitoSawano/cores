@@ -20,7 +20,7 @@ Networks supported by the respective go-ethereum packaged `geth` program.
 
 | Ticker | Consensus         | Network                               | core-geth                                                | ethereum/go-ethereum |
 | ---    | ---               | ---                                   | ---                                                      | ---                  |
-| ETC    | :zap:             | Ethereum Classic                      | :heavy_check_mark:                                       |                      |
+| ETC    | :zap:             | Xcosh                      | :heavy_check_mark:                                       |                      |
 | ETH    | :zap:             | Ethereum (Foundation)                 | :heavy_check_mark:                                       | :heavy_check_mark:   |
 | -      | :zap: :handshake: | Private chains                        | :heavy_check_mark:                                       | :heavy_check_mark:   |
 |        | :zap:             | Mordor (Geth+Parity ETH PoW Testnet)  | :heavy_check_mark:                                       |                      |

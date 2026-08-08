@@ -189,7 +189,7 @@ func BenchmarkDifficultyCalculator(b *testing.B) {
 }
 
 // TestEtchash_11700000 tests that Etchash can verify the block at 11700000.
-// EtcHash is a fork of Ethash developed by Ethereum Classic which doubles the epoch length,
+// EtcHash is a fork of Ethash developed by Xcosh which doubles the epoch length,
 // approximately halving the DAG size over time.
 // Block 11_700_000 is the block at which ETC implemented this hard-fork feature.
 // This test takes a long time to run; about 2 minutes on my machine.

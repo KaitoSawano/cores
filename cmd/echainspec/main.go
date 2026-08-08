@@ -189,7 +189,7 @@ EXAMPLES:
 
 		> {{.Name}} --inputf parity --file my-parity-spec.json --outputf [geth|coregeth]
 
-	Print a default Ethereum Classic network chain configuration in coregeth format:
+	Print a default Xcosh network chain configuration in coregeth format:
 
 		> {{.Name}} --default classic --outputf coregeth
 

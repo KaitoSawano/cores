@@ -25,7 +25,7 @@ import (
 )
 
 var (
-	// MordorChainConfig is the chain parameters to run a node on the Ethereum Classic Mordor test network (PoW).
+	// MordorChainConfig is the chain parameters to run a node on the Xcosh Mordor test network (PoW).
 	MordorChainConfig = &coregeth.CoreGethChainConfig{
 		NetworkID:                 7,
 		ChainID:                   big.NewInt(63),

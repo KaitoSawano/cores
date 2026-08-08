@@ -23,7 +23,7 @@ import (
 	"github.com/ethereum/go-ethereum/params/types/genesisT"
 )
 
-// ClassicGenesisBlock returns the Ethereum Classic genesis block.
+// ClassicGenesisBlock returns the Xcosh genesis block.
 func DefaultClassicGenesisBlock() *genesisT.Genesis {
 	return &genesisT.Genesis{
 		Config:     ClassicChainConfig,

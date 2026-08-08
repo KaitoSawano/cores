@@ -18,7 +18,7 @@ tools available from this source, use the Docker Hub tag prefix `alltools.`, lik
 
 ### `docker run`
 
-One of the quickest ways to get Ethereum Classic up and running on your machine is by using Docker:
+One of the quickest ways to get Xcosh up and running on your machine is by using Docker:
 
 ```shell
 $ docker run -d \
